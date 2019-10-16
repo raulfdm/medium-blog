@@ -3,15 +3,15 @@ backend:
   branch: master
 
 media_folder: static/assets/images
-public_folder: assets/images
+public_folder: '../../static/assets/images'
 publish_mode: editorial_workflow
 
 collections:
   - name: 'posts'
     label: 'Posts'
-    folder: 'content/posts'
+    folder: 'src/content/posts/{{year}}/{{slug}}'
     create: true
-    slug: '{{year}}-{{month}}-{{day}}-{{slug}}'
+    slug: '{{year}}/{{month}}/{{slug}}'
     fields:
       - { label: 'Title', name: 'title', widget: 'string' }
       - {

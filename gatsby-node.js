@@ -7,17 +7,17 @@
 const { createFilePath } = require(`gatsby-source-filesystem`);
 const path = require('path');
 
-const { postUrl } = require('./src/utils/urls');
-
 exports.onCreateNode = ({ node, actions, getNode }) => {
   const { createNodeField } = actions;
 
   if (node.internal.type === `MarkdownRemark`) {
     const value = createFilePath({ node, getNode });
+
     createNodeField({
       name: `slug`,
       node,
-      value,
+      /* If we need to change the slug, it's here :) */
+      value: `posts${value}`,
     });
   }
 };
@@ -26,6 +26,7 @@ exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions;
 
   const blogPost = path.resolve('./src/templates/blog-post.js');
+
   const result = await graphql(`
     query {
       allMarkdownRemark(
@@ -63,17 +64,15 @@ exports.createPages = async ({ graphql, actions }) => {
     const previous = index === posts.length - 1 ? null : posts[index + 1].node;
     const next = index === 0 ? null : posts[index - 1].node;
 
-    console.log('post', post);
-
     createPage({
-      path: postUrl(post.node.fields.slug),
+      path: post.node.fields.slug,
       component: blogPost,
       context: {
         html: post.node.html,
-        slug: postUrl(post.node.fields.slug),
+        slug: post.node.fields.slug,
         previous,
         next,
-        ...post.node.frontmatter
+        ...post.node.frontmatter,
       },
     });
   });
