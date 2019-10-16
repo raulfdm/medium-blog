@@ -1,7 +1,7 @@
 ---
 title: Test
 date: '2019-10-01 09:22:31'
-featuredImage: '../../static/assets/images/salty_egg.jpg'
+featuredImage: '../../../static/assets/images/salty_egg.jpg'
 description: Some test right here
 categories:
   - lol
