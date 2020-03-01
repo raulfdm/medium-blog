@@ -1,8 +1,6 @@
 name: 'Netlify Preview Deploy'
 
-on:
-  pull_request:
-    types: ['opened', 'edited', 'synchronize']
+on: [push]
 
 jobs:
   deploy:
@@ -11,7 +9,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v1
-      - uses: jsmrcaga/action-netlify-deploy@master
+      - uses: jsmrcaga/action-netlify-deploy@v1.0.1
         if: github.event_name != 'pull_request'
         env:
           GATSBY_ALGOLIA_APP_ID: ${{ secrets.GATSBY_ALGOLIA_APP_ID }}
@@ -23,7 +21,7 @@ jobs:
           NETLIFY_SITE_ID: ${{ secrets. NETLIFY_SITE_ID }}
           build_directory: public/
 
-      - uses: jsmrcaga/action-netlify-deploy@v1
+      - uses: jsmrcaga/action-netlify-deploy@v1.0.1
         if: contains(github.ref, 'master')
         env:
           GATSBY_ALGOLIA_APP_ID: ${{ secrets.GATSBY_ALGOLIA_APP_ID }}
