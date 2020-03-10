@@ -16,7 +16,7 @@ jobs:
           - node sandbox.js
         name: Install dependencies
         env:
-        CONTEXT: ${{ github.ref  }}
+        CONTEXT: ${{ github.ref }}
       # - name: Yarn cache directory
       #   id: yarn-cache-dir
       #   run: echo "::set-output name=dir::$(yarn cache dir)"
