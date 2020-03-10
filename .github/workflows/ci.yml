@@ -12,7 +12,9 @@ jobs:
         with:
           node-version: 12
 
-      - run: node sandbox.js
+      - run:
+          - node sandbox.js
+          - echo ${{ github.ref }}
         name: Install dependencies
         env:
           CONTEXT: ${{ github.ref == 'test-env' && 'production' || 'staging' }}
