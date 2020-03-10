@@ -12,45 +12,43 @@ jobs:
         with:
           node-version: 12
 
-      - name: Yarn cache directory
-        id: yarn-cache-dir
-        run: echo "::set-output name=dir::$(yarn cache dir)"
-
-      - name: Yarn cache
-        uses: actions/cache@v1
-        id: yarn-cache
-        with:
-          path: ${{ steps.yarn-cache-dir.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-
-
-      - run: yarn install
+      - run: node sandbox.js
         name: Install dependencies
-
-      - run: yarn lint
-        name: Run ESLint
-
-      - run: yarn jest --color
-        name: Run Test
         env:
-          CI: true
-
-      - run: yarn build
-        name: Build
-        env:
-          CI: true
-          GATSBY_ALGOLIA_APP_ID: ${{ secrets.GATSBY_ALGOLIA_APP_ID }}
-          GATSBY_ALGOLIA_SEARCH_KEY: ${{ secrets.GATSBY_ALGOLIA_SEARCH_KEY }}
-          ALGOLIA_ADMIN_KEY: ${{ secrets.ALGOLIA_ADMIN_KEY }}
-          GATSBY_ALGOLIA_INDEX_NAME: ${{ secrets.GATSBY_ALGOLIA_INDEX_NAME }}
-
-      - name: Deploy to Netlify
-        uses: nwtgck/actions-netlify@v1.0
-        with:
-          publish-dir: './public'
-          production-branch: master
-          deploy-message: 'Deploy from GitHub Actions'
-        env:
-          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+          CONTEXT: ${{ github.ref == 'master' && 'production' || 'staging' }}
+      # - name: Yarn cache directory
+      #   id: yarn-cache-dir
+      #   run: echo "::set-output name=dir::$(yarn cache dir)"
+      # - name: Yarn cache
+      #   uses: actions/cache@v1
+      #   id: yarn-cache
+      #   with:
+      #     path: ${{ steps.yarn-cache-dir.outputs.dir }}
+      #     key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+      #     restore-keys: |
+      #       ${{ runner.os }}-yarn-
+      # - run: yarn install
+      #   name: Install dependencies
+      # - run: yarn lint
+      #   name: Run ESLint
+      # - run: yarn jest --color
+      #   name: Run Test
+      #   env:
+      #     CI: true
+      # - run: yarn build
+      #   name: Build
+      #   env:
+      #     CI: true
+      #     GATSBY_ALGOLIA_APP_ID: ${{ secrets.GATSBY_ALGOLIA_APP_ID }}
+      #     GATSBY_ALGOLIA_SEARCH_KEY: ${{ secrets.GATSBY_ALGOLIA_SEARCH_KEY }}
+      #     ALGOLIA_ADMIN_KEY: ${{ secrets.ALGOLIA_ADMIN_KEY }}
+      #     GATSBY_ALGOLIA_INDEX_NAME: ${{ secrets.GATSBY_ALGOLIA_INDEX_NAME }}
+      # - name: Deploy to Netlify
+      #   uses: nwtgck/actions-netlify@v1.0
+      #   with:
+      #     publish-dir: './public'
+      #     production-branch: master
+      #     deploy-message: 'Deploy from GitHub Actions'
+      #   env:
+      #     NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+      #     NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
