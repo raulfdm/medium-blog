@@ -14,7 +14,6 @@ jobs:
 
       - run:
           - node sandbox.js
-          - echo ${{ github.ref }}
         name: Install dependencies
         env:
           CONTEXT: ${{ contains(github.ref,'test-env')  && 'production' }}
