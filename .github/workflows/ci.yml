@@ -17,7 +17,7 @@ jobs:
           - echo ${{ github.ref }}
         name: Install dependencies
         env:
-          CONTEXT: ${{ contains(github.ref,'test-env')  && 'production' || 'staging' }}
+          CONTEXT: ${{ contains(github.ref,'test-env')  && 'production' }}
       # - name: Yarn cache directory
       #   id: yarn-cache-dir
       #   run: echo "::set-output name=dir::$(yarn cache dir)"
