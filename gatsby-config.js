@@ -98,6 +98,9 @@ const pluginsList = [
   'gatsby-plugin-netlify-cache',
 ];
 
+console.log(process.env.NODE_ENV, process.env.NODE_ENV === 'production');
+console.log(process.env.CI, process.env.CI === true);
+
 if (process.env.NODE_ENV === 'production' && process.env.CI === true) {
   pluginsList.push({
     resolve: `gatsby-plugin-algolia-search`,
