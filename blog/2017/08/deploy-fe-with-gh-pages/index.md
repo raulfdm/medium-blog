@@ -28,11 +28,11 @@ Como eu disse na introdução, na cabeça de quem está começando, servir um si
 
 Mas, poxa, não queria usar PHP, eu só queria subir meu index.html + index.css + index.js e ser feliz. Será que era pedir muito?
 
-<div style="width:100%;height:0;padding-bottom:56%;position:relative;"><iframe src="https://giphy.com/embed/3ohzdDls6viEANKHtK" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></div>
+<gif src="https://media.giphy.com/media/3ohzdDls6viEANKHtK/giphy.gif" caption="Simples assim..."></gif>
 
 Depois de ficar um bom tempo tentando resolver esse problema eu acabei ficando de saco cheio e desisti. Algum tempo depois, eu estava procurando procurando formas de modularizar meu HTML e acabei caindo em um curso de [Jekyll](https://jekyllrb.com/) de um desenvolvedor front-end que eu admiro muito, o [Willian Justen](https://twitter.com/Willian_justen). Nesse curso, além dos conceitos de Jekyll, ele ensina como rodar o site gerado na plataforma do Github Pages (caso tenha interesse no curso, ele está [disponível gratuitamente](https://www.udemy.com/criando-sites-estaticos-com-jekyll/) na plataforma da Udemy).
 
-<div style="width:100%;height:0;padding-bottom:54%;position:relative;"><iframe src="https://giphy.com/embed/l0ErQJblvX9EWNQCA" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></div>
+<gif src="https://media.giphy.com/media/l0ErQJblvX9EWNQCA/giphy.gif" caption="Isso é uma idéia fantástica"></gif>
 
 ### Disclaimer rápido
 
@@ -215,9 +215,7 @@ Para facilitar a troca de exibição, clique no botão `Branch` e selecione o no
 
 Mas pera…
 
-<div style="width:100%;height:0;padding-bottom:56%;position:relative;"><iframe src="https://giphy.com/embed/jzmW5lHbV456E" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></div>
-
-> CADÊ MEU SITE?
+<gif src="https://media.giphy.com/media/jzmW5lHbV456E/giphy.gif" caption="Se ta de sacanagem? CADÊ MEU SITE?"></gif>
 
 Calma, xófem… respira…
 
@@ -253,7 +251,7 @@ E vamos ver se deu certo?
 
 ![Página live](./assets/page-live.png)
 
-<div style="width:100%;height:0;padding-bottom:58%;position:relative;"><iframe src="https://giphy.com/embed/xT9IgOoJe1q8D9cRsk" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></div>
+<gif src="https://media.giphy.com/media/xT9IgOoJe1q8D9cRsk/giphy.gif" caption="Bouyachaka!!"></gif>
 
 ---
 

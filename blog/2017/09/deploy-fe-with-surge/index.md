@@ -124,7 +124,7 @@ Acessando o nosso domínio (publish-frontend-pages.surge.sh), podemos ver o resu
 
 ![surge: hospedado](./assets/page-live.png)
 
-<div style="width:100%;height:0;padding-bottom:75%;position:relative;"><iframe src="https://giphy.com/embed/l42P7LGjW2aGRfvXy" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></div>
+<gif src="https://media.giphy.com/media/l42P7LGjW2aGRfvXy/giphy.gif" caption="Yaaass..."></gif>
 
 ---
 
@@ -203,4 +203,4 @@ Compartilha comigo para eu testar e escrever sobre! =D
 
 Grande abraço e **#pás**.
 
-<div style="width:100%;height:0;padding-bottom:53%;position:relative;"><iframe src="https://giphy.com/embed/JDKxRN0Bvmm2c" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></div>
+<gif src="https://media.giphy.com/media/JDKxRN0Bvmm2c/giphy.gif" caption="Eu voltarei! :p"></gif>
