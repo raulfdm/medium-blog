@@ -2,7 +2,7 @@ backend:
   name: github
   repo: raulfdm/raulmelo.dev
   branch: master
-  site_domain: https://www.raulmelo.dev/
+  site_domain: cms.netlify.com
 
 publish_mode: editorial_workflow
 media_folder: 'static/assets/images'
