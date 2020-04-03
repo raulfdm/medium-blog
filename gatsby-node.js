@@ -19,7 +19,7 @@ exports.onCreateNode = createFields;
  */
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions;
-  const blogPostComponent = path.resolve('./src/templates/blog-post.tsx');
+  const mdPostComponent = path.resolve('./src/templates/md-post.tsx');
   const wpPostComponent = path.resolve('./src/templates/wp-post.tsx');
 
   const result = await graphql(`
@@ -112,7 +112,7 @@ exports.createPages = async ({ graphql, actions }) => {
 
     const pageData = {
       path: fields.slug,
-      component: blogPostComponent,
+      component: mdPostComponent,
       context: {
         post,
         slug: fields.slug,
