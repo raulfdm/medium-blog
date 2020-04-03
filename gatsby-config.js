@@ -111,6 +111,27 @@ module.exports = {
         },
       },
     },
+    {
+      resolve: 'gatsby-source-wordpress',
+      options: {
+        baseUrl: 'blog.gamedii.com.br/wp/',
+        protocol: 'http',
+        hostingWPCOM: false,
+        useACF: true,
+        verboseOutput: true,
+        excludedRoutes: ['**/users', '**/settings', '**/themes'],
+        includedRoutes: [
+          '**/posts',
+          '**/pages',
+          '**/taxonomies',
+          '**/menus',
+          '**/media',
+        ],
+        normalizer: function ({ entities }) {
+          return entities;
+        },
+      },
+    },
   ].concat(
     isProduction
       ? [

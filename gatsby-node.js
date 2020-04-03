@@ -20,6 +20,7 @@ exports.onCreateNode = createFields;
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions;
   const blogPostComponent = path.resolve('./src/templates/blog-post.tsx');
+  const wpPostComponent = path.resolve('./src/templates/wp-post.tsx');
 
   const result = await graphql(`
     {
@@ -74,6 +75,16 @@ exports.createPages = async ({ graphql, actions }) => {
           }
         }
       }
+      allWordpressPost {
+        edges {
+          node {
+            id
+            path
+            status
+            template
+          }
+        }
+      }
     }
   `);
 
@@ -83,6 +94,16 @@ exports.createPages = async ({ graphql, actions }) => {
 
   // Create blog posts pages.
   const posts = result.data.allMarkdownRemark.edges;
+
+  result.data.allWordpressPost.edges.forEach((edge) => {
+    createPage({
+      path: edge.node.path,
+      component: wpPostComponent,
+      context: {
+        id: edge.node.id,
+      },
+    });
+  });
 
   const postSeriesAvailable = getSeriesPost(posts);
 
