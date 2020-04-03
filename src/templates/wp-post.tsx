@@ -1,7 +1,7 @@
 import React from 'react';
 import { graphql } from 'gatsby';
-import PostContentWrapper from './post-content-wrapper';
 import { WordpressPost } from './../types';
+import BlogPostContent from '../components/BlogPostContent';
 
 type WpPostTypes = {
   data: {
@@ -13,7 +13,7 @@ const WpPost: React.FC<WpPostTypes> = (props) => {
   const { title, excerpt, content } = props.data.wordpressPost;
   const image = props.data.wordpressPost.featured_media.localFile;
   return (
-    <PostContentWrapper
+    <BlogPostContent
       lang="pt-br"
       title={title}
       image={image}
@@ -27,7 +27,7 @@ const WpPost: React.FC<WpPostTypes> = (props) => {
         data-testid="article-content"
         dangerouslySetInnerHTML={{ __html: content }}
       />
-    </PostContentWrapper>
+    </BlogPostContent>
   );
 };
 

@@ -4,7 +4,7 @@ import { Quote } from '../components/Ui';
 import { Gif } from '../components/Gif';
 import { Frontmatter, SeriesType, PostSeries, PostEdge } from '../types';
 import { YouTubeVideo } from '../components/YouTubeVideo';
-import PostContentWrapper from './post-content-wrapper';
+import BlogPostContent from '../components/BlogPostContent';
 
 type PostProps = {
   pageContext: {
@@ -44,7 +44,7 @@ const Post: React.FC<PostProps> = ({ pageContext }) => {
   } = frontmatter as Frontmatter;
 
   return (
-    <PostContentWrapper
+    <BlogPostContent
       series={series}
       title={title}
       seriesInfo={seriesInfo}
@@ -56,7 +56,7 @@ const Post: React.FC<PostProps> = ({ pageContext }) => {
       description={description || excerpt!}
     >
       {renderAst(htmlAst)}
-    </PostContentWrapper>
+    </BlogPostContent>
   );
 };
 

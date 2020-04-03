@@ -4,16 +4,15 @@ import styled from 'styled-components';
 import media from 'styled-media-query';
 import { motion } from 'framer-motion';
 import { defineMessages } from 'react-intl';
-import { pageTransitionVariants } from '../components/Ui';
+import { pageTransitionVariants, Container } from './Ui';
 import { BlogGlobalStyle } from '../styles/blogPost';
 import { GlobalStyles } from '../styles';
-import { Container } from '../components/Ui';
-import { MenuBar } from '../components/MenuBar';
-import SEO from '../components/SEO';
+import { MenuBar } from './MenuBar';
+import SEO from './SEO';
 import { useIntl } from '../context/react-intl';
 import { ThemeProvider } from '../config/theme';
 import { PostTemplate } from './../types';
-import SeriesSection from '../components/Blog/SeriesSection/SeriesSection';
+import SeriesSection from './Blog/SeriesSection/SeriesSection';
 
 const Title = styled.h1`
   font-size: 34px;
@@ -52,7 +51,7 @@ const messages = defineMessages({
   },
 });
 
-const PostContentWrapper: React.FC<PostTemplate> = ({
+const BlogPostContent: React.FC<PostTemplate> = ({
   title,
   image,
   image_caption: imageCaption,
@@ -133,4 +132,4 @@ const PostContentWrapper: React.FC<PostTemplate> = ({
   );
 };
 
-export default PostContentWrapper;
+export default BlogPostContent;
