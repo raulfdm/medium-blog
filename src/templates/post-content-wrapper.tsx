@@ -47,13 +47,12 @@ const ImgWrapper = styled(Container)`
 
 type PostProps = {
   title: string;
-  image: string;
+  image: any;
   image_caption: string;
   subtitle: string;
   url: string;
   excerpt: string;
   description: string;
-  children: any;
 };
 
 const messages = defineMessages({
