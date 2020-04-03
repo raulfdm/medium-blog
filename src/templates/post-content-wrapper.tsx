@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import media from 'styled-media-query';
 import { motion } from 'framer-motion';
 import { defineMessages } from 'react-intl';
-import { SeriesMenu } from '../components/Blog/SeriesMenu';
 import { pageTransitionVariants } from '../components/Ui';
 import { BlogGlobalStyle } from '../styles/blogPost';
 import { GlobalStyles } from '../styles';
@@ -13,7 +12,8 @@ import { MenuBar } from '../components/MenuBar';
 import SEO from '../components/SEO';
 import { useIntl } from '../context/react-intl';
 import { ThemeProvider } from '../config/theme';
-import { PostTemplate, SeriesSection } from './../types';
+import { PostTemplate } from './../types';
+import SeriesSection from '../components/Blog/SeriesSection/SeriesSection';
 
 const Title = styled.h1`
   font-size: 34px;
@@ -52,29 +52,6 @@ const messages = defineMessages({
   },
 });
 
-const SeriesSection: React.FC<SeriesSection> = ({
-  noDivider,
-  series,
-  title,
-  seriesInfo,
-}) => {
-  if (!series) {
-    return null;
-  }
-  return (
-    <>
-      {!noDivider && <hr />}
-      <Container as="section">
-        <SeriesMenu
-          series={series}
-          postIndex={seriesInfo!.index}
-          title={title}
-        />
-      </Container>
-    </>
-  );
-};
-
 const PostContentWrapper: React.FC<PostTemplate> = ({
   title,
   image,
@@ -107,7 +84,7 @@ const PostContentWrapper: React.FC<PostTemplate> = ({
         description={description || excerpt!}
         lang={lang}
         url={url}
-        image={image.childImageSharp.fluid.src}
+        image={image?.childImageSharp?.fluid?.src}
       />
       <ThemeProvider>
         <motion.div
