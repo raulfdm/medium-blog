@@ -1,14 +1,20 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 import PostContentWrapper from './post-content-wrapper';
+import { WordpressPost } from './../types';
 
-const WpPost: React.FC<{}> = (props) => {
+type WpPostTypes = {
+  data: {
+    wordpressPost: WordpressPost;
+  };
+};
+
+const WpPost: React.FC<WpPostTypes> = (props) => {
   const { title, excerpt, content } = props.data.wordpressPost;
-  const image =
-    props.data.wordpressPost.featured_media.localFile.childImageSharp.fluid;
-  console.log('props', props);
+  const image = props.data.wordpressPost.featured_media.localFile;
   return (
     <PostContentWrapper
+      lang="pt-br"
       title={title}
       image={image}
       image_caption={''}

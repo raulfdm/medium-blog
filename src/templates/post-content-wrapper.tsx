@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import media from 'styled-media-query';
 import { motion } from 'framer-motion';
 import { defineMessages } from 'react-intl';
-
+import { SeriesMenu } from '../components/Blog/SeriesMenu';
 import { pageTransitionVariants } from '../components/Ui';
 import { BlogGlobalStyle } from '../styles/blogPost';
 import { GlobalStyles } from '../styles';
@@ -13,6 +13,7 @@ import { MenuBar } from '../components/MenuBar';
 import SEO from '../components/SEO';
 import { useIntl } from '../context/react-intl';
 import { ThemeProvider } from '../config/theme';
+import { PostTemplate, SeriesSection } from './../types';
 
 const Title = styled.h1`
   font-size: 34px;
@@ -45,23 +46,36 @@ const ImgWrapper = styled(Container)`
   padding-bottom: 50px;
 `;
 
-type PostProps = {
-  title: string;
-  image: any;
-  image_caption: string;
-  subtitle: string;
-  url: string;
-  excerpt: string;
-  description: string;
-};
-
 const messages = defineMessages({
   featuredImageLabel: {
     id: 'blog.featuredImage',
   },
 });
 
-const PostContentWrapper: React.FC<PostProps> = ({
+const SeriesSection: React.FC<SeriesSection> = ({
+  noDivider,
+  series,
+  title,
+  seriesInfo,
+}) => {
+  if (!series) {
+    return null;
+  }
+  return (
+    <>
+      {!noDivider && <hr />}
+      <Container as="section">
+        <SeriesMenu
+          series={series}
+          postIndex={seriesInfo!.index}
+          title={title}
+        />
+      </Container>
+    </>
+  );
+};
+
+const PostContentWrapper: React.FC<PostTemplate> = ({
   title,
   image,
   image_caption: imageCaption,
@@ -69,6 +83,9 @@ const PostContentWrapper: React.FC<PostProps> = ({
   url,
   description,
   excerpt,
+  lang,
+  seriesInfo,
+  series,
   children,
 }) => {
   const { formatMessage } = useIntl();
@@ -88,9 +105,9 @@ const PostContentWrapper: React.FC<PostProps> = ({
       <SEO
         title={title}
         description={description || excerpt!}
-        lang="pt-br"
+        lang={lang}
         url={url}
-        image={image}
+        image={image.childImageSharp.fluid.src}
       />
       <ThemeProvider>
         <motion.div
@@ -105,19 +122,32 @@ const PostContentWrapper: React.FC<PostProps> = ({
           <Container as="header">
             <Title>{title}</Title>
             {subtitle && <Subtitle>{subtitle}</Subtitle>}
+            <SeriesSection
+              seriesInfo={seriesInfo}
+              title={title}
+              series={series}
+              noDivider
+            />
           </Container>
-          {/* <SeriesSection noDivider /> */}
           {image && (
             <ImgWrapper
               role="img"
               aria-label={formatMessage(messages.featuredImageLabel)}
             >
-              <StyledImg fluid={image} alt={imageCaption} />
+              <StyledImg
+                fluid={image.childImageSharp.fluid}
+                alt={imageCaption}
+              />
               {imageCaption && <p className="img-caption">{imageCaption}</p>}
             </ImgWrapper>
           )}
           <Container className="post" as="main">
             {children}
+            <SeriesSection
+              seriesInfo={seriesInfo}
+              title={title}
+              series={series}
+            />
           </Container>
           <br />
         </motion.div>
