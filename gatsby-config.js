@@ -114,7 +114,7 @@ module.exports = {
     {
       resolve: 'gatsby-source-wordpress',
       options: {
-        baseUrl: 'blog.gamedii.com.br/wp/',
+        baseUrl: 'sergiojunior.com.br/wp/',
         protocol: 'http',
         hostingWPCOM: false,
         useACF: true,
