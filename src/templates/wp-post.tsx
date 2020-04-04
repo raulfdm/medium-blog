@@ -10,18 +10,23 @@ type WpPostTypes = {
 };
 
 const WpPost: React.FC<WpPostTypes> = (props) => {
-  const { title, excerpt, content } = props.data.wordpressPost;
-  const image = props.data.wordpressPost.featured_media.localFile;
+  const {
+    title,
+    excerpt,
+    content,
+    path,
+    alt_text: altText,
+    featured_media: { localFile: image },
+  } = props.data.wordpressPost;
+
   return (
     <BlogPostContent
       lang="pt-br"
       title={title}
       image={image}
-      image_caption={''}
-      subtitle={''}
-      url={''}
+      image_caption={altText}
+      url={path}
       excerpt={excerpt}
-      description={''}
     >
       <div
         data-testid="article-content"
@@ -40,6 +45,7 @@ export const pageQuery = graphql`
       title
       content
       excerpt
+      path
       date(formatString: "MM-DD-YYYY")
       featured_media {
         alt_text

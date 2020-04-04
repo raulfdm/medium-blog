@@ -21,16 +21,6 @@ const renderAst = new rehypeReact({
 }).Compiler;
 
 const Post: React.FC<PostProps> = ({ pageContext }) => {
-  React.useEffect(() => {
-    /* This loads all widgets from twitter if exists. 
-    It's loaded by html.tsx (data-testid="twitter-script")
-    */
-    // @ts-ignore
-    if (window.twttr?.widgets) {
-      // @ts-ignore
-      window.twttr.widgets.load();
-    }
-  }, []);
   const { series, post } = pageContext;
 
   const { htmlAst, frontmatter, excerpt, fields } = post.node;

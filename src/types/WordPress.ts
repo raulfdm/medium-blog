@@ -17,6 +17,8 @@ export type WordpressPost = {
   content: string;
   excerpt: string;
   date: Date;
+  path: string;
+  alt_text: string;
   featured_media: FeaturedMedia;
 };
 
@@ -28,7 +30,7 @@ export type PostTemplate = {
   url: string;
   lang: string;
   excerpt?: string;
-  description: string;
+  description?: string;
   series?: SeriesType;
   seriesInfo?: FrontmatterSeries;
 };
