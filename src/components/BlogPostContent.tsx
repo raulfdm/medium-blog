@@ -64,6 +64,9 @@ const BlogPostContent: React.FC<PostTemplate> = ({
   series,
   children,
 }) => {
+  /* This component is responsable to handle with any blog post, whether by markup ou CMS, receivig all the necessary information, such as image, title, series, beside url, lang and description to SEO setup. Its content is rendered as a children component. It's easier to add any new features like share buttons, comment box.
+   */
+
   const { formatMessage } = useIntl();
   React.useEffect(() => {
     /* This loads all widgets from twitter if exists. 
