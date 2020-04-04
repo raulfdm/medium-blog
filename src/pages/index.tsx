@@ -33,7 +33,7 @@ const Home: React.FC<GraphQLResponse> = ({ data }) => {
   const { locale, formatMessage } = useIntl();
   const [filter, setFilter] = React.useState<PostFilters>('all');
 
-  const posts = getAndSanitizePostsFromQueryResponse({
+  const markupPosts = getAndSanitizePostsFromQueryResponse({
     data,
     preferredLang: locale,
   });
@@ -41,6 +41,8 @@ const Home: React.FC<GraphQLResponse> = ({ data }) => {
   if (!data.site) {
     throw new Error('Home: site info is empty');
   }
+
+  const allPosts = [...wpPosts, ...markupPosts];
 
   const { profilePic, social, author } = data.site.siteMetadata;
 
@@ -62,7 +64,7 @@ const Home: React.FC<GraphQLResponse> = ({ data }) => {
             github={social.github}
           />
           <Filter setFilter={setFilter} currentFilter={filter} />
-          <Posts posts={wpPosts.concat(posts)} filter={filter} />
+          <Posts posts={allPosts} filter={filter} />
         </main>
       </Layout>
     </>

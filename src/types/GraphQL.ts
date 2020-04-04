@@ -1,5 +1,6 @@
 import { FluidObject } from 'gatsby-image';
 import { PostSeries } from './Series';
+import { WordpressPost } from './WordPress';
 
 export type FrontmatterSeries = PostSeries | null;
 
@@ -67,11 +68,20 @@ export type SiteMetadata = {
   author: string;
 };
 
+type allWordpressPostNode = {
+  node: WordpressPost;
+};
+
+type allWordpressPost = {
+  edges: [allWordpressPostNode];
+};
+
 export type GraphQLResponse = {
   data: {
     allMarkdownRemark: AllMarkdownRemark;
     site?: {
       siteMetadata: SiteMetadata;
     };
+    allWordpressPost: allWordpressPost;
   };
 };

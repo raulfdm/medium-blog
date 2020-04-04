@@ -1,4 +1,16 @@
-export const normalizeWpResponse = (data) => {
+import { WordpressPost, PostEdges } from './../types';
+
+type normalizeWpResponseNode = {
+  node: WordpressPost;
+};
+
+type normalizeWpResponseTypes = {
+  edges: [normalizeWpResponseNode];
+};
+
+export const normalizeWpResponse = (
+  data: normalizeWpResponseTypes,
+): PostEdges => {
   return data.edges.map(({ node }) => {
     const {
       id,
@@ -8,6 +20,7 @@ export const normalizeWpResponse = (data) => {
       excerpt,
       featured_media: { localFile: image },
     } = node;
+    const d = new Date(date);
     return {
       node: {
         id,
@@ -15,7 +28,7 @@ export const normalizeWpResponse = (data) => {
         frontmatter: {
           series: null,
           categories: [],
-          date,
+          date: `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`,
           image,
           subtitle: excerpt.replace(/<p>|<\/p>/g, ''),
           title,
