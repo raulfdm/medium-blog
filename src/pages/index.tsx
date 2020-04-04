@@ -28,11 +28,10 @@ const messages = defineMessages({
 });
 
 const Home: React.FC<GraphQLResponse> = ({ data }) => {
-  const wpPosts = normalizeWpResponse(data.allWordpressPost);
-
   const { locale, formatMessage } = useIntl();
   const [filter, setFilter] = React.useState<PostFilters>('all');
 
+  const wpPosts = normalizeWpResponse(data.allWordpressPost);
   const markupPosts = getAndSanitizePostsFromQueryResponse({
     data,
     preferredLang: locale,
