@@ -114,10 +114,10 @@ module.exports = {
     {
       resolve: 'gatsby-source-wordpress',
       options: {
-        baseUrl: 'sergiojunior.com.br/wp/',
+        baseUrl: 'https://leery-hook.000webhostapp.com/',
         protocol: 'http',
         hostingWPCOM: false,
-        useACF: true,
+        useACF: false,
         verboseOutput: true,
         excludedRoutes: ['**/users', '**/settings', '**/themes'],
         includedRoutes: [

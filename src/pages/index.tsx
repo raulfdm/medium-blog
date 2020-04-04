@@ -12,6 +12,7 @@ import SEO from '../components/SEO';
 import { Filter } from '../components/Home/Filter';
 import { PostFilters } from '../components/Home/types';
 import { Posts } from '../components/Home/Posts';
+import { normalizeWpResponse } from '../utils';
 
 const StyledAuthorPresentation = styled(AuthorPresentation)`
   margin-bottom: 3rem;
@@ -27,6 +28,8 @@ const messages = defineMessages({
 });
 
 const Home: React.FC<GraphQLResponse> = ({ data }) => {
+  const wpPosts = normalizeWpResponse(data.allWordpressPost);
+
   const { locale, formatMessage } = useIntl();
   const [filter, setFilter] = React.useState<PostFilters>('all');
 
@@ -59,7 +62,7 @@ const Home: React.FC<GraphQLResponse> = ({ data }) => {
             github={social.github}
           />
           <Filter setFilter={setFilter} currentFilter={filter} />
-          <Posts posts={posts} filter={filter} />
+          <Posts posts={wpPosts.concat(posts)} filter={filter} />
         </main>
       </Layout>
     </>
@@ -121,6 +124,38 @@ export const query = graphql`
           github
           linkedIn
           twitter
+        }
+      }
+    }
+    allWordpressPost {
+      edges {
+        node {
+          id
+          path
+          title
+          excerpt
+          date
+          featured_media {
+            alt_text
+            localFile {
+              childImageSharp {
+                fluid {
+                  tracedSVG
+                  srcWebp
+                  srcSetWebp
+                  srcSet
+                  src
+                  sizes
+                  presentationWidth
+                  presentationHeight
+                  originalName
+                  originalImg
+                  base64
+                  aspectRatio
+                }
+              }
+            }
+          }
         }
       }
     }
