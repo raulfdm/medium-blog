@@ -6,7 +6,7 @@ import { Frontmatter, SeriesType, PostSeries, PostEdge } from '../types';
 import { YouTubeVideo } from '../components/YouTubeVideo';
 import BlogPostContent from '../components/BlogPostContent';
 
-type PostProps = {
+type MarkupPostProps = {
   pageContext: {
     nextPost: PostSeries | null;
     post: PostEdge;
@@ -20,7 +20,7 @@ const renderAst = new rehypeReact({
   components: { 'big-quote': Quote, gif: Gif, yt: YouTubeVideo },
 }).Compiler;
 
-const Post: React.FC<PostProps> = ({ pageContext }) => {
+const MarkupPost: React.FC<MarkupPostProps> = ({ pageContext }) => {
   const { series, post } = pageContext;
 
   const { htmlAst, frontmatter, excerpt, fields } = post.node;
@@ -50,4 +50,4 @@ const Post: React.FC<PostProps> = ({ pageContext }) => {
   );
 };
 
-export default Post;
+export default MarkupPost;

@@ -3,13 +3,13 @@ import { graphql } from 'gatsby';
 import { WordpressPost } from './../types';
 import BlogPostContent from '../components/BlogPostContent';
 
-type WpPostTypes = {
+type WpPostProps = {
   data: {
     wordpressPost: WordpressPost;
   };
 };
 
-const WpPost: React.FC<WpPostTypes> = (props) => {
+const WpPost: React.FC<WpPostProps> = (props) => {
   const {
     title,
     excerpt,

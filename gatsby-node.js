@@ -19,7 +19,7 @@ exports.onCreateNode = createFields;
  */
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions;
-  const mdPostComponent = path.resolve('./src/templates/md-post.tsx');
+  const mdPostComponent = path.resolve('./src/templates/markup-post.tsx');
   const wpPostComponent = path.resolve('./src/templates/wp-post.tsx');
 
   const result = await graphql(`
