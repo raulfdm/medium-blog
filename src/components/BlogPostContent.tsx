@@ -13,6 +13,7 @@ import { useIntl } from '../context/react-intl';
 import { ThemeProvider } from '../config/theme';
 import { PostTemplate } from './../types';
 import SeriesSection from './Blog/SeriesSection/SeriesSection';
+import { useScripts } from '../hooks';
 
 const Title = styled.h1`
   font-size: 34px;
@@ -68,16 +69,7 @@ const BlogPostContent: React.FC<PostTemplate> = ({
    */
 
   const { formatMessage } = useIntl();
-  React.useEffect(() => {
-    /* This loads all widgets from twitter if exists. 
-    It's loaded by html.tsx (data-testid="twitter-script")
-    */
-    // @ts-ignore
-    if (window.twttr?.widgets) {
-      // @ts-ignore
-      window.twttr.widgets.load();
-    }
-  }, []);
+  useScripts();
 
   return (
     <>
