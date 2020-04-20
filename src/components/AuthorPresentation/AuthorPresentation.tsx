@@ -31,8 +31,8 @@ const AuthorPresentation: React.FC = () => {
   return (
     <S.Wrapper>
       <S.AuthorDataWrapper>
-        <S.AuthorName>{author}</S.AuthorName>
-        <S.AuthorSynopsis>
+        <S.AuthorName data-testid="author">{author}</S.AuthorName>
+        <S.AuthorSynopsis data-testid="description">
           <FormattedMessage id="siteData.description" />
         </S.AuthorSynopsis>
         <S.SocialWrapper>
