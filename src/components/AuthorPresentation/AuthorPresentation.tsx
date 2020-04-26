@@ -37,17 +37,17 @@ const AuthorPresentation: React.FC = () => {
         </S.AuthorSynopsis>
         <S.SocialWrapper>
           {github && (
-            <S.SocialLink href={github}>
+            <S.SocialLink href={github} data-testid="github-url">
               <Github size={21} />
             </S.SocialLink>
           )}
           {twitter && (
-            <S.SocialLink href={twitter}>
+            <S.SocialLink href={twitter} data-testid="twitter-url">
               <Twitter size={21} />
             </S.SocialLink>
           )}
           {linkedIn && (
-            <S.SocialLink href={linkedIn}>
+            <S.SocialLink href={linkedIn} data-testid="linkedIn-url">
               <Linkedin size={21} />
             </S.SocialLink>
           )}

@@ -1,68 +1,98 @@
 import React from 'react';
 import { useStaticQuery } from 'gatsby';
+import { mergeDeepRight } from 'ramda';
 
-import { render, fireEvent } from 'test-utils';
+import { render } from 'test-utils';
 import AuthorPresentation from './AuthorPresentation';
+import { SiteMetadata } from 'types';
 
 jest.mock('gatsby');
 
-// describe.skip('<AuthorPresentation', () => {
-//   const apiResponse = {
-//     site: {
-//       siteMetadata: {
-//         profilePic:
-//           'https://miro.medium.com/fit/c/256/256/1*6jtMoNvX_MHslzBLP4aM9g.jpeg',
-//         author: 'Raul Melo',
-//         social: {
-//           github: 'https://github.com/raulfdm',
-//           linkedIn: 'https://www.linkedin.com/in/raulfdm/',
-//           twitter: 'https://twitter.com/raul_fdm',
-//         },
-//       },
-//     },
-//   };
-
-//   (useStaticQuery as jest.Mock<typeof useStaticQuery>).mockReturnValue(
-//     apiResponse as any,
-//   );
-
-//   const { getByTestId, debug } = render(<AuthorPresentation />);
-
-//   it('renders author', () => {
-//     expect(getByTestId('author').textContent).toBe(
-//       apiResponse.site.siteMetadata.author,
-//     );
-//   });
-
-//   it.skip('renders site description from locale', () => {
-//     // expect(getByTestId('description').textContent).toMatchInlineSnapshot();
-//     // expect(debug()).toBe(1);
-//   });
-// });
-
-it('test', () => {
-  const CustomInput = () => {
-    const [name, setName] = React.useState('');
-
-    return (
-      <>
-        <input
-          onChange={(e) => setName(e.target.value)}
-          name="name"
-          value={name}
-          data-testid="greetings"
-        />
-        <p data-testid="greetings">Hello {name}</p>
-      </>
-    );
+function mockApiResult(custom?: any): Partial<SiteMetadata> {
+  const defaults = {
+    profilePic:
+      'https://miro.medium.com/fit/c/256/256/1*6jtMoNvX_MHslzBLP4aM9g.jpeg',
+    author: 'Raul Melo',
+    social: {},
   };
 
-  const { getByTestId, container } = render(<CustomInput />);
+  const mergedProps = mergeDeepRight(defaults, custom || {});
 
-  const input = getByTestId('name');
-  const greetingsText = getByTestId('greetings');
+  (useStaticQuery as jest.Mock<typeof useStaticQuery>).mockReturnValue({
+    site: {
+      siteMetadata: mergedProps,
+    },
+  } as any);
 
-  fireEvent.change(input, { target: { value: 'John' } });
+  return mergedProps;
+}
 
-  expect(greetingsText.textContent).toBe('Hello John');
+describe('<AuthorPresentation />', () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
+  it('renders author name', () => {
+    const siteMetadata = mockApiResult();
+
+    const { getByTestId } = render(<AuthorPresentation />);
+
+    expect(getByTestId('author').textContent).toBe(siteMetadata.author);
+  });
+
+  it('renders site description from locale', () => {
+    mockApiResult();
+
+    const { getByTestId } = render(<AuthorPresentation />);
+
+    expect(getByTestId('description').textContent).toMatchInlineSnapshot(
+      `"Developer, writer in my spare time, tech addicted, open-source lover who believes the only way to transform lives is through education."`,
+    );
+  });
+
+  it('renders github if received', () => {
+    const github = 'https://github.com/raulfdm';
+
+    mockApiResult({
+      social: {
+        github,
+      },
+    });
+
+    const { getByTestId } = render(<AuthorPresentation />);
+
+    expect((getByTestId('github-url') as HTMLAnchorElement).href).toBe(github);
+  });
+
+  it('renders twitter if received', () => {
+    const twitter = 'https://twitter.com/raul_fdm';
+
+    mockApiResult({
+      social: {
+        twitter,
+      },
+    });
+
+    const { getByTestId } = render(<AuthorPresentation />);
+
+    expect((getByTestId('twitter-url') as HTMLAnchorElement).href).toBe(
+      twitter,
+    );
+  });
+
+  it('renders linkedIn if received', () => {
+    const linkedIn = 'https://www.linkedin.com/in/raulfdm/';
+
+    mockApiResult({
+      social: {
+        linkedIn,
+      },
+    });
+
+    const { getByTestId } = render(<AuthorPresentation />);
+
+    expect((getByTestId('linkedIn-url') as HTMLAnchorElement).href).toBe(
+      linkedIn,
+    );
+  });
 });
