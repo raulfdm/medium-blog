@@ -25,7 +25,7 @@ const renderAst = new rehypeReact({
   components: { 'big-quote': Quote, gif: Gif, yt: YouTubeVideo },
 }).Compiler;
 
-const Post: React.FC<BlogPostProps> = ({ pageContext }) => {
+const BlogPost: React.FC<BlogPostProps> = ({ pageContext }) => {
   useTwitterScript();
 
   const { series, post } = pageContext;
@@ -76,4 +76,4 @@ const Post: React.FC<BlogPostProps> = ({ pageContext }) => {
   );
 };
 
-export default Post;
+export default BlogPost;
