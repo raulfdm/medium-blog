@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import media from 'styled-media-query';
 
 import { Container } from '../../Ui';
+import { useBlogContext } from '../blogContext';
 
 const Title = styled.h1`
   font-size: 34px;
@@ -25,12 +26,8 @@ const Subtitle = styled.p`
   `}
 `;
 
-interface HeaderProps {
-  title: string;
-  subtitle?: string;
-}
-
-export const Header = ({ title, subtitle }: HeaderProps) => {
+export const Header = () => {
+  const { title, subtitle } = useBlogContext();
   return (
     <Container as="header" data-testid="header">
       <Title data-testid="header-title">{title}</Title>

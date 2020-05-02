@@ -2,16 +2,28 @@ import React from 'react';
 import { render } from 'test-utils';
 
 import { Header } from '.';
+import { BlogContextProvider } from '../blogContext';
+import { BlogPostContext } from '../types';
+
+function renderWithContext(contextValues?: Partial<BlogPostContext>) {
+  return render(
+    <BlogContextProvider
+      value={{ title: 'hey, Im a Title', ...contextValues } as any}
+    >
+      <Header />
+    </BlogContextProvider>,
+  );
+}
 
 describe('<Header />', () => {
   it('renders element', () => {
-    const { getByTestId } = render(<Header title="hi" />);
+    const { getByTestId } = renderWithContext();
     expect(getByTestId('header')).toBeInTheDocument();
   });
 
   it('renders title', () => {
     const title = 'some title';
-    const { getByText } = render(<Header title={title} />);
+    const { getByText } = renderWithContext({ title });
 
     const titleEl = getByText(title);
     expect(titleEl).toBeInTheDocument();
@@ -41,14 +53,14 @@ describe('<Header />', () => {
   });
 
   it('does not render subtitle if not received ', () => {
-    const { queryByTestId } = render(<Header title="hi" />);
+    const { queryByTestId } = renderWithContext();
 
     expect(queryByTestId('header-subtitle')).not.toBeInTheDocument();
   });
 
   it('renders subtitle', () => {
     const subtitle = 'some subtitle';
-    const { queryByTestId } = render(<Header title="hi" subtitle={subtitle} />);
+    const { queryByTestId } = renderWithContext({ subtitle });
 
     const subtitleEl = queryByTestId('header-subtitle');
 
