@@ -12,10 +12,11 @@ import { SeriesMenu } from '../components/Blog/SeriesMenu';
 import { Gif } from '../components/Blog/Gif';
 import { Frontmatter, SeriesType, PostSeries, PostEdge } from '../types';
 import SEO from '../components/SEO';
-import { useIntl } from '../context/react-intl';
+
 import { YouTubeVideo } from '../components/YouTubeVideo';
 import { ThemeProvider } from '../context/theme';
 import { Header } from 'components/Blog/Header';
+import { FeaturedImage } from 'components/Blog/FeaturedImage';
 
 type PostProps = {
   pageContext: {
@@ -31,14 +32,7 @@ const renderAst = new rehypeReact({
   components: { 'big-quote': Quote, gif: Gif, yt: YouTubeVideo },
 }).Compiler;
 
-const messages = defineMessages({
-  featuredImageLabel: {
-    id: 'blog.featuredImage',
-  },
-});
-
 const Post: React.FC<PostProps> = ({ pageContext }) => {
-  const { formatMessage } = useIntl();
   React.useEffect(() => {
     /* This loads all widgets from twitter if exists. 
     It's loaded by html.tsx (data-testid="twitter-script")
@@ -101,18 +95,7 @@ const Post: React.FC<PostProps> = ({ pageContext }) => {
           <MenuBar />
           <Header title={title} subtitle={subtitle} />
           <SeriesSection noDivider />
-          {image && (
-            <ImgWrapper
-              role="img"
-              aria-label={formatMessage(messages.featuredImageLabel)}
-            >
-              <StyledImg
-                fluid={image.childImageSharp.fluid}
-                alt={imageCaption}
-              />
-              {imageCaption && <p className="img-caption">{imageCaption}</p>}
-            </ImgWrapper>
-          )}
+          <FeaturedImage image={image} imageCaption={imageCaption} />
           <Container className="post" as="main">
             {renderAst(htmlAst)}
             <SeriesSection />
