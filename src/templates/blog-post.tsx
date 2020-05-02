@@ -1,30 +1,22 @@
 import React from 'react';
 import rehypeReact from 'rehype-react';
 import { motion } from 'framer-motion';
-import { defineMessages } from 'react-intl';
 
 import { Quote, pageTransitionVariants } from '../components/Ui';
 import { BlogGlobalStyle } from '../styles/blogPost';
 import { GlobalStyles } from '../styles';
 import { Container } from '../components/Ui';
 import { MenuBar } from '../components/MenuBar';
-import { SeriesMenu } from '../components/Blog/SeriesMenu';
 import { Gif } from '../components/Blog/Gif';
-import { Frontmatter, SeriesType, PostSeries, PostEdge } from '../types';
+import { Frontmatter } from '../types';
 import SEO from '../components/SEO';
-
 import { YouTubeVideo } from '../components/YouTubeVideo';
 import { ThemeProvider } from '../context/theme';
 import { Header } from 'components/Blog/Header';
 import { FeaturedImage } from 'components/Blog/FeaturedImage';
-
-type PostProps = {
-  pageContext: {
-    nextPost: PostSeries | null;
-    post: PostEdge;
-    series: SeriesType;
-  };
-};
+import { SeriesSection } from 'components/Blog/SeriesSection';
+import { BlogPostProps } from 'components/Blog/types';
+import { BlogContextProvider } from 'components/Blog/blogContext';
 
 /* Custom Components */
 const renderAst = new rehypeReact({
@@ -32,7 +24,7 @@ const renderAst = new rehypeReact({
   components: { 'big-quote': Quote, gif: Gif, yt: YouTubeVideo },
 }).Compiler;
 
-const Post: React.FC<PostProps> = ({ pageContext }) => {
+const Post: React.FC<BlogPostProps> = ({ pageContext }) => {
   React.useEffect(() => {
     /* This loads all widgets from twitter if exists. 
     It's loaded by html.tsx (data-testid="twitter-script")
@@ -55,25 +47,6 @@ const Post: React.FC<PostProps> = ({ pageContext }) => {
     series: seriesInfo,
   } = frontmatter as Frontmatter;
 
-  const SeriesSection: React.FC<{ noDivider?: boolean }> = ({
-    noDivider = false,
-  }) => {
-    return (
-      series && (
-        <>
-          {!noDivider && <hr />}
-          <Container as="section">
-            <SeriesMenu
-              series={series}
-              postIndex={seriesInfo!.index}
-              title={title}
-            />
-          </Container>
-        </>
-      )
-    );
-  };
-
   return (
     <>
       <SEO
@@ -93,14 +66,17 @@ const Post: React.FC<PostProps> = ({ pageContext }) => {
           <GlobalStyles />
           <BlogGlobalStyle />
           <MenuBar />
-          <Header title={title} subtitle={subtitle} />
-          <SeriesSection noDivider />
-          <FeaturedImage image={image} imageCaption={imageCaption} />
-          <Container className="post" as="main">
-            {renderAst(htmlAst)}
-            <SeriesSection />
-          </Container>
-          <br />
+          <BlogContextProvider
+            value={{ series, seriesInfo, title, subtitle, image, imageCaption }}
+          >
+            <Header />
+            <SeriesSection noDivider />
+            <FeaturedImage />
+            <Container className="post" as="main">
+              {renderAst(htmlAst)}
+              <SeriesSection />
+            </Container>
+          </BlogContextProvider>
         </motion.div>
       </ThemeProvider>
     </>
