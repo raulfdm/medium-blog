@@ -2,6 +2,12 @@ import React from 'react';
 import rehypeReact from 'rehype-react';
 import { motion } from 'framer-motion';
 
+import { Header } from 'components/Blog/Header';
+import { FeaturedImage } from 'components/Blog/FeaturedImage';
+import { SeriesSection } from 'components/Blog/SeriesSection';
+import { BlogPostProps } from 'components/Blog/types';
+import { BlogContextProvider } from 'components/Blog/blogContext';
+import { useTwitterScript } from 'components/Blog/useTwitterScript';
 import { Quote, pageTransitionVariants } from '../components/Ui';
 import { BlogGlobalStyle } from '../styles/blogPost';
 import { GlobalStyles } from '../styles';
@@ -12,11 +18,6 @@ import { Frontmatter } from '../types';
 import SEO from '../components/SEO';
 import { YouTubeVideo } from '../components/YouTubeVideo';
 import { ThemeProvider } from '../context/theme';
-import { Header } from 'components/Blog/Header';
-import { FeaturedImage } from 'components/Blog/FeaturedImage';
-import { SeriesSection } from 'components/Blog/SeriesSection';
-import { BlogPostProps } from 'components/Blog/types';
-import { BlogContextProvider } from 'components/Blog/blogContext';
 
 /* Custom Components */
 const renderAst = new rehypeReact({
@@ -25,16 +26,8 @@ const renderAst = new rehypeReact({
 }).Compiler;
 
 const Post: React.FC<BlogPostProps> = ({ pageContext }) => {
-  React.useEffect(() => {
-    /* This loads all widgets from twitter if exists. 
-    It's loaded by html.tsx (data-testid="twitter-script")
-    */
-    // @ts-ignore
-    if (window.twttr?.widgets) {
-      // @ts-ignore
-      window.twttr.widgets.load();
-    }
-  }, []);
+  useTwitterScript();
+
   const { series, post } = pageContext;
 
   const { htmlAst, frontmatter, excerpt, fields } = post.node;
