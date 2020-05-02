@@ -3,15 +3,27 @@ import { render } from 'test-utils';
 
 import { mockedImage } from './__mocks__/mockData';
 import { FeaturedImage } from '.';
+import { BlogContextProvider } from '../blogContext';
+import { BlogPostContext } from '../types';
+
+function renderWithContext(contextValues?: Partial<BlogPostContext>) {
+  return render(
+    <BlogContextProvider
+      value={{ image: mockedImage, ...contextValues } as any}
+    >
+      <FeaturedImage />
+    </BlogContextProvider>,
+  );
+}
 
 describe('<FeaturedImage />', () => {
   it('does not render anything if not receives image', () => {
-    const { queryByTestId } = render(<FeaturedImage />);
+    const { queryByTestId } = renderWithContext({ image: undefined });
     expect(queryByTestId('featured-image-wrapper')).not.toBeInTheDocument();
   });
 
   it('renders gatsby image with default alt', () => {
-    const { container } = render(<FeaturedImage image={mockedImage} />);
+    const { container } = renderWithContext();
 
     const imgEl = container.querySelector('img[alt="Featured image"]');
 
@@ -22,9 +34,9 @@ describe('<FeaturedImage />', () => {
   it('renders gatsby image with custom alt', () => {
     const imgCaption = 'This is an awesome image';
 
-    const { container } = render(
-      <FeaturedImage image={mockedImage} imageCaption={imgCaption} />,
-    );
+    const { container } = renderWithContext({
+      imageCaption: imgCaption,
+    });
 
     const imgEl = container.querySelector(`img[alt="${imgCaption}"]`);
 
@@ -32,7 +44,7 @@ describe('<FeaturedImage />', () => {
   });
 
   it('does not render imageCaption element when not receive "imageCaption"', () => {
-    const { queryByTestId } = render(<FeaturedImage image={mockedImage} />);
+    const { queryByTestId } = renderWithContext();
 
     const captionEl = queryByTestId('featured-img-caption');
 
@@ -42,9 +54,9 @@ describe('<FeaturedImage />', () => {
   it('renders img-caption element when send imageCaption', () => {
     const imgCaption = 'This is an awesome image';
 
-    const { getByTestId } = render(
-      <FeaturedImage image={mockedImage} imageCaption={imgCaption} />,
-    );
+    const { getByTestId } = renderWithContext({
+      imageCaption: imgCaption,
+    });
 
     const captionEl = getByTestId('featured-img-caption');
 

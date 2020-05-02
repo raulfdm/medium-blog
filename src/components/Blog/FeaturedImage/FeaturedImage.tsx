@@ -6,6 +6,7 @@ import { defineMessages } from 'react-intl';
 import { Frontmatter } from 'types';
 import { useIntl } from 'context/react-intl';
 import { Container } from '../../Ui';
+import { useBlogContext } from '../blogContext';
 
 const StyledImg = styled(Img)`
   max-height: 600px;
@@ -28,8 +29,9 @@ const messages = defineMessages({
   },
 });
 
-export const FeaturedImage = ({ image, imageCaption }: FeaturedImageProps) => {
+export const FeaturedImage = () => {
   const { formatMessage } = useIntl();
+  const { image, imageCaption } = useBlogContext();
 
   return image ? (
     <ImgWrapper
