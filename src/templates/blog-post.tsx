@@ -1,8 +1,5 @@
 import React from 'react';
-import Img from 'gatsby-image';
-import styled from 'styled-components';
 import rehypeReact from 'rehype-react';
-import media from 'styled-media-query';
 import { motion } from 'framer-motion';
 import { defineMessages } from 'react-intl';
 
@@ -18,37 +15,7 @@ import SEO from '../components/SEO';
 import { useIntl } from '../context/react-intl';
 import { YouTubeVideo } from '../components/YouTubeVideo';
 import { ThemeProvider } from '../context/theme';
-
-const Title = styled.h1`
-  font-size: 34px;
-  line-height: 40px;
-
-  ${media.greaterThan('medium')`
-    font-size: 42px;
-  `}
-`;
-
-const Subtitle = styled.p`
-  font-size: 24px;
-  line-height: 1.22;
-  letter-spacing: -0.012em;
-  font-family: ${({ theme }) => theme.font.contentSans};
-  opacity: 0.54;
-
-  ${media.greaterThan('medium')`
-    font-size: 28px;
-  `}
-`;
-
-const StyledImg = styled(Img)`
-  max-height: 600px;
-  margin-top: 42px;
-`;
-
-const ImgWrapper = styled(Container)`
-  max-width: 1192px;
-  padding-bottom: 50px;
-`;
+import { Header } from 'components/Blog/Header';
 
 type PostProps = {
   pageContext: {
@@ -132,10 +99,7 @@ const Post: React.FC<PostProps> = ({ pageContext }) => {
           <GlobalStyles />
           <BlogGlobalStyle />
           <MenuBar />
-          <Container as="header">
-            <Title>{title}</Title>
-            {subtitle && <Subtitle>{subtitle}</Subtitle>}
-          </Container>
+          <Header title={title} subtitle={subtitle} />
           <SeriesSection noDivider />
           {image && (
             <ImgWrapper
