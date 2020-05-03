@@ -39,6 +39,18 @@ module.exports = {
     // To learn more, visit: https://gatsby.dev/offline
     `gatsby-plugin-offline`,
     {
+      resolve: 'gatsby-plugin-tinacms',
+      options: {
+        sidebar: {
+          hidden: process.env.NODE_ENV === 'production',
+          position: 'displace',
+        },
+        plugins: [
+          // We'll add some Tinacms plugins in the next step.
+        ],
+      },
+    },
+    {
       resolve: `gatsby-plugin-manifest`,
       options: {
         name: `Raul Melo - Site pessoal e Blog`,
