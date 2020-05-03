@@ -6,7 +6,7 @@ import Typography from 'typography';
 import { FONTS } from 'context/theme';
 
 const baseFontSize = '18px';
-const baseFontSizeHigherThanMobile = '21px';
+const baseFontSizeHigherThanMobile = '18px';
 
 export function pxToRem(px: string | number, mobile = true): string {
   const baseNumber = parseInt(
@@ -19,7 +19,7 @@ export function pxToRem(px: string | number, mobile = true): string {
 
 export const typography = new Typography({
   baseFontSize,
-  baseLineHeight: 1.5,
+  baseLineHeight: 1.58,
   includeNormalize: true,
   headerFontFamily: [
     FONTS.contentSans,
@@ -113,7 +113,7 @@ const blogGlobal = css`
 
   ${media.greaterThan('medium')`
     html {
-      font-size: ${fontSizeInPercenetage(baseFontSizeHigherThanMobile)}
+      /* font-size: ${fontSizeInPercenetage(baseFontSizeHigherThanMobile)} */
     }
 
     blockquote{

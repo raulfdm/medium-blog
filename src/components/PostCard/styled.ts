@@ -31,7 +31,7 @@ export const Title = styled.h2`
   color: ${({ theme }) => theme.color.font};
 
   ${media.greaterThan('medium')`
-    font-size: 3.4rem;
+    font-size: 3rem;
     line-height: 1.12;
     letter-spacing: -0.022em;
   `}
@@ -45,21 +45,20 @@ export const Subtitle = styled.p`
   color: ${({ theme }) => theme.color.fontLight};
 
   ${media.greaterThan('medium')`
-    font-size: 2.4rem;
+    font-size: 2.2rem;
   `}
 `;
 
 export const Description = styled.p`
   font-weight: 400;
   overflow-wrap: break-word;
-  margin-top: 1.11em;
-  font-size: 1.6rem;
+  font-size: 1.4rem;
   font-family: ${({ theme }) => theme.font.contentSerif};
-  margin-top: 0.8rem;
+  margin-top: 16px;
 
   ${media.greaterThan('medium')`
     font-size: 1.8rem;
-    margin-top: 1.2rem;
+    margin-top: 18px;
   `}
 `;
 
@@ -73,7 +72,6 @@ export const MetaWrapper = styled.div`
 
   ${media.greaterThan('medium')`
     margin-top: 1em;
-    font-size: 1.6rem;
   `}
 `;
 
