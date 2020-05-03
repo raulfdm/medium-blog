@@ -23,7 +23,8 @@ export const Image = styled(Img)`
 
 export const Title = styled.h2`
   margin: 0;
-  line-height: 1;
+  margin-bottom: 5px;
+  line-height: 1.3;
   font-size: 2rem;
   font-weight: 600;
   font-family: ${({ theme }) => theme.font.contentSans};
@@ -38,15 +39,13 @@ export const Title = styled.h2`
 
 export const Subtitle = styled.p`
   margin: 0;
+  line-height: 1.3;
   font-size: 1.8rem;
-  font-weight: 300;
   font-family: ${({ theme }) => theme.font.contentSans};
   color: ${({ theme }) => theme.color.fontLight};
 
   ${media.greaterThan('medium')`
     font-size: 2.4rem;
-    letter-spacing: 0px;
-    line-height: 1.394;
   `}
 `;
 
@@ -55,7 +54,6 @@ export const Description = styled.p`
   overflow-wrap: break-word;
   margin-top: 1.11em;
   font-size: 1.6rem;
-  letter-spacing: -0.004em;
   font-family: ${({ theme }) => theme.font.contentSerif};
   margin-top: 0.8rem;
 
@@ -68,7 +66,6 @@ export const Description = styled.p`
 export const MetaWrapper = styled.div`
   font-family: ${({ theme }) => theme.font.contentSans};
   font-size: 1.4rem;
-  font-weight: 300;
   margin-top: 1em;
   color: ${({ theme }) => theme.color.font};
   display: flex;
