@@ -93,7 +93,7 @@
     "gatsby-plugin-tinacms": "^0.1.34",
     "gatsby-plugin-typescript": "^2.4.0",
     "gatsby-plugin-web-font-loader": "^1.0.4",
-    "gatsby-remark-autolink-headers": "^2.3.0",
+    "gatsby-remark-autolink-headers": "^2.3.2",
     "gatsby-remark-code-titles": "^1.1.0",
     "gatsby-remark-copy-linked-files": "^2.3.1",
     "gatsby-remark-images": "^3.3.0",
