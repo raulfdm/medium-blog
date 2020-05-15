@@ -23,7 +23,7 @@ jobs:
           path: ${{ steps.yarn-cache-dir.outputs.dir }}
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
-            ${{ runner.os }}-yarn-
+            ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
 
       # In order to make gatsby incremental build works, it's necessary .cache
       # and public folder.
@@ -47,6 +47,7 @@ jobs:
 
       - run: yarn install --pure-lockfile
         name: Install dependencies
+        if: steps.yarn-cache.outputs.cache-hit != 'true'
 
       - run: yarn lint
         name: Run ESLint
