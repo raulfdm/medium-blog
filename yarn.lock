@@ -2843,6 +2843,11 @@
   resolved "https://registry.yarnpkg.com/@types/js-cookie/-/js-cookie-2.2.6.tgz#f1a1cb35aff47bc5cfb05cb0c441ca91e914c26f"
   integrity sha512-+oY0FDTO2GYKEV0YPvSshGq9t7YozVkgvXLty7zogQNuCxBhT9/3INX9Q7H1aRZ4SUDRXAKlJuA4EA5nTt7SNw==
 
+"@types/js-yaml@^3.12.3":
+  version "3.12.3"
+  resolved "https://registry.yarnpkg.com/@types/js-yaml/-/js-yaml-3.12.3.tgz#abf383c5b639d0aa8b8c4a420d6a85f703357d6c"
+  integrity sha512-otRe77JNNWzoVGLKw8TCspKswRoQToys4tuL6XYVBFxjgeM0RUrx7m3jkaTdxILxeGry3zM8mGYkGXMeQ02guA==
+
 "@types/json-schema@^7.0.3":
   version "7.0.3"
   resolved "https://registry.yarnpkg.com/@types/json-schema/-/json-schema-7.0.3.tgz#bdfd69d61e464dcc81b25159c270d75a73c1a636"
@@ -8483,11 +8488,12 @@ gatsby-tinacms-json@^0.8.19:
   dependencies:
     slash "^3.0.0"
 
-gatsby-tinacms-remark@^0.7.14:
-  version "0.7.14"
-  resolved "https://registry.yarnpkg.com/gatsby-tinacms-remark/-/gatsby-tinacms-remark-0.7.14.tgz#0f2b0b8fb52af8d97826885c768d096de70d824d"
-  integrity sha512-DtJwC2ECjYLmu7JH92V+600k4x7TOP3A3RFD/xzk8qw23yVVO8l1Rv0v3kgtHpu94c4po7eEl05t5/MnELqJPg==
+gatsby-tinacms-remark@^0.7.18:
+  version "0.7.18"
+  resolved "https://registry.yarnpkg.com/gatsby-tinacms-remark/-/gatsby-tinacms-remark-0.7.18.tgz#ada30a1dcd807d358c94c15cf7be6ff590fa1744"
+  integrity sha512-8ioqWgvwJKU7mDVeYsvlH+2nn3iQQH0yIb+oyRhfN4J3kcRDkebrb0t9MuKhHXT7f/hxahOu5ydWTZicywReAw==
   dependencies:
+    "@types/js-yaml" "^3.12.3"
     gray-matter "^4.0.2"
     js-yaml "^3.13.1"
     slash "^3.0.0"
