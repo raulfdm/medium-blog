@@ -90,7 +90,7 @@
     "gatsby-plugin-sharp": "2.6.4",
     "gatsby-plugin-sitemap": "2.4.2",
     "gatsby-plugin-styled-components": "3.3.1",
-    "gatsby-plugin-tinacms": "0.1.37",
+    "gatsby-plugin-tinacms": "0.1.38",
     "gatsby-plugin-typescript": "2.4.2",
     "gatsby-plugin-web-font-loader": "1.0.4",
     "gatsby-remark-autolink-headers": "2.3.2",
