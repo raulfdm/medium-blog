@@ -4123,10 +4123,10 @@ babel-preset-fbjs@^3.3.0:
     "@babel/plugin-transform-template-literals" "^7.0.0"
     babel-plugin-syntax-trailing-function-commas "^7.0.0-beta.0"
 
-babel-preset-gatsby@0.4.3, babel-preset-gatsby@^0.4.3:
-  version "0.4.3"
-  resolved "https://registry.yarnpkg.com/babel-preset-gatsby/-/babel-preset-gatsby-0.4.3.tgz#f0380dd3d1ab9ebdb199f9fccd6e3fec3d0b20e7"
-  integrity sha512-HMeu162tqowWD4lIZW3pAnRwxtha3ar6EEa3U/fWQiKab7r+oy28c/7kzhxb9L/nECaYIKH0wd+o2HU2Jnc6RQ==
+babel-preset-gatsby@0.4.6, babel-preset-gatsby@^0.4.3:
+  version "0.4.6"
+  resolved "https://registry.yarnpkg.com/babel-preset-gatsby/-/babel-preset-gatsby-0.4.6.tgz#5a569c827d0615a338ea252418cf165945d1b783"
+  integrity sha512-WIFSRX3tnv3WirBz/qFF7HKTCB6yAkLHUFyB/zvPiJ2QQ8HHiR0x7mBm35cE3+W+fuzmFhkL25O4DE/x67AhfA==
   dependencies:
     "@babel/plugin-proposal-class-properties" "^7.8.3"
     "@babel/plugin-proposal-nullish-coalescing-operator" "^7.8.3"
@@ -4140,7 +4140,7 @@ babel-preset-gatsby@0.4.3, babel-preset-gatsby@^0.4.3:
     babel-plugin-dynamic-import-node "^2.3.3"
     babel-plugin-macros "^2.8.0"
     babel-plugin-transform-react-remove-prop-types "^0.4.24"
-    gatsby-core-utils "^1.2.3"
+    gatsby-core-utils "^1.3.2"
 
 babel-preset-jest@^26.0.0:
   version "26.0.0"
@@ -8112,10 +8112,10 @@ gatsby-cli@^2.12.24:
     ink "^2.7.1"
     ink-spinner "^3.0.1"
 
-gatsby-core-utils@^1.2.2, gatsby-core-utils@^1.2.3, gatsby-core-utils@^1.3.0:
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/gatsby-core-utils/-/gatsby-core-utils-1.3.0.tgz#a3dfc85f705c23e0b19a8cf9ccb97580eb0e2612"
-  integrity sha512-7rgNCsqvChp00rL2rJrYNqXf47qP1G0K9Pm6iWuIYrZAdzT0q6rB9csNS5dZ8gzY9CnLT4cTcHVYbr5BjuT/Rg==
+gatsby-core-utils@^1.2.2, gatsby-core-utils@^1.2.3, gatsby-core-utils@^1.3.0, gatsby-core-utils@^1.3.2:
+  version "1.3.2"
+  resolved "https://registry.yarnpkg.com/gatsby-core-utils/-/gatsby-core-utils-1.3.2.tgz#b76489df19a5a0952701db073235827df627244a"
+  integrity sha512-aNecB7D9KFGITArBoEu7Y4g2ZN2zVY+BB2uF9Ql8mp1fcRZFXZdkNvyXqiKsyDFRl/UdBT4u6Zrym1bXk0SWig==
   dependencies:
     ci-info "2.0.0"
     configstore "^5.0.1"
