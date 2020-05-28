@@ -1,5 +1,5 @@
 const myQuery = `{
-  posts: allMarkdownRemark(
+  posts: allMdx(
     sort: { fields: [frontmatter___date], order: DESC }
     limit: 1000
   ) {

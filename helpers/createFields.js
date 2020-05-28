@@ -9,7 +9,7 @@ function getFileLanguageForSlug(fileName) {
 
 const createFields = ({ node, actions }) => {
   const { createNodeField } = actions;
-  if (node.internal.type === `MarkdownRemark`) {
+  if (node.internal.type === `Mdx`) {
     const fileName = path.basename(node.fileAbsolutePath, `.md`);
 
     const postDirectoryPath = path.dirname(node.fileAbsolutePath);

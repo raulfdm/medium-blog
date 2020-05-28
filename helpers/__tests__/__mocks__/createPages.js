@@ -1,7 +1,7 @@
 const singlePost = {
   api: {
     data: {
-      allMarkdownRemark: {
+      allMdx: {
         edges: [
           {
             node: {
@@ -69,7 +69,7 @@ const singlePost = {
 const twoPosts = {
   api: {
     data: {
-      allMarkdownRemark: {
+      allMdx: {
         edges: [
           {
             node: {

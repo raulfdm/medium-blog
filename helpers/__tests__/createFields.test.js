@@ -4,7 +4,7 @@ describe('fn: createFields', () => {
   describe('pt post', () => {
     const node = {
       internal: {
-        type: 'MarkdownRemark',
+        type: 'Mdx',
       },
       fileAbsolutePath: `${BLOGS_PATH}/2017/05/regex-part-1/index.md`,
     };
@@ -40,7 +40,7 @@ describe('fn: createFields', () => {
   describe('en post', () => {
     const node = {
       internal: {
-        type: 'MarkdownRemark',
+        type: 'Mdx',
       },
       fileAbsolutePath: `${BLOGS_PATH}/2017/05/regex-part-1/index.en.md`,
     };
