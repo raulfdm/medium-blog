@@ -1290,10 +1290,10 @@
   dependencies:
     "@formatjs/intl-utils" "^3.1.0"
 
-"@formatjs/intl-pluralrules@2.1.0":
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/@formatjs/intl-pluralrules/-/intl-pluralrules-2.1.0.tgz#3e7f2d974f76fbf28a36fe4e066d98025e3469ee"
-  integrity sha512-01fu5IMZAEnNiJZZrINCvsGoqG6L6/eZ0cKBD8dCcWQC5FGDZXonpGk3iwkGJncO9GwEJhHi6kaLcgyf8nALPg==
+"@formatjs/intl-pluralrules@2.2.0":
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/@formatjs/intl-pluralrules/-/intl-pluralrules-2.2.0.tgz#af6af13ab2bffe7eb6c13039ff5fc01da528be25"
+  integrity sha512-AzjjLF0nEGJuk8ep6I8OhBCZPRLKfb0xro5wHx7agOU4jI/O806KTZOxQTgmzUfuAAnn5Am+TEcI4GoDZjS8lQ==
   dependencies:
     "@formatjs/intl-utils" "^3.1.0"
 
