@@ -10,7 +10,7 @@ function getFileLanguageForSlug(fileName) {
 const createFields = ({ node, actions }) => {
   const { createNodeField } = actions;
   if (node.internal.type === `Mdx`) {
-    const fileName = path.basename(node.fileAbsolutePath, `.md`);
+    const fileName = path.basename(node.fileAbsolutePath, `.mdx`);
 
     const postDirectoryPath = path.dirname(node.fileAbsolutePath);
 
