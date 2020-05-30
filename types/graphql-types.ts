@@ -3225,6 +3225,7 @@ export type SitePageContextPostFilterInput = {
 
 export type SitePageContextPostNode = {
   id?: Maybe<Scalars['String']>;
+  body?: Maybe<Scalars['String']>;
   excerpt?: Maybe<Scalars['String']>;
   timeToRead?: Maybe<Scalars['Int']>;
   frontmatter?: Maybe<SitePageContextPostNodeFrontmatter>;
@@ -3246,6 +3247,7 @@ export type SitePageContextPostNodeFieldsFilterInput = {
 
 export type SitePageContextPostNodeFilterInput = {
   id?: Maybe<StringQueryOperatorInput>;
+  body?: Maybe<StringQueryOperatorInput>;
   excerpt?: Maybe<StringQueryOperatorInput>;
   timeToRead?: Maybe<IntQueryOperatorInput>;
   frontmatter?: Maybe<SitePageContextPostNodeFrontmatterFilterInput>;
@@ -3585,6 +3587,7 @@ export type SitePageFieldsEnum =
   | 'internal___type'
   | 'isCreatedByStatefulCreatePages'
   | 'context___post___node___id'
+  | 'context___post___node___body'
   | 'context___post___node___excerpt'
   | 'context___post___node___timeToRead'
   | 'context___post___node___fileAbsolutePath'
@@ -4269,4 +4272,12 @@ export type Unnamed_3_Query = { allMdx: { edges: Array<{ node: (
           Pick<MdxFrontmatter, 'title' | 'subtitle' | 'date' | 'categories' | 'description'>
           & { series?: Maybe<Pick<MdxFrontmatterSeries, 'id'>>, image?: Maybe<{ childImageSharp?: Maybe<{ fluid?: Maybe<Pick<ImageSharpFluid, 'base64' | 'tracedSVG' | 'srcWebp' | 'srcSetWebp' | 'srcSet' | 'src' | 'sizes' | 'presentationWidth' | 'presentationHeight' | 'originalName' | 'originalImg' | 'aspectRatio'>> }> }> }
         )>, fields?: Maybe<Pick<MdxFields, 'slug' | 'lang' | 'commonSlug'>> }
+      ) }> } };
+
+export type UsesQueryVariables = {};
+
+
+export type UsesQuery = { allMdx: { edges: Array<{ node: (
+        Pick<Mdx, 'id' | 'body'>
+        & { fields?: Maybe<Pick<MdxFields, 'lang'>> }
       ) }> } };
