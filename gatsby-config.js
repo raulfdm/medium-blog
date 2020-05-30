@@ -29,6 +29,13 @@ module.exports = {
         name: `blog`,
       },
     },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        path: `${__dirname}/data/uses`,
+        name: `uses`,
+      },
+    },
     `gatsby-alias-imports`,
     `gatsby-plugin-styled-components`,
     `gatsby-plugin-typescript`,

@@ -8,10 +8,15 @@ async function createBlogPost({ graphql, createPage }) {
 
   const result = await graphql(`
     {
-      allMdx(sort: { fields: [frontmatter___date], order: DESC }, limit: 1000) {
+      allMdx(
+        sort: { fields: [frontmatter___date], order: DESC }
+        limit: 1000
+        filter: { fileAbsolutePath: { regex: "//blog//" } }
+      ) {
         edges {
           node {
             id
+            body
             excerpt
             timeToRead
             frontmatter {
@@ -102,7 +107,11 @@ async function createYearPage({ graphql, createPage }) {
 
   const data = await graphql(`
     {
-      allMdx(sort: { fields: [frontmatter___date], order: DESC }, limit: 1000) {
+      allMdx(
+        sort: { fields: [frontmatter___date], order: DESC }
+        limit: 1000
+        filter: { fileAbsolutePath: { regex: "//blog//" } }
+      ) {
         edges {
           node {
             id
