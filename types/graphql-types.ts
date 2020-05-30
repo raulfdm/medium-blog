@@ -3345,7 +3345,9 @@ export type SitePageContextSeries = {
   _4?: Maybe<SitePageContextSeries_4>;
   _5?: Maybe<SitePageContextSeries_5>;
   _6?: Maybe<SitePageContextSeries_6>;
+  _7?: Maybe<SitePageContextSeries_7>;
   _8?: Maybe<SitePageContextSeries_8>;
+  _9?: Maybe<SitePageContextSeries_9>;
   _10?: Maybe<SitePageContextSeries_10>;
 };
 
@@ -3461,6 +3463,20 @@ export type SitePageContextSeries_6FilterInput = {
   uri?: Maybe<StringQueryOperatorInput>;
 };
 
+export type SitePageContextSeries_7 = {
+  subtitle?: Maybe<Scalars['String']>;
+  copy?: Maybe<Scalars['String']>;
+  index?: Maybe<Scalars['Int']>;
+  uri?: Maybe<Scalars['String']>;
+};
+
+export type SitePageContextSeries_7FilterInput = {
+  subtitle?: Maybe<StringQueryOperatorInput>;
+  copy?: Maybe<StringQueryOperatorInput>;
+  index?: Maybe<IntQueryOperatorInput>;
+  uri?: Maybe<StringQueryOperatorInput>;
+};
+
 export type SitePageContextSeries_8 = {
   subtitle?: Maybe<Scalars['String']>;
   copy?: Maybe<Scalars['String']>;
@@ -3475,6 +3491,20 @@ export type SitePageContextSeries_8FilterInput = {
   uri?: Maybe<StringQueryOperatorInput>;
 };
 
+export type SitePageContextSeries_9 = {
+  subtitle?: Maybe<Scalars['String']>;
+  copy?: Maybe<Scalars['String']>;
+  index?: Maybe<Scalars['Int']>;
+  uri?: Maybe<Scalars['String']>;
+};
+
+export type SitePageContextSeries_9FilterInput = {
+  subtitle?: Maybe<StringQueryOperatorInput>;
+  copy?: Maybe<StringQueryOperatorInput>;
+  index?: Maybe<IntQueryOperatorInput>;
+  uri?: Maybe<StringQueryOperatorInput>;
+};
+
 export type SitePageContextSeriesFilterInput = {
   _0?: Maybe<SitePageContextSeries_0FilterInput>;
   _1?: Maybe<SitePageContextSeries_1FilterInput>;
@@ -3483,7 +3513,9 @@ export type SitePageContextSeriesFilterInput = {
   _4?: Maybe<SitePageContextSeries_4FilterInput>;
   _5?: Maybe<SitePageContextSeries_5FilterInput>;
   _6?: Maybe<SitePageContextSeries_6FilterInput>;
+  _7?: Maybe<SitePageContextSeries_7FilterInput>;
   _8?: Maybe<SitePageContextSeries_8FilterInput>;
+  _9?: Maybe<SitePageContextSeries_9FilterInput>;
   _10?: Maybe<SitePageContextSeries_10FilterInput>;
 };
 
@@ -3620,10 +3652,18 @@ export type SitePageFieldsEnum =
   | 'context___series____6___copy'
   | 'context___series____6___index'
   | 'context___series____6___uri'
+  | 'context___series____7___subtitle'
+  | 'context___series____7___copy'
+  | 'context___series____7___index'
+  | 'context___series____7___uri'
   | 'context___series____8___subtitle'
   | 'context___series____8___copy'
   | 'context___series____8___index'
   | 'context___series____8___uri'
+  | 'context___series____9___subtitle'
+  | 'context___series____9___copy'
+  | 'context___series____9___index'
+  | 'context___series____9___uri'
   | 'context___series____10___subtitle'
   | 'context___series____10___copy'
   | 'context___series____10___index'
