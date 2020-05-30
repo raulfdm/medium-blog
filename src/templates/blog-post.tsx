@@ -16,8 +16,7 @@ import { MenuBar } from '../components/MenuBar';
 import { Frontmatter } from '../types';
 import SEO from '../components/SEO';
 import { ThemeProvider } from '../context/theme';
-
-import { blogComponents } from '../components/MdxComponents';
+import LayoutBlog from 'layouts/blog';
 
 const BlogPost: React.FC<BlogPostProps> = ({ pageContext }) => {
   useTwitterScript();
@@ -36,7 +35,7 @@ const BlogPost: React.FC<BlogPostProps> = ({ pageContext }) => {
   } = frontmatter as Frontmatter;
 
   return (
-    <>
+    <LayoutBlog>
       <SEO
         title={title}
         description={description || excerpt!}
@@ -61,13 +60,13 @@ const BlogPost: React.FC<BlogPostProps> = ({ pageContext }) => {
             <SeriesSection noDivider />
             <FeaturedImage />
             <Container className="post" as="main">
-              <MDXRenderer components={blogComponents}>{body}</MDXRenderer>
+              <MDXRenderer>{body}</MDXRenderer>
               <SeriesSection />
             </Container>
           </BlogContextProvider>
         </motion.div>
       </ThemeProvider>
-    </>
+    </LayoutBlog>
   );
 };
 
