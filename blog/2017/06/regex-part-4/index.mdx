@@ -17,11 +17,11 @@ Fala galere, tudo em cima? Hoje é dia de mais um artigo sobre expressões regul
 
 Então simbora que a gente ta na metade já =D
 
-<gif
+<Gif
   src="https://media.giphy.com/media/VmZWEOc2rigIU/giphy.gif"
   caption="Raul?… Raul…? …. Ahhh vamo nessa!"
   imgstyle="max-width: 600px;"
-></gif>
+></Gif>
 
 ---
 
@@ -219,11 +219,11 @@ Fazendo uma pequena retrospectiva na aula sobre classes, quando definimos que qu
 
 ![Ae caramba! =D](./assets/regex101-once-3.png)
 
-<gif
+<Gif
   src="https://media.giphy.com/media/XreQmk7ETCak0/giphy.gif"
   caption="Finalmente! (y)"
   imgstyle="max-width: 300px;"
-></gif>
+></Gif>
 
 ---
 
@@ -233,20 +233,26 @@ Fazendo uma pequena retrospectiva na aula sobre classes, quando definimos que qu
 
 Lembra do exemplo dos nomes completos? O quantifier + (e todos os outros) entende da seguinte forma:
 
-<big-quote>“Vou selecionar tudo o corresponder à essa expressão, até encontrar algo que não responda, aí eu paro!” — quantifier</big-quote>
+<BigQuote>
+  “Vou selecionar tudo o corresponder à essa expressão, até encontrar algo que
+  não responda, aí eu paro!” — quantifier
+</BigQuote>
 
 E é exatamente isso que ele fez. Ele selecionou TUDO que era **letras** e **espaços em branco**, até se deparar com o **ponto-e-virgula** e ser obrigado a parar a seleção. Meio abstrato né? O que ele faz é isso aqui:
 
-<gif
+<Gif
   src="https://media.giphy.com/media/j78vZ65PQ0jdXRcbnp/giphy.gif"
   caption="Comportamento greedy"
-></gif>
+></Gif>
 
 > Mas Raul, como evitar esse comportamento? Eu quero meu quantifier preguiçoso!
 
 Sempre que você quiser evitar esse comportamento — quiser que ele seja preguiçoso — após a declaração do _quantifier_, basta passar uma interrogação. Assim, discurso dele vai passar para:
 
-<big-quote>“Vou selecionar o texto até acontecer a primeira ocorrência correspondente à essa expressão!” — quantifier</big-quote>
+<BigQuote>
+  “Vou selecionar o texto até acontecer a primeira ocorrência correspondente à
+  essa expressão!” — quantifier
+</BigQuote>
 
 Difícil imaginar um caso pra evitar esse comportamento? Vamos observar o _target_ abaixo:
 
