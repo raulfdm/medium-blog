@@ -22,9 +22,7 @@ const BlogPost: React.FC<BlogPostProps> = ({ pageContext }) => {
   useTwitterScript();
 
   const { series, post } = pageContext;
-
   const { body, frontmatter, excerpt, fields } = post.node;
-  console.log(post.node);
   const {
     image,
     image_caption: imageCaption,
