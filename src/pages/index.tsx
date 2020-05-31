@@ -19,7 +19,11 @@ const Home: React.FC<GraphQLResponse> = ({ data }) => {
 
 export const query = graphql`
   {
-    allMdx(sort: { fields: [frontmatter___date], order: DESC }, limit: 1000) {
+    allMdx(
+      sort: { fields: [frontmatter___date], order: DESC }
+      limit: 1000
+      filter: { fileAbsolutePath: { regex: "//blog//" } }
+    ) {
       edges {
         node {
           id
