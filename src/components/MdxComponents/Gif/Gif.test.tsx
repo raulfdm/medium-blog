@@ -4,7 +4,7 @@ import { Gif } from '.';
 
 describe('<Gif />', () => {
   it('renders a figure with the expected css class', () => {
-    const { getByTestId, debug } = render(<Gif src="http://google.com" />);
+    const { getByTestId } = render(<Gif src="http://google.com" />);
     const el = getByTestId('gif-figure');
 
     expect(el.nodeName).toBe('FIGURE');
@@ -12,7 +12,7 @@ describe('<Gif />', () => {
   });
 
   it('render inline string css', () => {
-    const { getByTestId, debug } = render(
+    const { getByTestId } = render(
       <Gif src="http://google.com" imgStyle="background-color: blue;" />,
     );
 
