@@ -35,6 +35,7 @@ export type PostTranslation = {
 export type PostTranslations = PostTranslation[];
 
 export type PostNode = {
+  body?: string;
   excerpt?: string;
   id?: string;
   timeToRead?: number;

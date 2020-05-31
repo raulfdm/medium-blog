@@ -60,7 +60,7 @@ const BlogPost: React.FC<BlogPostProps> = ({ pageContext }) => {
             <SeriesSection noDivider />
             <FeaturedImage />
             <Container className="post" as="main">
-              <MDXRenderer>{body}</MDXRenderer>
+              <MDXRenderer>{body!}</MDXRenderer>
               <SeriesSection />
             </Container>
           </BlogContextProvider>
