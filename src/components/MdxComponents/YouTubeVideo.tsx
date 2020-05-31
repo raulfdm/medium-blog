@@ -2,13 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 
 const ResponsiveIframe = styled.div`
-  && {
-    padding-bottom: 56.25%;
-    position: relative;
-    height: 0px;
-    overflow: hidden;
-    margin-bottom: 1.0725rem;
-  }
+  margin-bottom: 2rem;
+  padding-bottom: 56.25%;
+  position: relative;
+  height: 0px;
+  overflow: hidden;
 `;
 
 const Iframe = styled.iframe`

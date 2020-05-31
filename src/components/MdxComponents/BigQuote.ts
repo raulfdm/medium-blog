@@ -1,10 +1,11 @@
 import styled from 'styled-components';
 import media from 'styled-media-query';
 
-export const Quote = styled.blockquote`
+export const BigQuote = styled.blockquote`
   /* Resetting global blockquote style  */
   && {
     margin: 0;
+    margin-bottom: 20px;
     box-shadow: none;
   }
 

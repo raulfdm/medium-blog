@@ -13,7 +13,7 @@ describe('<Gif />', () => {
 
   it('render inline string css', () => {
     const { getByTestId, debug } = render(
-      <Gif src="http://google.com" imgstyle="background-color: blue;" />,
+      <Gif src="http://google.com" imgStyle="background-color: blue;" />,
     );
 
     const el = getByTestId('gif-figure');

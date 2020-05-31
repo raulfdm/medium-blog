@@ -4,20 +4,21 @@ import styled, { css, FlattenSimpleInterpolation } from 'styled-components';
 type GifProps = {
   src: string;
   caption?: string;
-  imgstyle?: string;
+  imgStyle?: string;
 };
 
 const Figure = styled.figure<{ extraStyles?: FlattenSimpleInterpolation }>`
   ${({ extraStyles }) => extraStyles};
   margin: 0 auto;
+  margin-bottom: 20px;
 `;
 
-export const Gif: React.FC<GifProps> = ({ src, caption, imgstyle }) => {
+export const Gif: React.FC<GifProps> = ({ src, caption, imgStyle }) => {
   return (
     <Figure
       className="gif-wrapper"
       extraStyles={css`
-        ${imgstyle};
+        ${imgStyle};
       `}
       data-testid="gif-figure"
     >
