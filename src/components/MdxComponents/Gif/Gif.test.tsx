@@ -22,6 +22,7 @@ describe('<Gif />', () => {
       .c0 {
         background-color: blue;
         margin: 0 auto;
+        margin-bottom: 20px;
       }
 
       <figure

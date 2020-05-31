@@ -6,7 +6,7 @@ describe('fn: createFields', () => {
       internal: {
         type: 'Mdx',
       },
-      fileAbsolutePath: `${BLOGS_PATH}/2017/05/regex-part-1/index.md`,
+      fileAbsolutePath: `${BLOGS_PATH}/2017/05/regex-part-1/index.mdx`,
     };
 
     const createNodeField = jest.fn();
