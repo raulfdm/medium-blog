@@ -25,6 +25,7 @@ jobs:
           path: |
             ${{ steps.yarn-cache-dir.outputs.dir }}
             **/node_modules
+            ~/.cache
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
@@ -96,10 +97,7 @@ jobs:
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
 
       - name: Cypress run (E2E)
-        uses: cypress-io/github-action@v1
-        with:
-          browser: chrome
-          headless: true
+        run: yarn cypress run
         env:
           CYPRESS_BASE_URL: ${{ steps.deploy.outputs.deploy-url }}
 
