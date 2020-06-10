@@ -15,38 +15,38 @@ jobs:
         with:
           node-version: 12
 
-      # - name: Print Yarn cache directory
-      #   id: yarn-cache-dir
-      #   run: echo "::set-output name=dir::$(yarn cache dir)"
+      - name: Print Yarn cache directory
+        id: yarn-cache-dir
+        run: echo "::set-output name=dir::$(yarn cache dir)"
 
-      # - name: Yarn cache
-      #   uses: actions/cache@v1
-      #   id: yarn-cache
-      #   with:
-      #     path: ${{ steps.yarn-cache-dir.outputs.dir }}
-      #     key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-      #     restore-keys: |
-      #       ${{ runner.os }}-yarn-
+      - name: Yarn cache
+        uses: actions/cache@v1
+        id: yarn-cache
+        with:
+          path: ${{ steps.yarn-cache-dir.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
 
       # In order to make gatsby incremental build works, it's necessary .cache
       # and public folder.
-      - name: Gatsby Cache Folder
-        uses: actions/cache@v1
-        id: gatsby-cache-folder
-        with:
-          path: .cache
-          key: ${{ runner.os }}-cache-gatsby
-          restore-keys: |
-            ${{ runner.os }}-cache-gatsby
+      # - name: Gatsby Cache Folder
+      #   uses: actions/cache@v1
+      #   id: gatsby-cache-folder
+      #   with:
+      #     path: .cache
+      #     key: ${{ runner.os }}-cache-gatsby
+      #     restore-keys: |
+      #       ${{ runner.os }}-cache-gatsby
 
-      - name: Gatsby Public Folder
-        uses: actions/cache@v1
-        id: gatsby-public-folder
-        with:
-          path: public/
-          key: ${{ runner.os }}-public-gatsby
-          restore-keys: |
-            ${{ runner.OS }}-public-gatsby
+      # - name: Gatsby Public Folder
+      #   uses: actions/cache@v1
+      #   id: gatsby-public-folder
+      #   with:
+      #     path: public/
+      #     key: ${{ runner.os }}-public-gatsby
+      #     restore-keys: |
+      #       ${{ runner.OS }}-public-gatsby
 
       - name: Install dependencies
         run: yarn install --pure-lockfile
@@ -81,6 +81,11 @@ jobs:
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+
+      - name: Cypress run
+        run: yarn cypress run
+        env:
+          CYPRESS_BASE_URL: ${{ steps.deploy.outputs.deploy-url }}
 
       - name: Save public folder as artifact
         uses: actions/upload-artifact@v2
