@@ -15,18 +15,18 @@ jobs:
         with:
           node-version: 12
 
-      - name: Print Yarn cache directory
-        id: yarn-cache-dir
-        run: echo "::set-output name=dir::$(yarn cache dir)"
+      # - name: Print Yarn cache directory
+      #   id: yarn-cache-dir
+      #   run: echo "::set-output name=dir::$(yarn cache dir)"
 
-      - name: Yarn cache
-        uses: actions/cache@v1
-        id: yarn-cache
-        with:
-          path: ${{ steps.yarn-cache-dir.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-
+      # - name: Yarn cache
+      #   uses: actions/cache@v1
+      #   id: yarn-cache
+      #   with:
+      #     path: ${{ steps.yarn-cache-dir.outputs.dir }}
+      #     key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+      #     restore-keys: |
+      #       ${{ runner.os }}-yarn-
 
       # In order to make gatsby incremental build works, it's necessary .cache
       # and public folder.
