@@ -1,75 +1,61 @@
-name: Platform
+name: Platform Runs
 
 on: [push]
 
 jobs:
-  install-dependencies:
+  pipeline:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Get actual code
+      - name: Check branch code
         uses: actions/checkout@v2
 
-      - name: Setup Node Environment
+      - name: Setup Node
         uses: actions/setup-node@v1
         with:
           node-version: 12
 
-      - name: Yarn cache directory
+      - name: Print Yarn cache directory
         id: yarn-cache-dir
         run: echo "::set-output name=dir::$(yarn cache dir)"
 
       - name: Yarn cache
-        uses: actions/cache@v2
+        uses: actions/cache@v1
         id: yarn-cache
         with:
-          path: |
-            ${{ steps.yarn-cache-dir.outputs.dir }}
-            **/node_modules
-            ~/.cache
+          path: ${{ steps.yarn-cache-dir.outputs.dir }}
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
+
+      # In order to make gatsby incremental build works, it's necessary .cache
+      # and public folder.
+      - name: Gatsby Cache Folder
+        uses: actions/cache@v1
+        id: gatsby-cache-folder
+        with:
+          path: .cache
+          key: ${{ runner.os }}-cache-gatsby
+          restore-keys: |
+            ${{ runner.os }}-cache-gatsby
+
+      - name: Gatsby Public Folder
+        uses: actions/cache@v1
+        id: gatsby-public-folder
+        with:
+          path: public/
+          key: ${{ runner.os }}-public-gatsby
+          restore-keys: |
+            ${{ runner.OS }}-public-gatsby
 
       - name: Install dependencies
         run: yarn install --pure-lockfile
 
-  build:
-    needs: install-dependencies
-    runs-on: ubuntu-latest
-    steps:
-      - name: Get actual code
-        uses: actions/checkout@v2
+      - name: Run ESLint
+        run: yarn lint
 
-      - name: Setup Node Environment
-        uses: actions/setup-node@v1
-        with:
-          node-version: 12
-
-      - name: Yarn cache directory
-        id: yarn-cache-dir
-        run: echo "::set-output name=dir::$(yarn cache dir)"
-
-      - name: Yarn cache
-        uses: actions/cache@v2
-        id: yarn-cache
-        with:
-          path: |
-            ${{ steps.yarn-cache-dir.outputs.dir }}
-            **/node_modules
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-
-
-      - name: Gatsby Cache Folder
-        uses: actions/cache@v2
-        id: gatsby-cache-folder
-        with:
-          path: |
-            .cache
-            public/
-          key: ${{ runner.os }}-cache-gatsby
-          restore-keys: |
-            ${{ runner.os }}-cache-gatsby
+      - name: Run unit tests
+        run: yarn jest --color
 
       - name: Build
         run: yarn build --log-pages
@@ -85,7 +71,7 @@ jobs:
           GATSBY_ALGOLIA_INDEX_NAME: ${{ secrets.GATSBY_ALGOLIA_INDEX_NAME }}
 
       - name: Deploy to Netlify
-        uses: nwtgck/actions-netlify@v1.1
+        uses: nwtgck/actions-netlify@v1
         id: deploy
         with:
           publish-dir: './public'
@@ -96,52 +82,14 @@ jobs:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
 
-      - name: Cypress run (E2E)
-        run: yarn cypress run
-        env:
-          CYPRESS_BASE_URL: ${{ steps.deploy.outputs.deploy-url }}
-
-      - uses: actions/upload-artifact@v2
+      - name: Save public folder as artifact
+        uses: actions/upload-artifact@v2
         with:
-          name: site
+          name: public
           path: public/**/*
 
-      - uses: actions/upload-artifact@v2
+      - name: Save .cache as artifact
+        uses: actions/upload-artifact@v2
         with:
-          name: cache
+          name: .cache
           path: .cache/**/*
-
-  lint-and-unit:
-    needs: install-dependencies
-    runs-on: ubuntu-latest
-    steps:
-      - name: Get actual code
-        uses: actions/checkout@v2
-
-      - name: Setup Node Environment
-        uses: actions/setup-node@v1
-        with:
-          node-version: 12
-
-      - name: Yarn cache directory
-        id: yarn-cache-dir
-        run: echo "::set-output name=dir::$(yarn cache dir)"
-
-      - name: Yarn cache
-        uses: actions/cache@v2
-        id: yarn-cache
-        with:
-          path: |
-            ${{ steps.yarn-cache-dir.outputs.dir }}
-            **/node_modules
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-
-
-      - name: Run ESLint
-        run: yarn lint
-
-      - name: Run Test
-        run: yarn jest --color
-        env:
-          CI: true
