@@ -55,6 +55,20 @@ jobs:
       - name: Run unit tests
         run: yarn jest --color
 
+      - name: Save public folder as artifact
+        uses: actions/upload-artifact@v2
+        # if: github.ref == 'refs/heads/master'
+        with:
+          name: public
+          path: public/**/*
+
+      - name: Save .cache as artifact
+        uses: actions/upload-artifact@v2
+        # if: github.ref == 'refs/heads/master'
+        with:
+          name: .cache
+          path: .cache/**/*
+
       - name: Build
         run: yarn build --log-pages
         env:
@@ -84,17 +98,3 @@ jobs:
         run: yarn cypress run
         env:
           CYPRESS_BASE_URL: ${{ steps.deploy.outputs.deploy-url }}
-
-      - name: Save public folder as artifact
-        uses: actions/upload-artifact@v2
-        if: github.ref == 'refs/heads/master'
-        with:
-          name: public
-          path: public/**/*
-
-      - name: Save .cache as artifact
-        uses: actions/upload-artifact@v2
-        if: github.ref == 'refs/heads/master'
-        with:
-          name: .cache
-          path: .cache/**/*
