@@ -33,18 +33,18 @@ jobs:
         id: gatsby-public-folder
         with:
           path: public
-          key: ${{ runner.os }}-public-gatsby-${{ hashFiles('**/yarn.lock') }}
+          key: ${{ runner.os }}-public-gatsby-${{ github.ref }}
           restore-keys: |
-            ${{ runner.OS }}-public-gatsby
+            ${{ runner.OS }}-public-gatsby-
 
       - name: Gatsby Cache Folder
         uses: actions/cache@v2
         id: gatsby-cache-folder
         with:
           path: .cache
-          key: ${{ runner.os }}-cache-gatsby-${{ hashFiles('**/yarn.lock') }}
+          key: ${{ runner.os }}-cache-gatsby-${{ github.ref }}
           restore-keys: |
-            ${{ runner.OS }}-cache-gatsby
+            ${{ runner.OS }}-cache-gatsby-
 
       - name: Install dependencies
         run: yarn install --pure-lockfile
