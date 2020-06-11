@@ -46,6 +46,10 @@ jobs:
           restore-keys: |
             ${{ runner.OS }}-cache-gatsby-
 
+      - name: Clean gatsby if both didn't hit
+        if: steps.gatsby-public-folder.outputs.cache-hit != 'true' || steps.gatsby-cache-folder.outputs.cache-hit != 'true'
+        run: rm -rf .cache/ public/
+
       - name: Install dependencies
         run: yarn install --pure-lockfile
 
