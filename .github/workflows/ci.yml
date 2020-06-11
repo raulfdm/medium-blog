@@ -33,7 +33,7 @@ jobs:
         id: gatsby-public-folder
         with:
           path: public
-          key: ${{ runner.os }}-public-gatsby
+          key: ${{ runner.os }}-public-gatsby-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.OS }}-public-gatsby
 
@@ -42,7 +42,7 @@ jobs:
         id: gatsby-cache-folder
         with:
           path: .cache
-          key: ${{ runner.os }}-cache-gatsby
+          key: ${{ runner.os }}-cache-gatsby-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.OS }}-cache-gatsby
 
