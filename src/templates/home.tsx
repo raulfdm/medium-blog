@@ -51,7 +51,6 @@ const HomeTemplate: React.FC<HomeTemplateType> = ({ pageContext }) => {
 
       <Layout>
         <main>
-          <h1>heyho</h1>
           <AuthorPresentation />
           <Filter setFilter={setFilter} currentFilter={filter} />
           <Posts
