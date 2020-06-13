@@ -25,6 +25,7 @@ jobs:
           path: |
             ${{ steps.yarn-cache-dir.outputs.dir }}
             **/node_modules
+            ~/.cache
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
@@ -55,6 +56,7 @@ jobs:
           path: |
             ${{ steps.yarn-cache-dir.outputs.dir }}
             **/node_modules
+            ~/.cache
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
@@ -141,6 +143,7 @@ jobs:
           path: |
             ${{ steps.yarn-cache-dir.outputs.dir }}
             **/node_modules
+            ~/.cache
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
