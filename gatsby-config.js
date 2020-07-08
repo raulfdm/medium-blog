@@ -8,6 +8,8 @@ const ciEnv = R.propEq('ENVIRONMENT', 'production')(process.env);
 
 const isProduction = ciEnv || nodeEnv;
 
+console.log({ isProduction });
+
 module.exports = {
   siteMetadata: {
     title: 'Raul Melo',
