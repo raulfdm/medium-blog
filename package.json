@@ -84,7 +84,7 @@
     "eslint-config-prettier": "6.11.0",
     "eslint-plugin-cypress": "2.11.1",
     "eslint-plugin-jest": "23.18.2",
-    "eslint-plugin-react": "7.20.4",
+    "eslint-plugin-react": "7.20.5",
     "eslint-plugin-react-hooks": "4.0.8",
     "gatsby": "2.24.11",
     "gatsby-alias-imports": "1.0.4",
