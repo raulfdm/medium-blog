@@ -20,8 +20,8 @@
       "required": true
     },
     "blog_posts": {
-      "collection": "post",
-      "via": "post_tags"
+      "via": "post_tags",
+      "collection": "post"
     }
   }
 }
