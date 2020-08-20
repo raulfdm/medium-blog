@@ -13,7 +13,7 @@
     "eslint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "lint": "npm-run-all eslint ts",
     "test": "jest",
-    "e2e:open": "cypress open",
+    "e2e:open": "CYPRESS_BASE_URL=http://localhost:8000 cypress open",
     "e2e:run": "cypress run"
   },
   "dependencies": {
