@@ -57,6 +57,8 @@ const plugins = [
         '@static': 'static',
         '@styles': 'src/styles',
         '@utils': 'src/utils',
+        '@stores': 'src/stores',
+        '@globalShared': 'globalShared/',
       },
     },
   },
@@ -153,7 +155,7 @@ const plugins = [
     resolve: `gatsby-source-strapi`,
     options: {
       apiURL: process.env.STRAPI_API_URL || `http://localhost:1337`,
-      contentTypes: [`uses`],
+      contentTypes: [`uses`, `posts`, `post-tags`, `post-serie`],
       singleTypes: [`cv`, `personal-information`, `social`, `site`],
     },
   },

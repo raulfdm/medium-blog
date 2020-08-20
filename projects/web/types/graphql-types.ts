@@ -695,7 +695,6 @@ export type FileFieldsEnum =
   | 'childMdx___rawBody'
   | 'childMdx___fileAbsolutePath'
   | 'childMdx___frontmatter___title'
-  | 'childMdx___frontmatter___subtitle'
   | 'childMdx___frontmatter___date'
   | 'childMdx___frontmatter___image___sourceInstanceName'
   | 'childMdx___frontmatter___image___absolutePath'
@@ -733,8 +732,9 @@ export type FileFieldsEnum =
   | 'childMdx___frontmatter___image___publicURL'
   | 'childMdx___frontmatter___image___id'
   | 'childMdx___frontmatter___image___children'
-  | 'childMdx___frontmatter___tags'
   | 'childMdx___frontmatter___description'
+  | 'childMdx___frontmatter___tags'
+  | 'childMdx___frontmatter___subtitle'
   | 'childMdx___frontmatter___series___id'
   | 'childMdx___frontmatter___series___index'
   | 'childMdx___frontmatter___series___copy'
@@ -752,9 +752,6 @@ export type FileFieldsEnum =
   | 'childMdx___wordCount___paragraphs'
   | 'childMdx___wordCount___sentences'
   | 'childMdx___wordCount___words'
-  | 'childMdx___fields___slug'
-  | 'childMdx___fields___lang'
-  | 'childMdx___fields___postFolderName'
   | 'childMdx___id'
   | 'childMdx___parent___id'
   | 'childMdx___parent___parent___id'
@@ -1423,7 +1420,6 @@ export type Mdx = Node & {
   tableOfContents?: Maybe<Scalars['JSON']>;
   timeToRead?: Maybe<Scalars['Int']>;
   wordCount?: Maybe<MdxWordCount>;
-  fields?: Maybe<MdxFields>;
   id: Scalars['ID'];
   parent?: Maybe<Node>;
   children: Array<Node>;
@@ -1473,17 +1469,10 @@ export type MdxEdge = {
   previous?: Maybe<Mdx>;
 };
 
-export type MdxFields = {
-  slug?: Maybe<Scalars['String']>;
-  lang?: Maybe<Scalars['String']>;
-  postFolderName?: Maybe<Scalars['String']>;
-};
-
 export type MdxFieldsEnum = 
   | 'rawBody'
   | 'fileAbsolutePath'
   | 'frontmatter___title'
-  | 'frontmatter___subtitle'
   | 'frontmatter___date'
   | 'frontmatter___image___sourceInstanceName'
   | 'frontmatter___image___absolutePath'
@@ -1547,8 +1536,9 @@ export type MdxFieldsEnum =
   | 'frontmatter___image___childMdx___timeToRead'
   | 'frontmatter___image___childMdx___id'
   | 'frontmatter___image___childMdx___children'
-  | 'frontmatter___tags'
   | 'frontmatter___description'
+  | 'frontmatter___tags'
+  | 'frontmatter___subtitle'
   | 'frontmatter___series___id'
   | 'frontmatter___series___index'
   | 'frontmatter___series___copy'
@@ -1566,9 +1556,6 @@ export type MdxFieldsEnum =
   | 'wordCount___paragraphs'
   | 'wordCount___sentences'
   | 'wordCount___words'
-  | 'fields___slug'
-  | 'fields___lang'
-  | 'fields___postFolderName'
   | 'id'
   | 'parent___id'
   | 'parent___parent___id'
@@ -1656,12 +1643,6 @@ export type MdxFieldsEnum =
   | 'internal___owner'
   | 'internal___type';
 
-export type MdxFieldsFilterInput = {
-  slug?: Maybe<StringQueryOperatorInput>;
-  lang?: Maybe<StringQueryOperatorInput>;
-  postFolderName?: Maybe<StringQueryOperatorInput>;
-};
-
 export type MdxFilterInput = {
   rawBody?: Maybe<StringQueryOperatorInput>;
   fileAbsolutePath?: Maybe<StringQueryOperatorInput>;
@@ -1675,7 +1656,6 @@ export type MdxFilterInput = {
   tableOfContents?: Maybe<JsonQueryOperatorInput>;
   timeToRead?: Maybe<IntQueryOperatorInput>;
   wordCount?: Maybe<MdxWordCountFilterInput>;
-  fields?: Maybe<MdxFieldsFilterInput>;
   id?: Maybe<StringQueryOperatorInput>;
   parent?: Maybe<NodeFilterInput>;
   children?: Maybe<NodeFilterListInput>;
@@ -1684,11 +1664,11 @@ export type MdxFilterInput = {
 
 export type MdxFrontmatter = {
   title: Scalars['String'];
-  subtitle?: Maybe<Scalars['String']>;
   date?: Maybe<Scalars['Date']>;
   image?: Maybe<File>;
-  tags?: Maybe<Array<Maybe<Scalars['String']>>>;
   description?: Maybe<Scalars['String']>;
+  tags?: Maybe<Array<Maybe<Scalars['String']>>>;
+  subtitle?: Maybe<Scalars['String']>;
   series?: Maybe<MdxFrontmatterSeries>;
   image_caption?: Maybe<Scalars['String']>;
 };
@@ -1703,11 +1683,11 @@ export type MdxFrontmatterDateArgs = {
 
 export type MdxFrontmatterFilterInput = {
   title?: Maybe<StringQueryOperatorInput>;
-  subtitle?: Maybe<StringQueryOperatorInput>;
   date?: Maybe<DateQueryOperatorInput>;
   image?: Maybe<FileFilterInput>;
-  tags?: Maybe<StringQueryOperatorInput>;
   description?: Maybe<StringQueryOperatorInput>;
+  tags?: Maybe<StringQueryOperatorInput>;
+  subtitle?: Maybe<StringQueryOperatorInput>;
   series?: Maybe<MdxFrontmatterSeriesFilterInput>;
   image_caption?: Maybe<StringQueryOperatorInput>;
 };
@@ -1826,6 +1806,8 @@ export type Query = {
   allImageSharp: ImageSharpConnection;
   mdx?: Maybe<Mdx>;
   allMdx: MdxConnection;
+  strapiPostContent?: Maybe<StrapiPostContent>;
+  allStrapiPostContent: StrapiPostContentConnection;
   strapiUsesContent?: Maybe<StrapiUsesContent>;
   allStrapiUsesContent: StrapiUsesContentConnection;
   strapiSite?: Maybe<StrapiSite>;
@@ -1836,6 +1818,12 @@ export type Query = {
   allStrapiPersonalInformation: StrapiPersonalInformationConnection;
   strapiCv?: Maybe<StrapiCv>;
   allStrapiCv: StrapiCvConnection;
+  strapiPostSerie?: Maybe<StrapiPostSerie>;
+  allStrapiPostSerie: StrapiPostSerieConnection;
+  strapiPostTags?: Maybe<StrapiPostTags>;
+  allStrapiPostTags: StrapiPostTagsConnection;
+  strapiPosts?: Maybe<StrapiPosts>;
+  allStrapiPosts: StrapiPostsConnection;
   strapiUses?: Maybe<StrapiUses>;
   allStrapiUses: StrapiUsesConnection;
   siteBuildMetadata?: Maybe<SiteBuildMetadata>;
@@ -1974,8 +1962,6 @@ export type QueryAllSitePageArgs = {
 
 export type QuerySiteArgs = {
   buildTime?: Maybe<DateQueryOperatorInput>;
-  port?: Maybe<IntQueryOperatorInput>;
-  host?: Maybe<StringQueryOperatorInput>;
   polyfill?: Maybe<BooleanQueryOperatorInput>;
   pathPrefix?: Maybe<StringQueryOperatorInput>;
   id?: Maybe<StringQueryOperatorInput>;
@@ -2028,7 +2014,6 @@ export type QueryMdxArgs = {
   tableOfContents?: Maybe<JsonQueryOperatorInput>;
   timeToRead?: Maybe<IntQueryOperatorInput>;
   wordCount?: Maybe<MdxWordCountFilterInput>;
-  fields?: Maybe<MdxFieldsFilterInput>;
   id?: Maybe<StringQueryOperatorInput>;
   parent?: Maybe<NodeFilterInput>;
   children?: Maybe<NodeFilterListInput>;
@@ -2039,6 +2024,23 @@ export type QueryMdxArgs = {
 export type QueryAllMdxArgs = {
   filter?: Maybe<MdxFilterInput>;
   sort?: Maybe<MdxSortInput>;
+  skip?: Maybe<Scalars['Int']>;
+  limit?: Maybe<Scalars['Int']>;
+};
+
+
+export type QueryStrapiPostContentArgs = {
+  id?: Maybe<StringQueryOperatorInput>;
+  parent?: Maybe<NodeFilterInput>;
+  children?: Maybe<NodeFilterListInput>;
+  internal?: Maybe<InternalFilterInput>;
+  childMdx?: Maybe<MdxFilterInput>;
+};
+
+
+export type QueryAllStrapiPostContentArgs = {
+  filter?: Maybe<StrapiPostContentFilterInput>;
+  sort?: Maybe<StrapiPostContentSortInput>;
   skip?: Maybe<Scalars['Int']>;
   limit?: Maybe<Scalars['Int']>;
 };
@@ -2071,6 +2073,7 @@ export type QueryStrapiSiteArgs = {
   updatedAt?: Maybe<DateQueryOperatorInput>;
   created_by?: Maybe<StrapiSiteCreated_ByFilterInput>;
   updated_by?: Maybe<StrapiSiteUpdated_ByFilterInput>;
+  seo_image?: Maybe<FileFilterInput>;
   strapiId?: Maybe<StringQueryOperatorInput>;
 };
 
@@ -2164,6 +2167,90 @@ export type QueryAllStrapiCvArgs = {
 };
 
 
+export type QueryStrapiPostSerieArgs = {
+  id?: Maybe<StringQueryOperatorInput>;
+  parent?: Maybe<NodeFilterInput>;
+  children?: Maybe<NodeFilterListInput>;
+  internal?: Maybe<InternalFilterInput>;
+  slug?: Maybe<StringQueryOperatorInput>;
+  name?: Maybe<StringQueryOperatorInput>;
+  createdAt?: Maybe<DateQueryOperatorInput>;
+  updatedAt?: Maybe<DateQueryOperatorInput>;
+  created_by?: Maybe<StrapiPostSerieCreated_ByFilterInput>;
+  updated_by?: Maybe<StrapiPostSerieUpdated_ByFilterInput>;
+  post_tags?: Maybe<StringQueryOperatorInput>;
+  blog_posts?: Maybe<StrapiPostSerieBlog_PostsFilterListInput>;
+  strapiId?: Maybe<StringQueryOperatorInput>;
+};
+
+
+export type QueryAllStrapiPostSerieArgs = {
+  filter?: Maybe<StrapiPostSerieFilterInput>;
+  sort?: Maybe<StrapiPostSerieSortInput>;
+  skip?: Maybe<Scalars['Int']>;
+  limit?: Maybe<Scalars['Int']>;
+};
+
+
+export type QueryStrapiPostTagsArgs = {
+  id?: Maybe<StringQueryOperatorInput>;
+  parent?: Maybe<NodeFilterInput>;
+  children?: Maybe<NodeFilterListInput>;
+  internal?: Maybe<InternalFilterInput>;
+  tag?: Maybe<StringQueryOperatorInput>;
+  createdAt?: Maybe<DateQueryOperatorInput>;
+  updatedAt?: Maybe<DateQueryOperatorInput>;
+  created_by?: Maybe<StrapiPostTagsCreated_ByFilterInput>;
+  updated_by?: Maybe<StrapiPostTagsUpdated_ByFilterInput>;
+  slug?: Maybe<StringQueryOperatorInput>;
+  name?: Maybe<StringQueryOperatorInput>;
+  blog_posts?: Maybe<StrapiPostTagsBlog_PostsFilterListInput>;
+  strapiId?: Maybe<StringQueryOperatorInput>;
+};
+
+
+export type QueryAllStrapiPostTagsArgs = {
+  filter?: Maybe<StrapiPostTagsFilterInput>;
+  sort?: Maybe<StrapiPostTagsSortInput>;
+  skip?: Maybe<Scalars['Int']>;
+  limit?: Maybe<Scalars['Int']>;
+};
+
+
+export type QueryStrapiPostsArgs = {
+  id?: Maybe<StringQueryOperatorInput>;
+  parent?: Maybe<NodeFilterInput>;
+  children?: Maybe<NodeFilterListInput>;
+  internal?: Maybe<InternalFilterInput>;
+  language?: Maybe<StringQueryOperatorInput>;
+  post_tags?: Maybe<StrapiPostsPost_TagsFilterListInput>;
+  slug?: Maybe<StringQueryOperatorInput>;
+  title?: Maybe<StringQueryOperatorInput>;
+  subtitle?: Maybe<StringQueryOperatorInput>;
+  content?: Maybe<StringQueryOperatorInput>;
+  description?: Maybe<StringQueryOperatorInput>;
+  date?: Maybe<DateQueryOperatorInput>;
+  createdAt?: Maybe<DateQueryOperatorInput>;
+  updatedAt?: Maybe<DateQueryOperatorInput>;
+  created_by?: Maybe<StrapiPostsCreated_ByFilterInput>;
+  featured_image?: Maybe<FileFilterInput>;
+  updated_by?: Maybe<StrapiPostsUpdated_ByFilterInput>;
+  strapiId?: Maybe<StringQueryOperatorInput>;
+  post_serie?: Maybe<StrapiPostsPost_SerieFilterInput>;
+  serie_copy?: Maybe<StringQueryOperatorInput>;
+  translation?: Maybe<StrapiPostsTranslationFilterInput>;
+  childStrapiPostContent?: Maybe<StrapiPostContentFilterInput>;
+};
+
+
+export type QueryAllStrapiPostsArgs = {
+  filter?: Maybe<StrapiPostsFilterInput>;
+  sort?: Maybe<StrapiPostsSortInput>;
+  skip?: Maybe<Scalars['Int']>;
+  limit?: Maybe<Scalars['Int']>;
+};
+
+
 export type QueryStrapiUsesArgs = {
   id?: Maybe<StringQueryOperatorInput>;
   parent?: Maybe<NodeFilterInput>;
@@ -2231,8 +2318,6 @@ export type QueryAllSitePluginArgs = {
 
 export type Site = Node & {
   buildTime?: Maybe<Scalars['Date']>;
-  port?: Maybe<Scalars['Int']>;
-  host?: Maybe<Scalars['String']>;
   polyfill?: Maybe<Scalars['Boolean']>;
   pathPrefix?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
@@ -2432,8 +2517,6 @@ export type SiteEdge = {
 
 export type SiteFieldsEnum = 
   | 'buildTime'
-  | 'port'
-  | 'host'
   | 'polyfill'
   | 'pathPrefix'
   | 'id'
@@ -2525,8 +2608,6 @@ export type SiteFieldsEnum =
 
 export type SiteFilterInput = {
   buildTime?: Maybe<DateQueryOperatorInput>;
-  port?: Maybe<IntQueryOperatorInput>;
-  host?: Maybe<StringQueryOperatorInput>;
   polyfill?: Maybe<BooleanQueryOperatorInput>;
   pathPrefix?: Maybe<StringQueryOperatorInput>;
   id?: Maybe<StringQueryOperatorInput>;
@@ -2583,100 +2664,73 @@ export type SitePageConnectionGroupArgs = {
 };
 
 export type SitePageContext = {
+  posts?: Maybe<Array<Maybe<SitePageContextPosts>>>;
+  tag?: Maybe<SitePageContextTag>;
+  postUri?: Maybe<Scalars['String']>;
   post?: Maybe<SitePageContextPost>;
-  slug?: Maybe<Scalars['String']>;
-  series?: Maybe<SitePageContextSeries>;
-  translations?: Maybe<Array<Maybe<SitePageContextTranslations>>>;
-  postEdges?: Maybe<Array<Maybe<SitePageContextPostEdges>>>;
-  tag?: Maybe<Scalars['String']>;
+  serie?: Maybe<SitePageContextSerie>;
+  translation?: Maybe<SitePageContextTranslation>;
 };
 
 export type SitePageContextFilterInput = {
+  posts?: Maybe<SitePageContextPostsFilterListInput>;
+  tag?: Maybe<SitePageContextTagFilterInput>;
+  postUri?: Maybe<StringQueryOperatorInput>;
   post?: Maybe<SitePageContextPostFilterInput>;
-  slug?: Maybe<StringQueryOperatorInput>;
-  series?: Maybe<SitePageContextSeriesFilterInput>;
-  translations?: Maybe<SitePageContextTranslationsFilterListInput>;
-  postEdges?: Maybe<SitePageContextPostEdgesFilterListInput>;
-  tag?: Maybe<StringQueryOperatorInput>;
+  serie?: Maybe<SitePageContextSerieFilterInput>;
+  translation?: Maybe<SitePageContextTranslationFilterInput>;
 };
 
 export type SitePageContextPost = {
-  node?: Maybe<SitePageContextPostNode>;
-};
-
-export type SitePageContextPostEdges = {
-  node?: Maybe<SitePageContextPostEdgesNode>;
-};
-
-export type SitePageContextPostEdgesFilterInput = {
-  node?: Maybe<SitePageContextPostEdgesNodeFilterInput>;
-};
-
-export type SitePageContextPostEdgesFilterListInput = {
-  elemMatch?: Maybe<SitePageContextPostEdgesFilterInput>;
-};
-
-export type SitePageContextPostEdgesNode = {
   id?: Maybe<Scalars['String']>;
-  timeToRead?: Maybe<Scalars['Int']>;
-  frontmatter?: Maybe<SitePageContextPostEdgesNodeFrontmatter>;
-  fileAbsolutePath?: Maybe<Scalars['String']>;
-  fields?: Maybe<SitePageContextPostEdgesNodeFields>;
-};
-
-export type SitePageContextPostEdgesNodeFields = {
-  slug?: Maybe<Scalars['String']>;
-  lang?: Maybe<Scalars['String']>;
-  postFolderName?: Maybe<Scalars['String']>;
-};
-
-export type SitePageContextPostEdgesNodeFieldsFilterInput = {
-  slug?: Maybe<StringQueryOperatorInput>;
-  lang?: Maybe<StringQueryOperatorInput>;
-  postFolderName?: Maybe<StringQueryOperatorInput>;
-};
-
-export type SitePageContextPostEdgesNodeFilterInput = {
-  id?: Maybe<StringQueryOperatorInput>;
-  timeToRead?: Maybe<IntQueryOperatorInput>;
-  frontmatter?: Maybe<SitePageContextPostEdgesNodeFrontmatterFilterInput>;
-  fileAbsolutePath?: Maybe<StringQueryOperatorInput>;
-  fields?: Maybe<SitePageContextPostEdgesNodeFieldsFilterInput>;
-};
-
-export type SitePageContextPostEdgesNodeFrontmatter = {
-  series?: Maybe<SitePageContextPostEdgesNodeFrontmatterSeries>;
   title?: Maybe<Scalars['String']>;
   subtitle?: Maybe<Scalars['String']>;
-  date?: Maybe<Scalars['Date']>;
-  tags?: Maybe<Array<Maybe<Scalars['String']>>>;
   description?: Maybe<Scalars['String']>;
-  image?: Maybe<SitePageContextPostEdgesNodeFrontmatterImage>;
+  date?: Maybe<Scalars['Date']>;
+  serieCopy?: Maybe<Scalars['String']>;
+  slug?: Maybe<Scalars['String']>;
+  language?: Maybe<Scalars['String']>;
+  translation?: Maybe<SitePageContextPostTranslation>;
+  serie?: Maybe<SitePageContextPostSerie>;
+  featuredImage?: Maybe<SitePageContextPostFeaturedImage>;
+  childStrapiPostContent?: Maybe<SitePageContextPostChildStrapiPostContent>;
+  tags?: Maybe<Array<Maybe<SitePageContextPostTags>>>;
 };
 
-export type SitePageContextPostEdgesNodeFrontmatterFilterInput = {
-  series?: Maybe<SitePageContextPostEdgesNodeFrontmatterSeriesFilterInput>;
-  title?: Maybe<StringQueryOperatorInput>;
-  subtitle?: Maybe<StringQueryOperatorInput>;
-  date?: Maybe<DateQueryOperatorInput>;
-  tags?: Maybe<StringQueryOperatorInput>;
-  description?: Maybe<StringQueryOperatorInput>;
-  image?: Maybe<SitePageContextPostEdgesNodeFrontmatterImageFilterInput>;
+export type SitePageContextPostChildStrapiPostContent = {
+  childMdx?: Maybe<SitePageContextPostChildStrapiPostContentChildMdx>;
 };
 
-export type SitePageContextPostEdgesNodeFrontmatterImage = {
-  childImageSharp?: Maybe<SitePageContextPostEdgesNodeFrontmatterImageChildImageSharp>;
+export type SitePageContextPostChildStrapiPostContentChildMdx = {
+  timeToRead?: Maybe<Scalars['Int']>;
+  body?: Maybe<Scalars['String']>;
+  excerpt?: Maybe<Scalars['String']>;
 };
 
-export type SitePageContextPostEdgesNodeFrontmatterImageChildImageSharp = {
-  fluid?: Maybe<SitePageContextPostEdgesNodeFrontmatterImageChildImageSharpFluid>;
+export type SitePageContextPostChildStrapiPostContentChildMdxFilterInput = {
+  timeToRead?: Maybe<IntQueryOperatorInput>;
+  body?: Maybe<StringQueryOperatorInput>;
+  excerpt?: Maybe<StringQueryOperatorInput>;
 };
 
-export type SitePageContextPostEdgesNodeFrontmatterImageChildImageSharpFilterInput = {
-  fluid?: Maybe<SitePageContextPostEdgesNodeFrontmatterImageChildImageSharpFluidFilterInput>;
+export type SitePageContextPostChildStrapiPostContentFilterInput = {
+  childMdx?: Maybe<SitePageContextPostChildStrapiPostContentChildMdxFilterInput>;
 };
 
-export type SitePageContextPostEdgesNodeFrontmatterImageChildImageSharpFluid = {
+export type SitePageContextPostFeaturedImage = {
+  publicURL?: Maybe<Scalars['String']>;
+  childImageSharp?: Maybe<SitePageContextPostFeaturedImageChildImageSharp>;
+};
+
+export type SitePageContextPostFeaturedImageChildImageSharp = {
+  fluid?: Maybe<SitePageContextPostFeaturedImageChildImageSharpFluid>;
+};
+
+export type SitePageContextPostFeaturedImageChildImageSharpFilterInput = {
+  fluid?: Maybe<SitePageContextPostFeaturedImageChildImageSharpFluidFilterInput>;
+};
+
+export type SitePageContextPostFeaturedImageChildImageSharpFluid = {
   base64?: Maybe<Scalars['String']>;
   tracedSVG?: Maybe<Scalars['String']>;
   srcWebp?: Maybe<Scalars['String']>;
@@ -2686,12 +2740,11 @@ export type SitePageContextPostEdgesNodeFrontmatterImageChildImageSharpFluid = {
   sizes?: Maybe<Scalars['String']>;
   presentationWidth?: Maybe<Scalars['Int']>;
   presentationHeight?: Maybe<Scalars['Int']>;
-  originalName?: Maybe<Scalars['String']>;
   originalImg?: Maybe<Scalars['String']>;
   aspectRatio?: Maybe<Scalars['Float']>;
 };
 
-export type SitePageContextPostEdgesNodeFrontmatterImageChildImageSharpFluidFilterInput = {
+export type SitePageContextPostFeaturedImageChildImageSharpFluidFilterInput = {
   base64?: Maybe<StringQueryOperatorInput>;
   tracedSVG?: Maybe<StringQueryOperatorInput>;
   srcWebp?: Maybe<StringQueryOperatorInput>;
@@ -2701,97 +2754,89 @@ export type SitePageContextPostEdgesNodeFrontmatterImageChildImageSharpFluidFilt
   sizes?: Maybe<StringQueryOperatorInput>;
   presentationWidth?: Maybe<IntQueryOperatorInput>;
   presentationHeight?: Maybe<IntQueryOperatorInput>;
-  originalName?: Maybe<StringQueryOperatorInput>;
   originalImg?: Maybe<StringQueryOperatorInput>;
   aspectRatio?: Maybe<FloatQueryOperatorInput>;
 };
 
-export type SitePageContextPostEdgesNodeFrontmatterImageFilterInput = {
-  childImageSharp?: Maybe<SitePageContextPostEdgesNodeFrontmatterImageChildImageSharpFilterInput>;
-};
-
-export type SitePageContextPostEdgesNodeFrontmatterSeries = {
-  id?: Maybe<Scalars['String']>;
-};
-
-export type SitePageContextPostEdgesNodeFrontmatterSeriesFilterInput = {
-  id?: Maybe<StringQueryOperatorInput>;
+export type SitePageContextPostFeaturedImageFilterInput = {
+  publicURL?: Maybe<StringQueryOperatorInput>;
+  childImageSharp?: Maybe<SitePageContextPostFeaturedImageChildImageSharpFilterInput>;
 };
 
 export type SitePageContextPostFilterInput = {
-  node?: Maybe<SitePageContextPostNodeFilterInput>;
-};
-
-export type SitePageContextPostNode = {
-  id?: Maybe<Scalars['String']>;
-  body?: Maybe<Scalars['String']>;
-  excerpt?: Maybe<Scalars['String']>;
-  timeToRead?: Maybe<Scalars['Int']>;
-  frontmatter?: Maybe<SitePageContextPostNodeFrontmatter>;
-  fileAbsolutePath?: Maybe<Scalars['String']>;
-  fields?: Maybe<SitePageContextPostNodeFields>;
-  nonGraphQLData?: Maybe<SitePageContextPostNodeNonGraphQlData>;
-};
-
-export type SitePageContextPostNodeFields = {
-  slug?: Maybe<Scalars['String']>;
-  lang?: Maybe<Scalars['String']>;
-  postFolderName?: Maybe<Scalars['String']>;
-};
-
-export type SitePageContextPostNodeFieldsFilterInput = {
-  slug?: Maybe<StringQueryOperatorInput>;
-  lang?: Maybe<StringQueryOperatorInput>;
-  postFolderName?: Maybe<StringQueryOperatorInput>;
-};
-
-export type SitePageContextPostNodeFilterInput = {
   id?: Maybe<StringQueryOperatorInput>;
-  body?: Maybe<StringQueryOperatorInput>;
-  excerpt?: Maybe<StringQueryOperatorInput>;
-  timeToRead?: Maybe<IntQueryOperatorInput>;
-  frontmatter?: Maybe<SitePageContextPostNodeFrontmatterFilterInput>;
-  fileAbsolutePath?: Maybe<StringQueryOperatorInput>;
-  fields?: Maybe<SitePageContextPostNodeFieldsFilterInput>;
-  nonGraphQLData?: Maybe<SitePageContextPostNodeNonGraphQlDataFilterInput>;
-};
-
-export type SitePageContextPostNodeFrontmatter = {
-  title?: Maybe<Scalars['String']>;
-  subtitle?: Maybe<Scalars['String']>;
-  date?: Maybe<Scalars['Date']>;
-  tags?: Maybe<Array<Maybe<Scalars['String']>>>;
-  description?: Maybe<Scalars['String']>;
-  series?: Maybe<SitePageContextPostNodeFrontmatterSeries>;
-  image_caption?: Maybe<Scalars['String']>;
-  image?: Maybe<SitePageContextPostNodeFrontmatterImage>;
-};
-
-export type SitePageContextPostNodeFrontmatterFilterInput = {
   title?: Maybe<StringQueryOperatorInput>;
   subtitle?: Maybe<StringQueryOperatorInput>;
-  date?: Maybe<DateQueryOperatorInput>;
-  tags?: Maybe<StringQueryOperatorInput>;
   description?: Maybe<StringQueryOperatorInput>;
-  series?: Maybe<SitePageContextPostNodeFrontmatterSeriesFilterInput>;
-  image_caption?: Maybe<StringQueryOperatorInput>;
-  image?: Maybe<SitePageContextPostNodeFrontmatterImageFilterInput>;
+  date?: Maybe<DateQueryOperatorInput>;
+  serieCopy?: Maybe<StringQueryOperatorInput>;
+  slug?: Maybe<StringQueryOperatorInput>;
+  language?: Maybe<StringQueryOperatorInput>;
+  translation?: Maybe<SitePageContextPostTranslationFilterInput>;
+  serie?: Maybe<SitePageContextPostSerieFilterInput>;
+  featuredImage?: Maybe<SitePageContextPostFeaturedImageFilterInput>;
+  childStrapiPostContent?: Maybe<SitePageContextPostChildStrapiPostContentFilterInput>;
+  tags?: Maybe<SitePageContextPostTagsFilterListInput>;
 };
 
-export type SitePageContextPostNodeFrontmatterImage = {
+export type SitePageContextPosts = {
+  id?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  subtitle?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  date?: Maybe<Scalars['Date']>;
+  serieCopy?: Maybe<Scalars['String']>;
+  slug?: Maybe<Scalars['String']>;
+  translation?: Maybe<SitePageContextPostsTranslation>;
+  serie?: Maybe<SitePageContextPostsSerie>;
+  language?: Maybe<Scalars['String']>;
+  featuredImage?: Maybe<SitePageContextPostsFeaturedImage>;
+  childStrapiPostContent?: Maybe<SitePageContextPostsChildStrapiPostContent>;
+  tags?: Maybe<Array<Maybe<SitePageContextPostsTags>>>;
+};
+
+export type SitePageContextPostsChildStrapiPostContent = {
+  childMdx?: Maybe<SitePageContextPostsChildStrapiPostContentChildMdx>;
+};
+
+export type SitePageContextPostsChildStrapiPostContentChildMdx = {
+  timeToRead?: Maybe<Scalars['Int']>;
+};
+
+export type SitePageContextPostsChildStrapiPostContentChildMdxFilterInput = {
+  timeToRead?: Maybe<IntQueryOperatorInput>;
+};
+
+export type SitePageContextPostsChildStrapiPostContentFilterInput = {
+  childMdx?: Maybe<SitePageContextPostsChildStrapiPostContentChildMdxFilterInput>;
+};
+
+export type SitePageContextPostSerie = {
+  slug?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+};
+
+export type SitePageContextPostSerieFilterInput = {
+  slug?: Maybe<StringQueryOperatorInput>;
+  id?: Maybe<StringQueryOperatorInput>;
+  name?: Maybe<StringQueryOperatorInput>;
+};
+
+export type SitePageContextPostsFeaturedImage = {
   publicURL?: Maybe<Scalars['String']>;
-  childImageSharp?: Maybe<SitePageContextPostNodeFrontmatterImageChildImageSharp>;
+  childImageSharp?: Maybe<SitePageContextPostsFeaturedImageChildImageSharp>;
 };
 
-export type SitePageContextPostNodeFrontmatterImageChildImageSharp = {
-  fluid?: Maybe<SitePageContextPostNodeFrontmatterImageChildImageSharpFluid>;
+export type SitePageContextPostsFeaturedImageChildImageSharp = {
+  fluid?: Maybe<SitePageContextPostsFeaturedImageChildImageSharpFluid>;
 };
 
-export type SitePageContextPostNodeFrontmatterImageChildImageSharpFilterInput = {
-  fluid?: Maybe<SitePageContextPostNodeFrontmatterImageChildImageSharpFluidFilterInput>;
+export type SitePageContextPostsFeaturedImageChildImageSharpFilterInput = {
+  fluid?: Maybe<SitePageContextPostsFeaturedImageChildImageSharpFluidFilterInput>;
 };
 
-export type SitePageContextPostNodeFrontmatterImageChildImageSharpFluid = {
+export type SitePageContextPostsFeaturedImageChildImageSharpFluid = {
   base64?: Maybe<Scalars['String']>;
   tracedSVG?: Maybe<Scalars['String']>;
   srcWebp?: Maybe<Scalars['String']>;
@@ -2801,12 +2846,11 @@ export type SitePageContextPostNodeFrontmatterImageChildImageSharpFluid = {
   sizes?: Maybe<Scalars['String']>;
   presentationWidth?: Maybe<Scalars['Int']>;
   presentationHeight?: Maybe<Scalars['Int']>;
-  originalName?: Maybe<Scalars['String']>;
   originalImg?: Maybe<Scalars['String']>;
   aspectRatio?: Maybe<Scalars['Float']>;
 };
 
-export type SitePageContextPostNodeFrontmatterImageChildImageSharpFluidFilterInput = {
+export type SitePageContextPostsFeaturedImageChildImageSharpFluidFilterInput = {
   base64?: Maybe<StringQueryOperatorInput>;
   tracedSVG?: Maybe<StringQueryOperatorInput>;
   srcWebp?: Maybe<StringQueryOperatorInput>;
@@ -2816,260 +2860,155 @@ export type SitePageContextPostNodeFrontmatterImageChildImageSharpFluidFilterInp
   sizes?: Maybe<StringQueryOperatorInput>;
   presentationWidth?: Maybe<IntQueryOperatorInput>;
   presentationHeight?: Maybe<IntQueryOperatorInput>;
-  originalName?: Maybe<StringQueryOperatorInput>;
   originalImg?: Maybe<StringQueryOperatorInput>;
   aspectRatio?: Maybe<FloatQueryOperatorInput>;
 };
 
-export type SitePageContextPostNodeFrontmatterImageFilterInput = {
+export type SitePageContextPostsFeaturedImageFilterInput = {
   publicURL?: Maybe<StringQueryOperatorInput>;
-  childImageSharp?: Maybe<SitePageContextPostNodeFrontmatterImageChildImageSharpFilterInput>;
+  childImageSharp?: Maybe<SitePageContextPostsFeaturedImageChildImageSharpFilterInput>;
 };
 
-export type SitePageContextPostNodeFrontmatterSeries = {
-  id?: Maybe<Scalars['String']>;
-  index?: Maybe<Scalars['Int']>;
-  copy?: Maybe<Scalars['String']>;
-};
-
-export type SitePageContextPostNodeFrontmatterSeriesFilterInput = {
+export type SitePageContextPostsFilterInput = {
   id?: Maybe<StringQueryOperatorInput>;
-  index?: Maybe<IntQueryOperatorInput>;
-  copy?: Maybe<StringQueryOperatorInput>;
+  title?: Maybe<StringQueryOperatorInput>;
+  subtitle?: Maybe<StringQueryOperatorInput>;
+  description?: Maybe<StringQueryOperatorInput>;
+  date?: Maybe<DateQueryOperatorInput>;
+  serieCopy?: Maybe<StringQueryOperatorInput>;
+  slug?: Maybe<StringQueryOperatorInput>;
+  translation?: Maybe<SitePageContextPostsTranslationFilterInput>;
+  serie?: Maybe<SitePageContextPostsSerieFilterInput>;
+  language?: Maybe<StringQueryOperatorInput>;
+  featuredImage?: Maybe<SitePageContextPostsFeaturedImageFilterInput>;
+  childStrapiPostContent?: Maybe<SitePageContextPostsChildStrapiPostContentFilterInput>;
+  tags?: Maybe<SitePageContextPostsTagsFilterListInput>;
 };
 
-export type SitePageContextPostNodeNonGraphQlData = {
-  translations?: Maybe<Array<Maybe<SitePageContextPostNodeNonGraphQlDataTranslations>>>;
+export type SitePageContextPostsFilterListInput = {
+  elemMatch?: Maybe<SitePageContextPostsFilterInput>;
 };
 
-export type SitePageContextPostNodeNonGraphQlDataFilterInput = {
-  translations?: Maybe<SitePageContextPostNodeNonGraphQlDataTranslationsFilterListInput>;
+export type SitePageContextPostsSerie = {
+  slug?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
 };
 
-export type SitePageContextPostNodeNonGraphQlDataTranslations = {
-  lang?: Maybe<Scalars['String']>;
+export type SitePageContextPostsSerieFilterInput = {
+  slug?: Maybe<StringQueryOperatorInput>;
+  id?: Maybe<StringQueryOperatorInput>;
+  name?: Maybe<StringQueryOperatorInput>;
+};
+
+export type SitePageContextPostsTags = {
+  id?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
   slug?: Maybe<Scalars['String']>;
 };
 
-export type SitePageContextPostNodeNonGraphQlDataTranslationsFilterInput = {
-  lang?: Maybe<StringQueryOperatorInput>;
+export type SitePageContextPostsTagsFilterInput = {
+  id?: Maybe<StringQueryOperatorInput>;
+  name?: Maybe<StringQueryOperatorInput>;
   slug?: Maybe<StringQueryOperatorInput>;
 };
 
-export type SitePageContextPostNodeNonGraphQlDataTranslationsFilterListInput = {
-  elemMatch?: Maybe<SitePageContextPostNodeNonGraphQlDataTranslationsFilterInput>;
+export type SitePageContextPostsTagsFilterListInput = {
+  elemMatch?: Maybe<SitePageContextPostsTagsFilterInput>;
 };
 
-export type SitePageContextSeries = {
-  _0?: Maybe<SitePageContextSeries_0>;
-  _1?: Maybe<SitePageContextSeries_1>;
-  _2?: Maybe<SitePageContextSeries_2>;
-  _3?: Maybe<SitePageContextSeries_3>;
-  _4?: Maybe<SitePageContextSeries_4>;
-  _5?: Maybe<SitePageContextSeries_5>;
-  _6?: Maybe<SitePageContextSeries_6>;
-  _7?: Maybe<SitePageContextSeries_7>;
-  _8?: Maybe<SitePageContextSeries_8>;
-  _9?: Maybe<SitePageContextSeries_9>;
-  _10?: Maybe<SitePageContextSeries_10>;
-  _11?: Maybe<SitePageContextSeries_11>;
+export type SitePageContextPostsTranslation = {
+  language?: Maybe<Scalars['String']>;
+  slug?: Maybe<Scalars['String']>;
+  translation?: Maybe<Scalars['String']>;
 };
 
-export type SitePageContextSeries_0 = {
-  subtitle?: Maybe<Scalars['String']>;
-  copy?: Maybe<Scalars['String']>;
-  index?: Maybe<Scalars['Int']>;
-  uri?: Maybe<Scalars['String']>;
+export type SitePageContextPostsTranslationFilterInput = {
+  language?: Maybe<StringQueryOperatorInput>;
+  slug?: Maybe<StringQueryOperatorInput>;
+  translation?: Maybe<StringQueryOperatorInput>;
 };
 
-export type SitePageContextSeries_0FilterInput = {
-  subtitle?: Maybe<StringQueryOperatorInput>;
-  copy?: Maybe<StringQueryOperatorInput>;
-  index?: Maybe<IntQueryOperatorInput>;
-  uri?: Maybe<StringQueryOperatorInput>;
-};
-
-export type SitePageContextSeries_1 = {
-  subtitle?: Maybe<Scalars['String']>;
-  copy?: Maybe<Scalars['String']>;
-  index?: Maybe<Scalars['Int']>;
-  uri?: Maybe<Scalars['String']>;
-};
-
-export type SitePageContextSeries_10 = {
-  subtitle?: Maybe<Scalars['String']>;
-  copy?: Maybe<Scalars['String']>;
-  index?: Maybe<Scalars['Int']>;
-  uri?: Maybe<Scalars['String']>;
-};
-
-export type SitePageContextSeries_10FilterInput = {
-  subtitle?: Maybe<StringQueryOperatorInput>;
-  copy?: Maybe<StringQueryOperatorInput>;
-  index?: Maybe<IntQueryOperatorInput>;
-  uri?: Maybe<StringQueryOperatorInput>;
-};
-
-export type SitePageContextSeries_11 = {
-  subtitle?: Maybe<Scalars['String']>;
-  copy?: Maybe<Scalars['String']>;
-  index?: Maybe<Scalars['Int']>;
-  uri?: Maybe<Scalars['String']>;
-};
-
-export type SitePageContextSeries_11FilterInput = {
-  subtitle?: Maybe<StringQueryOperatorInput>;
-  copy?: Maybe<StringQueryOperatorInput>;
-  index?: Maybe<IntQueryOperatorInput>;
-  uri?: Maybe<StringQueryOperatorInput>;
-};
-
-export type SitePageContextSeries_1FilterInput = {
-  subtitle?: Maybe<StringQueryOperatorInput>;
-  copy?: Maybe<StringQueryOperatorInput>;
-  index?: Maybe<IntQueryOperatorInput>;
-  uri?: Maybe<StringQueryOperatorInput>;
-};
-
-export type SitePageContextSeries_2 = {
-  subtitle?: Maybe<Scalars['String']>;
-  copy?: Maybe<Scalars['String']>;
-  index?: Maybe<Scalars['Int']>;
-  uri?: Maybe<Scalars['String']>;
-};
-
-export type SitePageContextSeries_2FilterInput = {
-  subtitle?: Maybe<StringQueryOperatorInput>;
-  copy?: Maybe<StringQueryOperatorInput>;
-  index?: Maybe<IntQueryOperatorInput>;
-  uri?: Maybe<StringQueryOperatorInput>;
-};
-
-export type SitePageContextSeries_3 = {
-  subtitle?: Maybe<Scalars['String']>;
-  copy?: Maybe<Scalars['String']>;
-  index?: Maybe<Scalars['Int']>;
-  uri?: Maybe<Scalars['String']>;
-};
-
-export type SitePageContextSeries_3FilterInput = {
-  subtitle?: Maybe<StringQueryOperatorInput>;
-  copy?: Maybe<StringQueryOperatorInput>;
-  index?: Maybe<IntQueryOperatorInput>;
-  uri?: Maybe<StringQueryOperatorInput>;
-};
-
-export type SitePageContextSeries_4 = {
-  subtitle?: Maybe<Scalars['String']>;
-  copy?: Maybe<Scalars['String']>;
-  index?: Maybe<Scalars['Int']>;
-  uri?: Maybe<Scalars['String']>;
-};
-
-export type SitePageContextSeries_4FilterInput = {
-  subtitle?: Maybe<StringQueryOperatorInput>;
-  copy?: Maybe<StringQueryOperatorInput>;
-  index?: Maybe<IntQueryOperatorInput>;
-  uri?: Maybe<StringQueryOperatorInput>;
-};
-
-export type SitePageContextSeries_5 = {
-  subtitle?: Maybe<Scalars['String']>;
-  copy?: Maybe<Scalars['String']>;
-  index?: Maybe<Scalars['Int']>;
-  uri?: Maybe<Scalars['String']>;
-};
-
-export type SitePageContextSeries_5FilterInput = {
-  subtitle?: Maybe<StringQueryOperatorInput>;
-  copy?: Maybe<StringQueryOperatorInput>;
-  index?: Maybe<IntQueryOperatorInput>;
-  uri?: Maybe<StringQueryOperatorInput>;
-};
-
-export type SitePageContextSeries_6 = {
-  subtitle?: Maybe<Scalars['String']>;
-  copy?: Maybe<Scalars['String']>;
-  index?: Maybe<Scalars['Int']>;
-  uri?: Maybe<Scalars['String']>;
-};
-
-export type SitePageContextSeries_6FilterInput = {
-  subtitle?: Maybe<StringQueryOperatorInput>;
-  copy?: Maybe<StringQueryOperatorInput>;
-  index?: Maybe<IntQueryOperatorInput>;
-  uri?: Maybe<StringQueryOperatorInput>;
-};
-
-export type SitePageContextSeries_7 = {
-  subtitle?: Maybe<Scalars['String']>;
-  copy?: Maybe<Scalars['String']>;
-  index?: Maybe<Scalars['Int']>;
-  uri?: Maybe<Scalars['String']>;
-};
-
-export type SitePageContextSeries_7FilterInput = {
-  subtitle?: Maybe<StringQueryOperatorInput>;
-  copy?: Maybe<StringQueryOperatorInput>;
-  index?: Maybe<IntQueryOperatorInput>;
-  uri?: Maybe<StringQueryOperatorInput>;
-};
-
-export type SitePageContextSeries_8 = {
-  subtitle?: Maybe<Scalars['String']>;
-  copy?: Maybe<Scalars['String']>;
-  index?: Maybe<Scalars['Int']>;
-  uri?: Maybe<Scalars['String']>;
-};
-
-export type SitePageContextSeries_8FilterInput = {
-  subtitle?: Maybe<StringQueryOperatorInput>;
-  copy?: Maybe<StringQueryOperatorInput>;
-  index?: Maybe<IntQueryOperatorInput>;
-  uri?: Maybe<StringQueryOperatorInput>;
-};
-
-export type SitePageContextSeries_9 = {
-  subtitle?: Maybe<Scalars['String']>;
-  copy?: Maybe<Scalars['String']>;
-  index?: Maybe<Scalars['Int']>;
-  uri?: Maybe<Scalars['String']>;
-};
-
-export type SitePageContextSeries_9FilterInput = {
-  subtitle?: Maybe<StringQueryOperatorInput>;
-  copy?: Maybe<StringQueryOperatorInput>;
-  index?: Maybe<IntQueryOperatorInput>;
-  uri?: Maybe<StringQueryOperatorInput>;
-};
-
-export type SitePageContextSeriesFilterInput = {
-  _0?: Maybe<SitePageContextSeries_0FilterInput>;
-  _1?: Maybe<SitePageContextSeries_1FilterInput>;
-  _2?: Maybe<SitePageContextSeries_2FilterInput>;
-  _3?: Maybe<SitePageContextSeries_3FilterInput>;
-  _4?: Maybe<SitePageContextSeries_4FilterInput>;
-  _5?: Maybe<SitePageContextSeries_5FilterInput>;
-  _6?: Maybe<SitePageContextSeries_6FilterInput>;
-  _7?: Maybe<SitePageContextSeries_7FilterInput>;
-  _8?: Maybe<SitePageContextSeries_8FilterInput>;
-  _9?: Maybe<SitePageContextSeries_9FilterInput>;
-  _10?: Maybe<SitePageContextSeries_10FilterInput>;
-  _11?: Maybe<SitePageContextSeries_11FilterInput>;
-};
-
-export type SitePageContextTranslations = {
-  lang?: Maybe<Scalars['String']>;
+export type SitePageContextPostTags = {
+  id?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
   slug?: Maybe<Scalars['String']>;
 };
 
-export type SitePageContextTranslationsFilterInput = {
-  lang?: Maybe<StringQueryOperatorInput>;
+export type SitePageContextPostTagsFilterInput = {
+  id?: Maybe<StringQueryOperatorInput>;
+  name?: Maybe<StringQueryOperatorInput>;
   slug?: Maybe<StringQueryOperatorInput>;
 };
 
-export type SitePageContextTranslationsFilterListInput = {
-  elemMatch?: Maybe<SitePageContextTranslationsFilterInput>;
+export type SitePageContextPostTagsFilterListInput = {
+  elemMatch?: Maybe<SitePageContextPostTagsFilterInput>;
+};
+
+export type SitePageContextPostTranslation = {
+  language?: Maybe<Scalars['String']>;
+  slug?: Maybe<Scalars['String']>;
+};
+
+export type SitePageContextPostTranslationFilterInput = {
+  language?: Maybe<StringQueryOperatorInput>;
+  slug?: Maybe<StringQueryOperatorInput>;
+};
+
+export type SitePageContextSerie = {
+  id?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  slug?: Maybe<Scalars['String']>;
+  blogPosts?: Maybe<Array<Maybe<SitePageContextSerieBlogPosts>>>;
+};
+
+export type SitePageContextSerieBlogPosts = {
+  id?: Maybe<Scalars['String']>;
+  slug?: Maybe<Scalars['String']>;
+  language?: Maybe<Scalars['String']>;
+  subtitle?: Maybe<Scalars['String']>;
+  copy?: Maybe<Scalars['String']>;
+  uri?: Maybe<Scalars['String']>;
+};
+
+export type SitePageContextSerieBlogPostsFilterInput = {
+  id?: Maybe<StringQueryOperatorInput>;
+  slug?: Maybe<StringQueryOperatorInput>;
+  language?: Maybe<StringQueryOperatorInput>;
+  subtitle?: Maybe<StringQueryOperatorInput>;
+  copy?: Maybe<StringQueryOperatorInput>;
+  uri?: Maybe<StringQueryOperatorInput>;
+};
+
+export type SitePageContextSerieBlogPostsFilterListInput = {
+  elemMatch?: Maybe<SitePageContextSerieBlogPostsFilterInput>;
+};
+
+export type SitePageContextSerieFilterInput = {
+  id?: Maybe<StringQueryOperatorInput>;
+  name?: Maybe<StringQueryOperatorInput>;
+  slug?: Maybe<StringQueryOperatorInput>;
+  blogPosts?: Maybe<SitePageContextSerieBlogPostsFilterListInput>;
+};
+
+export type SitePageContextTag = {
+  slug?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+};
+
+export type SitePageContextTagFilterInput = {
+  slug?: Maybe<StringQueryOperatorInput>;
+  name?: Maybe<StringQueryOperatorInput>;
+};
+
+export type SitePageContextTranslation = {
+  language?: Maybe<Scalars['String']>;
+  postUri?: Maybe<Scalars['String']>;
+};
+
+export type SitePageContextTranslationFilterInput = {
+  language?: Maybe<StringQueryOperatorInput>;
+  postUri?: Maybe<StringQueryOperatorInput>;
 };
 
 export type SitePageEdge = {
@@ -3171,68 +3110,59 @@ export type SitePageFieldsEnum =
   | 'internal___owner'
   | 'internal___type'
   | 'isCreatedByStatefulCreatePages'
-  | 'context___post___node___id'
-  | 'context___post___node___body'
-  | 'context___post___node___excerpt'
-  | 'context___post___node___timeToRead'
-  | 'context___post___node___fileAbsolutePath'
-  | 'context___slug'
-  | 'context___series____0___subtitle'
-  | 'context___series____0___copy'
-  | 'context___series____0___index'
-  | 'context___series____0___uri'
-  | 'context___series____1___subtitle'
-  | 'context___series____1___copy'
-  | 'context___series____1___index'
-  | 'context___series____1___uri'
-  | 'context___series____2___subtitle'
-  | 'context___series____2___copy'
-  | 'context___series____2___index'
-  | 'context___series____2___uri'
-  | 'context___series____3___subtitle'
-  | 'context___series____3___copy'
-  | 'context___series____3___index'
-  | 'context___series____3___uri'
-  | 'context___series____4___subtitle'
-  | 'context___series____4___copy'
-  | 'context___series____4___index'
-  | 'context___series____4___uri'
-  | 'context___series____5___subtitle'
-  | 'context___series____5___copy'
-  | 'context___series____5___index'
-  | 'context___series____5___uri'
-  | 'context___series____6___subtitle'
-  | 'context___series____6___copy'
-  | 'context___series____6___index'
-  | 'context___series____6___uri'
-  | 'context___series____7___subtitle'
-  | 'context___series____7___copy'
-  | 'context___series____7___index'
-  | 'context___series____7___uri'
-  | 'context___series____8___subtitle'
-  | 'context___series____8___copy'
-  | 'context___series____8___index'
-  | 'context___series____8___uri'
-  | 'context___series____9___subtitle'
-  | 'context___series____9___copy'
-  | 'context___series____9___index'
-  | 'context___series____9___uri'
-  | 'context___series____10___subtitle'
-  | 'context___series____10___copy'
-  | 'context___series____10___index'
-  | 'context___series____10___uri'
-  | 'context___series____11___subtitle'
-  | 'context___series____11___copy'
-  | 'context___series____11___index'
-  | 'context___series____11___uri'
-  | 'context___translations'
-  | 'context___translations___lang'
-  | 'context___translations___slug'
-  | 'context___postEdges'
-  | 'context___postEdges___node___id'
-  | 'context___postEdges___node___timeToRead'
-  | 'context___postEdges___node___fileAbsolutePath'
-  | 'context___tag'
+  | 'context___posts'
+  | 'context___posts___id'
+  | 'context___posts___title'
+  | 'context___posts___subtitle'
+  | 'context___posts___description'
+  | 'context___posts___date'
+  | 'context___posts___serieCopy'
+  | 'context___posts___slug'
+  | 'context___posts___translation___language'
+  | 'context___posts___translation___slug'
+  | 'context___posts___translation___translation'
+  | 'context___posts___serie___slug'
+  | 'context___posts___serie___id'
+  | 'context___posts___serie___name'
+  | 'context___posts___language'
+  | 'context___posts___featuredImage___publicURL'
+  | 'context___posts___tags'
+  | 'context___posts___tags___id'
+  | 'context___posts___tags___name'
+  | 'context___posts___tags___slug'
+  | 'context___tag___slug'
+  | 'context___tag___name'
+  | 'context___postUri'
+  | 'context___post___id'
+  | 'context___post___title'
+  | 'context___post___subtitle'
+  | 'context___post___description'
+  | 'context___post___date'
+  | 'context___post___serieCopy'
+  | 'context___post___slug'
+  | 'context___post___language'
+  | 'context___post___translation___language'
+  | 'context___post___translation___slug'
+  | 'context___post___serie___slug'
+  | 'context___post___serie___id'
+  | 'context___post___serie___name'
+  | 'context___post___featuredImage___publicURL'
+  | 'context___post___tags'
+  | 'context___post___tags___id'
+  | 'context___post___tags___name'
+  | 'context___post___tags___slug'
+  | 'context___serie___id'
+  | 'context___serie___name'
+  | 'context___serie___slug'
+  | 'context___serie___blogPosts'
+  | 'context___serie___blogPosts___id'
+  | 'context___serie___blogPosts___slug'
+  | 'context___serie___blogPosts___language'
+  | 'context___serie___blogPosts___subtitle'
+  | 'context___serie___blogPosts___copy'
+  | 'context___serie___blogPosts___uri'
+  | 'context___translation___language'
+  | 'context___translation___postUri'
   | 'pluginCreator___id'
   | 'pluginCreator___parent___id'
   | 'pluginCreator___parent___parent___id'
@@ -3288,6 +3218,8 @@ export type SitePageFieldsEnum =
   | 'pluginCreator___pluginOptions___aliases____static'
   | 'pluginCreator___pluginOptions___aliases____styles'
   | 'pluginCreator___pluginOptions___aliases____utils'
+  | 'pluginCreator___pluginOptions___aliases____stores'
+  | 'pluginCreator___pluginOptions___aliases____globalShared'
   | 'pluginCreator___pluginOptions___fileName'
   | 'pluginCreator___pluginOptions___documentPaths'
   | 'pluginCreator___pluginOptions___short_name'
@@ -3310,6 +3242,17 @@ export type SitePageFieldsEnum =
   | 'pluginCreator___pluginOptions___apiURL'
   | 'pluginCreator___pluginOptions___contentTypes'
   | 'pluginCreator___pluginOptions___singleTypes'
+  | 'pluginCreator___pluginOptions___appId'
+  | 'pluginCreator___pluginOptions___apiKey'
+  | 'pluginCreator___pluginOptions___indexName'
+  | 'pluginCreator___pluginOptions___queries'
+  | 'pluginCreator___pluginOptions___queries___query'
+  | 'pluginCreator___pluginOptions___queries___indexName'
+  | 'pluginCreator___pluginOptions___chunkSize'
+  | 'pluginCreator___pluginOptions___enablePartialUpdates'
+  | 'pluginCreator___pluginOptions___matchFields'
+  | 'pluginCreator___pluginOptions___trackingId'
+  | 'pluginCreator___pluginOptions___head'
   | 'pluginCreator___pluginOptions___pathCheck'
   | 'pluginCreator___nodeAPIs'
   | 'pluginCreator___browserAPIs'
@@ -3511,6 +3454,8 @@ export type SitePluginFieldsEnum =
   | 'pluginOptions___aliases____static'
   | 'pluginOptions___aliases____styles'
   | 'pluginOptions___aliases____utils'
+  | 'pluginOptions___aliases____stores'
+  | 'pluginOptions___aliases____globalShared'
   | 'pluginOptions___fileName'
   | 'pluginOptions___documentPaths'
   | 'pluginOptions___short_name'
@@ -3533,6 +3478,18 @@ export type SitePluginFieldsEnum =
   | 'pluginOptions___apiURL'
   | 'pluginOptions___contentTypes'
   | 'pluginOptions___singleTypes'
+  | 'pluginOptions___appId'
+  | 'pluginOptions___apiKey'
+  | 'pluginOptions___indexName'
+  | 'pluginOptions___queries'
+  | 'pluginOptions___queries___query'
+  | 'pluginOptions___queries___indexName'
+  | 'pluginOptions___queries___settings___attributesToSnippet'
+  | 'pluginOptions___chunkSize'
+  | 'pluginOptions___enablePartialUpdates'
+  | 'pluginOptions___matchFields'
+  | 'pluginOptions___trackingId'
+  | 'pluginOptions___head'
   | 'pluginOptions___pathCheck'
   | 'nodeAPIs'
   | 'browserAPIs'
@@ -3669,6 +3626,15 @@ export type SitePluginPluginOptions = {
   apiURL?: Maybe<Scalars['String']>;
   contentTypes?: Maybe<Array<Maybe<Scalars['String']>>>;
   singleTypes?: Maybe<Array<Maybe<Scalars['String']>>>;
+  appId?: Maybe<Scalars['String']>;
+  apiKey?: Maybe<Scalars['String']>;
+  indexName?: Maybe<Scalars['String']>;
+  queries?: Maybe<Array<Maybe<SitePluginPluginOptionsQueries>>>;
+  chunkSize?: Maybe<Scalars['Int']>;
+  enablePartialUpdates?: Maybe<Scalars['Boolean']>;
+  matchFields?: Maybe<Array<Maybe<Scalars['String']>>>;
+  trackingId?: Maybe<Scalars['String']>;
+  head?: Maybe<Scalars['Boolean']>;
   pathCheck?: Maybe<Scalars['Boolean']>;
 };
 
@@ -3684,6 +3650,8 @@ export type SitePluginPluginOptionsAliases = {
   _static?: Maybe<Scalars['String']>;
   _styles?: Maybe<Scalars['String']>;
   _utils?: Maybe<Scalars['String']>;
+  _stores?: Maybe<Scalars['String']>;
+  _globalShared?: Maybe<Scalars['String']>;
 };
 
 export type SitePluginPluginOptionsAliasesFilterInput = {
@@ -3698,6 +3666,8 @@ export type SitePluginPluginOptionsAliasesFilterInput = {
   _static?: Maybe<StringQueryOperatorInput>;
   _styles?: Maybe<StringQueryOperatorInput>;
   _utils?: Maybe<StringQueryOperatorInput>;
+  _stores?: Maybe<StringQueryOperatorInput>;
+  _globalShared?: Maybe<StringQueryOperatorInput>;
 };
 
 export type SitePluginPluginOptionsFilterInput = {
@@ -3724,6 +3694,15 @@ export type SitePluginPluginOptionsFilterInput = {
   apiURL?: Maybe<StringQueryOperatorInput>;
   contentTypes?: Maybe<StringQueryOperatorInput>;
   singleTypes?: Maybe<StringQueryOperatorInput>;
+  appId?: Maybe<StringQueryOperatorInput>;
+  apiKey?: Maybe<StringQueryOperatorInput>;
+  indexName?: Maybe<StringQueryOperatorInput>;
+  queries?: Maybe<SitePluginPluginOptionsQueriesFilterListInput>;
+  chunkSize?: Maybe<IntQueryOperatorInput>;
+  enablePartialUpdates?: Maybe<BooleanQueryOperatorInput>;
+  matchFields?: Maybe<StringQueryOperatorInput>;
+  trackingId?: Maybe<StringQueryOperatorInput>;
+  head?: Maybe<BooleanQueryOperatorInput>;
   pathCheck?: Maybe<BooleanQueryOperatorInput>;
 };
 
@@ -3749,6 +3728,30 @@ export type SitePluginPluginOptionsLocalizeFilterInput = {
 
 export type SitePluginPluginOptionsLocalizeFilterListInput = {
   elemMatch?: Maybe<SitePluginPluginOptionsLocalizeFilterInput>;
+};
+
+export type SitePluginPluginOptionsQueries = {
+  query?: Maybe<Scalars['String']>;
+  indexName?: Maybe<Scalars['String']>;
+  settings?: Maybe<SitePluginPluginOptionsQueriesSettings>;
+};
+
+export type SitePluginPluginOptionsQueriesFilterInput = {
+  query?: Maybe<StringQueryOperatorInput>;
+  indexName?: Maybe<StringQueryOperatorInput>;
+  settings?: Maybe<SitePluginPluginOptionsQueriesSettingsFilterInput>;
+};
+
+export type SitePluginPluginOptionsQueriesFilterListInput = {
+  elemMatch?: Maybe<SitePluginPluginOptionsQueriesFilterInput>;
+};
+
+export type SitePluginPluginOptionsQueriesSettings = {
+  attributesToSnippet?: Maybe<Array<Maybe<Scalars['String']>>>;
+};
+
+export type SitePluginPluginOptionsQueriesSettingsFilterInput = {
+  attributesToSnippet?: Maybe<StringQueryOperatorInput>;
 };
 
 export type SitePluginSortInput = {
@@ -4771,10 +4774,10 @@ export type StrapiPersonalInformationFieldsEnum =
   | 'profile_pic___childMdx___rawBody'
   | 'profile_pic___childMdx___fileAbsolutePath'
   | 'profile_pic___childMdx___frontmatter___title'
-  | 'profile_pic___childMdx___frontmatter___subtitle'
   | 'profile_pic___childMdx___frontmatter___date'
-  | 'profile_pic___childMdx___frontmatter___tags'
   | 'profile_pic___childMdx___frontmatter___description'
+  | 'profile_pic___childMdx___frontmatter___tags'
+  | 'profile_pic___childMdx___frontmatter___subtitle'
   | 'profile_pic___childMdx___frontmatter___image_caption'
   | 'profile_pic___childMdx___slug'
   | 'profile_pic___childMdx___body'
@@ -4789,9 +4792,6 @@ export type StrapiPersonalInformationFieldsEnum =
   | 'profile_pic___childMdx___wordCount___paragraphs'
   | 'profile_pic___childMdx___wordCount___sentences'
   | 'profile_pic___childMdx___wordCount___words'
-  | 'profile_pic___childMdx___fields___slug'
-  | 'profile_pic___childMdx___fields___lang'
-  | 'profile_pic___childMdx___fields___postFolderName'
   | 'profile_pic___childMdx___id'
   | 'profile_pic___childMdx___parent___id'
   | 'profile_pic___childMdx___parent___children'
@@ -4873,6 +4873,1819 @@ export type StrapiPersonalInformationUpdated_ByFilterInput = {
   id?: Maybe<StringQueryOperatorInput>;
 };
 
+export type StrapiPostContent = Node & {
+  id: Scalars['ID'];
+  parent?: Maybe<Node>;
+  children: Array<Node>;
+  internal: Internal;
+  childMdx?: Maybe<Mdx>;
+};
+
+export type StrapiPostContentConnection = {
+  totalCount: Scalars['Int'];
+  edges: Array<StrapiPostContentEdge>;
+  nodes: Array<StrapiPostContent>;
+  pageInfo: PageInfo;
+  distinct: Array<Scalars['String']>;
+  group: Array<StrapiPostContentGroupConnection>;
+};
+
+
+export type StrapiPostContentConnectionDistinctArgs = {
+  field: StrapiPostContentFieldsEnum;
+};
+
+
+export type StrapiPostContentConnectionGroupArgs = {
+  skip?: Maybe<Scalars['Int']>;
+  limit?: Maybe<Scalars['Int']>;
+  field: StrapiPostContentFieldsEnum;
+};
+
+export type StrapiPostContentEdge = {
+  next?: Maybe<StrapiPostContent>;
+  node: StrapiPostContent;
+  previous?: Maybe<StrapiPostContent>;
+};
+
+export type StrapiPostContentFieldsEnum = 
+  | 'id'
+  | 'parent___id'
+  | 'parent___parent___id'
+  | 'parent___parent___parent___id'
+  | 'parent___parent___parent___children'
+  | 'parent___parent___children'
+  | 'parent___parent___children___id'
+  | 'parent___parent___children___children'
+  | 'parent___parent___internal___content'
+  | 'parent___parent___internal___contentDigest'
+  | 'parent___parent___internal___description'
+  | 'parent___parent___internal___fieldOwners'
+  | 'parent___parent___internal___ignoreType'
+  | 'parent___parent___internal___mediaType'
+  | 'parent___parent___internal___owner'
+  | 'parent___parent___internal___type'
+  | 'parent___children'
+  | 'parent___children___id'
+  | 'parent___children___parent___id'
+  | 'parent___children___parent___children'
+  | 'parent___children___children'
+  | 'parent___children___children___id'
+  | 'parent___children___children___children'
+  | 'parent___children___internal___content'
+  | 'parent___children___internal___contentDigest'
+  | 'parent___children___internal___description'
+  | 'parent___children___internal___fieldOwners'
+  | 'parent___children___internal___ignoreType'
+  | 'parent___children___internal___mediaType'
+  | 'parent___children___internal___owner'
+  | 'parent___children___internal___type'
+  | 'parent___internal___content'
+  | 'parent___internal___contentDigest'
+  | 'parent___internal___description'
+  | 'parent___internal___fieldOwners'
+  | 'parent___internal___ignoreType'
+  | 'parent___internal___mediaType'
+  | 'parent___internal___owner'
+  | 'parent___internal___type'
+  | 'children'
+  | 'children___id'
+  | 'children___parent___id'
+  | 'children___parent___parent___id'
+  | 'children___parent___parent___children'
+  | 'children___parent___children'
+  | 'children___parent___children___id'
+  | 'children___parent___children___children'
+  | 'children___parent___internal___content'
+  | 'children___parent___internal___contentDigest'
+  | 'children___parent___internal___description'
+  | 'children___parent___internal___fieldOwners'
+  | 'children___parent___internal___ignoreType'
+  | 'children___parent___internal___mediaType'
+  | 'children___parent___internal___owner'
+  | 'children___parent___internal___type'
+  | 'children___children'
+  | 'children___children___id'
+  | 'children___children___parent___id'
+  | 'children___children___parent___children'
+  | 'children___children___children'
+  | 'children___children___children___id'
+  | 'children___children___children___children'
+  | 'children___children___internal___content'
+  | 'children___children___internal___contentDigest'
+  | 'children___children___internal___description'
+  | 'children___children___internal___fieldOwners'
+  | 'children___children___internal___ignoreType'
+  | 'children___children___internal___mediaType'
+  | 'children___children___internal___owner'
+  | 'children___children___internal___type'
+  | 'children___internal___content'
+  | 'children___internal___contentDigest'
+  | 'children___internal___description'
+  | 'children___internal___fieldOwners'
+  | 'children___internal___ignoreType'
+  | 'children___internal___mediaType'
+  | 'children___internal___owner'
+  | 'children___internal___type'
+  | 'internal___content'
+  | 'internal___contentDigest'
+  | 'internal___description'
+  | 'internal___fieldOwners'
+  | 'internal___ignoreType'
+  | 'internal___mediaType'
+  | 'internal___owner'
+  | 'internal___type'
+  | 'childMdx___rawBody'
+  | 'childMdx___fileAbsolutePath'
+  | 'childMdx___frontmatter___title'
+  | 'childMdx___frontmatter___date'
+  | 'childMdx___frontmatter___image___sourceInstanceName'
+  | 'childMdx___frontmatter___image___absolutePath'
+  | 'childMdx___frontmatter___image___relativePath'
+  | 'childMdx___frontmatter___image___extension'
+  | 'childMdx___frontmatter___image___size'
+  | 'childMdx___frontmatter___image___prettySize'
+  | 'childMdx___frontmatter___image___modifiedTime'
+  | 'childMdx___frontmatter___image___accessTime'
+  | 'childMdx___frontmatter___image___changeTime'
+  | 'childMdx___frontmatter___image___birthTime'
+  | 'childMdx___frontmatter___image___root'
+  | 'childMdx___frontmatter___image___dir'
+  | 'childMdx___frontmatter___image___base'
+  | 'childMdx___frontmatter___image___ext'
+  | 'childMdx___frontmatter___image___name'
+  | 'childMdx___frontmatter___image___relativeDirectory'
+  | 'childMdx___frontmatter___image___dev'
+  | 'childMdx___frontmatter___image___mode'
+  | 'childMdx___frontmatter___image___nlink'
+  | 'childMdx___frontmatter___image___uid'
+  | 'childMdx___frontmatter___image___gid'
+  | 'childMdx___frontmatter___image___rdev'
+  | 'childMdx___frontmatter___image___ino'
+  | 'childMdx___frontmatter___image___atimeMs'
+  | 'childMdx___frontmatter___image___mtimeMs'
+  | 'childMdx___frontmatter___image___ctimeMs'
+  | 'childMdx___frontmatter___image___atime'
+  | 'childMdx___frontmatter___image___mtime'
+  | 'childMdx___frontmatter___image___ctime'
+  | 'childMdx___frontmatter___image___birthtime'
+  | 'childMdx___frontmatter___image___birthtimeMs'
+  | 'childMdx___frontmatter___image___blksize'
+  | 'childMdx___frontmatter___image___blocks'
+  | 'childMdx___frontmatter___image___publicURL'
+  | 'childMdx___frontmatter___image___id'
+  | 'childMdx___frontmatter___image___children'
+  | 'childMdx___frontmatter___description'
+  | 'childMdx___frontmatter___tags'
+  | 'childMdx___frontmatter___subtitle'
+  | 'childMdx___frontmatter___series___id'
+  | 'childMdx___frontmatter___series___index'
+  | 'childMdx___frontmatter___series___copy'
+  | 'childMdx___frontmatter___image_caption'
+  | 'childMdx___slug'
+  | 'childMdx___body'
+  | 'childMdx___excerpt'
+  | 'childMdx___headings'
+  | 'childMdx___headings___value'
+  | 'childMdx___headings___depth'
+  | 'childMdx___html'
+  | 'childMdx___mdxAST'
+  | 'childMdx___tableOfContents'
+  | 'childMdx___timeToRead'
+  | 'childMdx___wordCount___paragraphs'
+  | 'childMdx___wordCount___sentences'
+  | 'childMdx___wordCount___words'
+  | 'childMdx___id'
+  | 'childMdx___parent___id'
+  | 'childMdx___parent___parent___id'
+  | 'childMdx___parent___parent___children'
+  | 'childMdx___parent___children'
+  | 'childMdx___parent___children___id'
+  | 'childMdx___parent___children___children'
+  | 'childMdx___parent___internal___content'
+  | 'childMdx___parent___internal___contentDigest'
+  | 'childMdx___parent___internal___description'
+  | 'childMdx___parent___internal___fieldOwners'
+  | 'childMdx___parent___internal___ignoreType'
+  | 'childMdx___parent___internal___mediaType'
+  | 'childMdx___parent___internal___owner'
+  | 'childMdx___parent___internal___type'
+  | 'childMdx___children'
+  | 'childMdx___children___id'
+  | 'childMdx___children___parent___id'
+  | 'childMdx___children___parent___children'
+  | 'childMdx___children___children'
+  | 'childMdx___children___children___id'
+  | 'childMdx___children___children___children'
+  | 'childMdx___children___internal___content'
+  | 'childMdx___children___internal___contentDigest'
+  | 'childMdx___children___internal___description'
+  | 'childMdx___children___internal___fieldOwners'
+  | 'childMdx___children___internal___ignoreType'
+  | 'childMdx___children___internal___mediaType'
+  | 'childMdx___children___internal___owner'
+  | 'childMdx___children___internal___type'
+  | 'childMdx___internal___content'
+  | 'childMdx___internal___contentDigest'
+  | 'childMdx___internal___description'
+  | 'childMdx___internal___fieldOwners'
+  | 'childMdx___internal___ignoreType'
+  | 'childMdx___internal___mediaType'
+  | 'childMdx___internal___owner'
+  | 'childMdx___internal___type';
+
+export type StrapiPostContentFilterInput = {
+  id?: Maybe<StringQueryOperatorInput>;
+  parent?: Maybe<NodeFilterInput>;
+  children?: Maybe<NodeFilterListInput>;
+  internal?: Maybe<InternalFilterInput>;
+  childMdx?: Maybe<MdxFilterInput>;
+};
+
+export type StrapiPostContentGroupConnection = {
+  totalCount: Scalars['Int'];
+  edges: Array<StrapiPostContentEdge>;
+  nodes: Array<StrapiPostContent>;
+  pageInfo: PageInfo;
+  field: Scalars['String'];
+  fieldValue?: Maybe<Scalars['String']>;
+};
+
+export type StrapiPostContentSortInput = {
+  fields?: Maybe<Array<Maybe<StrapiPostContentFieldsEnum>>>;
+  order?: Maybe<Array<Maybe<SortOrderEnum>>>;
+};
+
+export type StrapiPosts = Node & {
+  id: Scalars['ID'];
+  parent?: Maybe<Node>;
+  children: Array<Node>;
+  internal: Internal;
+  language?: Maybe<Scalars['String']>;
+  post_tags?: Maybe<Array<Maybe<StrapiPostsPost_Tags>>>;
+  slug?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  subtitle?: Maybe<Scalars['String']>;
+  content?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  date?: Maybe<Scalars['Date']>;
+  createdAt?: Maybe<Scalars['Date']>;
+  updatedAt?: Maybe<Scalars['Date']>;
+  created_by?: Maybe<StrapiPostsCreated_By>;
+  featured_image?: Maybe<File>;
+  updated_by?: Maybe<StrapiPostsUpdated_By>;
+  strapiId?: Maybe<Scalars['String']>;
+  post_serie?: Maybe<StrapiPostsPost_Serie>;
+  serie_copy?: Maybe<Scalars['String']>;
+  translation?: Maybe<StrapiPostsTranslation>;
+  childStrapiPostContent?: Maybe<StrapiPostContent>;
+};
+
+
+export type StrapiPostsDateArgs = {
+  formatString?: Maybe<Scalars['String']>;
+  fromNow?: Maybe<Scalars['Boolean']>;
+  difference?: Maybe<Scalars['String']>;
+  locale?: Maybe<Scalars['String']>;
+};
+
+
+export type StrapiPostsCreatedAtArgs = {
+  formatString?: Maybe<Scalars['String']>;
+  fromNow?: Maybe<Scalars['Boolean']>;
+  difference?: Maybe<Scalars['String']>;
+  locale?: Maybe<Scalars['String']>;
+};
+
+
+export type StrapiPostsUpdatedAtArgs = {
+  formatString?: Maybe<Scalars['String']>;
+  fromNow?: Maybe<Scalars['Boolean']>;
+  difference?: Maybe<Scalars['String']>;
+  locale?: Maybe<Scalars['String']>;
+};
+
+export type StrapiPostsConnection = {
+  totalCount: Scalars['Int'];
+  edges: Array<StrapiPostsEdge>;
+  nodes: Array<StrapiPosts>;
+  pageInfo: PageInfo;
+  distinct: Array<Scalars['String']>;
+  group: Array<StrapiPostsGroupConnection>;
+};
+
+
+export type StrapiPostsConnectionDistinctArgs = {
+  field: StrapiPostsFieldsEnum;
+};
+
+
+export type StrapiPostsConnectionGroupArgs = {
+  skip?: Maybe<Scalars['Int']>;
+  limit?: Maybe<Scalars['Int']>;
+  field: StrapiPostsFieldsEnum;
+};
+
+export type StrapiPostsCreated_By = {
+  firstname?: Maybe<Scalars['String']>;
+  lastname?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['Date']>;
+  updatedAt?: Maybe<Scalars['Date']>;
+  id?: Maybe<Scalars['String']>;
+};
+
+
+export type StrapiPostsCreated_ByCreatedAtArgs = {
+  formatString?: Maybe<Scalars['String']>;
+  fromNow?: Maybe<Scalars['Boolean']>;
+  difference?: Maybe<Scalars['String']>;
+  locale?: Maybe<Scalars['String']>;
+};
+
+
+export type StrapiPostsCreated_ByUpdatedAtArgs = {
+  formatString?: Maybe<Scalars['String']>;
+  fromNow?: Maybe<Scalars['Boolean']>;
+  difference?: Maybe<Scalars['String']>;
+  locale?: Maybe<Scalars['String']>;
+};
+
+export type StrapiPostsCreated_ByFilterInput = {
+  firstname?: Maybe<StringQueryOperatorInput>;
+  lastname?: Maybe<StringQueryOperatorInput>;
+  createdAt?: Maybe<DateQueryOperatorInput>;
+  updatedAt?: Maybe<DateQueryOperatorInput>;
+  id?: Maybe<StringQueryOperatorInput>;
+};
+
+export type StrapiPostsEdge = {
+  next?: Maybe<StrapiPosts>;
+  node: StrapiPosts;
+  previous?: Maybe<StrapiPosts>;
+};
+
+export type StrapiPostSerie = Node & {
+  id: Scalars['ID'];
+  parent?: Maybe<Node>;
+  children: Array<Node>;
+  internal: Internal;
+  slug?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['Date']>;
+  updatedAt?: Maybe<Scalars['Date']>;
+  created_by?: Maybe<StrapiPostSerieCreated_By>;
+  updated_by?: Maybe<StrapiPostSerieUpdated_By>;
+  post_tags?: Maybe<Array<Maybe<Scalars['String']>>>;
+  blog_posts?: Maybe<Array<Maybe<StrapiPostSerieBlog_Posts>>>;
+  strapiId?: Maybe<Scalars['String']>;
+};
+
+
+export type StrapiPostSerieCreatedAtArgs = {
+  formatString?: Maybe<Scalars['String']>;
+  fromNow?: Maybe<Scalars['Boolean']>;
+  difference?: Maybe<Scalars['String']>;
+  locale?: Maybe<Scalars['String']>;
+};
+
+
+export type StrapiPostSerieUpdatedAtArgs = {
+  formatString?: Maybe<Scalars['String']>;
+  fromNow?: Maybe<Scalars['Boolean']>;
+  difference?: Maybe<Scalars['String']>;
+  locale?: Maybe<Scalars['String']>;
+};
+
+export type StrapiPostSerieBlog_Posts = {
+  language?: Maybe<Scalars['String']>;
+  post_tags?: Maybe<Array<Maybe<Scalars['String']>>>;
+  slug?: Maybe<Scalars['String']>;
+  content?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  subtitle?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  date?: Maybe<Scalars['Date']>;
+  createdAt?: Maybe<Scalars['Date']>;
+  updatedAt?: Maybe<Scalars['Date']>;
+  created_by?: Maybe<Scalars['String']>;
+  featured_image?: Maybe<File>;
+  updated_by?: Maybe<Scalars['String']>;
+  post_serie?: Maybe<Scalars['String']>;
+  serie_copy?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['String']>;
+};
+
+
+export type StrapiPostSerieBlog_PostsDateArgs = {
+  formatString?: Maybe<Scalars['String']>;
+  fromNow?: Maybe<Scalars['Boolean']>;
+  difference?: Maybe<Scalars['String']>;
+  locale?: Maybe<Scalars['String']>;
+};
+
+
+export type StrapiPostSerieBlog_PostsCreatedAtArgs = {
+  formatString?: Maybe<Scalars['String']>;
+  fromNow?: Maybe<Scalars['Boolean']>;
+  difference?: Maybe<Scalars['String']>;
+  locale?: Maybe<Scalars['String']>;
+};
+
+
+export type StrapiPostSerieBlog_PostsUpdatedAtArgs = {
+  formatString?: Maybe<Scalars['String']>;
+  fromNow?: Maybe<Scalars['Boolean']>;
+  difference?: Maybe<Scalars['String']>;
+  locale?: Maybe<Scalars['String']>;
+};
+
+export type StrapiPostSerieBlog_PostsFilterInput = {
+  language?: Maybe<StringQueryOperatorInput>;
+  post_tags?: Maybe<StringQueryOperatorInput>;
+  slug?: Maybe<StringQueryOperatorInput>;
+  content?: Maybe<StringQueryOperatorInput>;
+  title?: Maybe<StringQueryOperatorInput>;
+  subtitle?: Maybe<StringQueryOperatorInput>;
+  description?: Maybe<StringQueryOperatorInput>;
+  date?: Maybe<DateQueryOperatorInput>;
+  createdAt?: Maybe<DateQueryOperatorInput>;
+  updatedAt?: Maybe<DateQueryOperatorInput>;
+  created_by?: Maybe<StringQueryOperatorInput>;
+  featured_image?: Maybe<FileFilterInput>;
+  updated_by?: Maybe<StringQueryOperatorInput>;
+  post_serie?: Maybe<StringQueryOperatorInput>;
+  serie_copy?: Maybe<StringQueryOperatorInput>;
+  id?: Maybe<StringQueryOperatorInput>;
+};
+
+export type StrapiPostSerieBlog_PostsFilterListInput = {
+  elemMatch?: Maybe<StrapiPostSerieBlog_PostsFilterInput>;
+};
+
+export type StrapiPostSerieConnection = {
+  totalCount: Scalars['Int'];
+  edges: Array<StrapiPostSerieEdge>;
+  nodes: Array<StrapiPostSerie>;
+  pageInfo: PageInfo;
+  distinct: Array<Scalars['String']>;
+  group: Array<StrapiPostSerieGroupConnection>;
+};
+
+
+export type StrapiPostSerieConnectionDistinctArgs = {
+  field: StrapiPostSerieFieldsEnum;
+};
+
+
+export type StrapiPostSerieConnectionGroupArgs = {
+  skip?: Maybe<Scalars['Int']>;
+  limit?: Maybe<Scalars['Int']>;
+  field: StrapiPostSerieFieldsEnum;
+};
+
+export type StrapiPostSerieCreated_By = {
+  firstname?: Maybe<Scalars['String']>;
+  lastname?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['Date']>;
+  updatedAt?: Maybe<Scalars['Date']>;
+  id?: Maybe<Scalars['String']>;
+};
+
+
+export type StrapiPostSerieCreated_ByCreatedAtArgs = {
+  formatString?: Maybe<Scalars['String']>;
+  fromNow?: Maybe<Scalars['Boolean']>;
+  difference?: Maybe<Scalars['String']>;
+  locale?: Maybe<Scalars['String']>;
+};
+
+
+export type StrapiPostSerieCreated_ByUpdatedAtArgs = {
+  formatString?: Maybe<Scalars['String']>;
+  fromNow?: Maybe<Scalars['Boolean']>;
+  difference?: Maybe<Scalars['String']>;
+  locale?: Maybe<Scalars['String']>;
+};
+
+export type StrapiPostSerieCreated_ByFilterInput = {
+  firstname?: Maybe<StringQueryOperatorInput>;
+  lastname?: Maybe<StringQueryOperatorInput>;
+  createdAt?: Maybe<DateQueryOperatorInput>;
+  updatedAt?: Maybe<DateQueryOperatorInput>;
+  id?: Maybe<StringQueryOperatorInput>;
+};
+
+export type StrapiPostSerieEdge = {
+  next?: Maybe<StrapiPostSerie>;
+  node: StrapiPostSerie;
+  previous?: Maybe<StrapiPostSerie>;
+};
+
+export type StrapiPostSerieFieldsEnum = 
+  | 'id'
+  | 'parent___id'
+  | 'parent___parent___id'
+  | 'parent___parent___parent___id'
+  | 'parent___parent___parent___children'
+  | 'parent___parent___children'
+  | 'parent___parent___children___id'
+  | 'parent___parent___children___children'
+  | 'parent___parent___internal___content'
+  | 'parent___parent___internal___contentDigest'
+  | 'parent___parent___internal___description'
+  | 'parent___parent___internal___fieldOwners'
+  | 'parent___parent___internal___ignoreType'
+  | 'parent___parent___internal___mediaType'
+  | 'parent___parent___internal___owner'
+  | 'parent___parent___internal___type'
+  | 'parent___children'
+  | 'parent___children___id'
+  | 'parent___children___parent___id'
+  | 'parent___children___parent___children'
+  | 'parent___children___children'
+  | 'parent___children___children___id'
+  | 'parent___children___children___children'
+  | 'parent___children___internal___content'
+  | 'parent___children___internal___contentDigest'
+  | 'parent___children___internal___description'
+  | 'parent___children___internal___fieldOwners'
+  | 'parent___children___internal___ignoreType'
+  | 'parent___children___internal___mediaType'
+  | 'parent___children___internal___owner'
+  | 'parent___children___internal___type'
+  | 'parent___internal___content'
+  | 'parent___internal___contentDigest'
+  | 'parent___internal___description'
+  | 'parent___internal___fieldOwners'
+  | 'parent___internal___ignoreType'
+  | 'parent___internal___mediaType'
+  | 'parent___internal___owner'
+  | 'parent___internal___type'
+  | 'children'
+  | 'children___id'
+  | 'children___parent___id'
+  | 'children___parent___parent___id'
+  | 'children___parent___parent___children'
+  | 'children___parent___children'
+  | 'children___parent___children___id'
+  | 'children___parent___children___children'
+  | 'children___parent___internal___content'
+  | 'children___parent___internal___contentDigest'
+  | 'children___parent___internal___description'
+  | 'children___parent___internal___fieldOwners'
+  | 'children___parent___internal___ignoreType'
+  | 'children___parent___internal___mediaType'
+  | 'children___parent___internal___owner'
+  | 'children___parent___internal___type'
+  | 'children___children'
+  | 'children___children___id'
+  | 'children___children___parent___id'
+  | 'children___children___parent___children'
+  | 'children___children___children'
+  | 'children___children___children___id'
+  | 'children___children___children___children'
+  | 'children___children___internal___content'
+  | 'children___children___internal___contentDigest'
+  | 'children___children___internal___description'
+  | 'children___children___internal___fieldOwners'
+  | 'children___children___internal___ignoreType'
+  | 'children___children___internal___mediaType'
+  | 'children___children___internal___owner'
+  | 'children___children___internal___type'
+  | 'children___internal___content'
+  | 'children___internal___contentDigest'
+  | 'children___internal___description'
+  | 'children___internal___fieldOwners'
+  | 'children___internal___ignoreType'
+  | 'children___internal___mediaType'
+  | 'children___internal___owner'
+  | 'children___internal___type'
+  | 'internal___content'
+  | 'internal___contentDigest'
+  | 'internal___description'
+  | 'internal___fieldOwners'
+  | 'internal___ignoreType'
+  | 'internal___mediaType'
+  | 'internal___owner'
+  | 'internal___type'
+  | 'slug'
+  | 'name'
+  | 'createdAt'
+  | 'updatedAt'
+  | 'created_by___firstname'
+  | 'created_by___lastname'
+  | 'created_by___createdAt'
+  | 'created_by___updatedAt'
+  | 'created_by___id'
+  | 'updated_by___firstname'
+  | 'updated_by___lastname'
+  | 'updated_by___createdAt'
+  | 'updated_by___updatedAt'
+  | 'updated_by___id'
+  | 'post_tags'
+  | 'blog_posts'
+  | 'blog_posts___language'
+  | 'blog_posts___post_tags'
+  | 'blog_posts___slug'
+  | 'blog_posts___content'
+  | 'blog_posts___title'
+  | 'blog_posts___subtitle'
+  | 'blog_posts___description'
+  | 'blog_posts___date'
+  | 'blog_posts___createdAt'
+  | 'blog_posts___updatedAt'
+  | 'blog_posts___created_by'
+  | 'blog_posts___featured_image___sourceInstanceName'
+  | 'blog_posts___featured_image___absolutePath'
+  | 'blog_posts___featured_image___relativePath'
+  | 'blog_posts___featured_image___extension'
+  | 'blog_posts___featured_image___size'
+  | 'blog_posts___featured_image___prettySize'
+  | 'blog_posts___featured_image___modifiedTime'
+  | 'blog_posts___featured_image___accessTime'
+  | 'blog_posts___featured_image___changeTime'
+  | 'blog_posts___featured_image___birthTime'
+  | 'blog_posts___featured_image___root'
+  | 'blog_posts___featured_image___dir'
+  | 'blog_posts___featured_image___base'
+  | 'blog_posts___featured_image___ext'
+  | 'blog_posts___featured_image___name'
+  | 'blog_posts___featured_image___relativeDirectory'
+  | 'blog_posts___featured_image___dev'
+  | 'blog_posts___featured_image___mode'
+  | 'blog_posts___featured_image___nlink'
+  | 'blog_posts___featured_image___uid'
+  | 'blog_posts___featured_image___gid'
+  | 'blog_posts___featured_image___rdev'
+  | 'blog_posts___featured_image___ino'
+  | 'blog_posts___featured_image___atimeMs'
+  | 'blog_posts___featured_image___mtimeMs'
+  | 'blog_posts___featured_image___ctimeMs'
+  | 'blog_posts___featured_image___atime'
+  | 'blog_posts___featured_image___mtime'
+  | 'blog_posts___featured_image___ctime'
+  | 'blog_posts___featured_image___birthtime'
+  | 'blog_posts___featured_image___birthtimeMs'
+  | 'blog_posts___featured_image___blksize'
+  | 'blog_posts___featured_image___blocks'
+  | 'blog_posts___featured_image___publicURL'
+  | 'blog_posts___featured_image___childImageSharp___id'
+  | 'blog_posts___featured_image___childImageSharp___children'
+  | 'blog_posts___featured_image___id'
+  | 'blog_posts___featured_image___parent___id'
+  | 'blog_posts___featured_image___parent___children'
+  | 'blog_posts___featured_image___children'
+  | 'blog_posts___featured_image___children___id'
+  | 'blog_posts___featured_image___children___children'
+  | 'blog_posts___featured_image___internal___content'
+  | 'blog_posts___featured_image___internal___contentDigest'
+  | 'blog_posts___featured_image___internal___description'
+  | 'blog_posts___featured_image___internal___fieldOwners'
+  | 'blog_posts___featured_image___internal___ignoreType'
+  | 'blog_posts___featured_image___internal___mediaType'
+  | 'blog_posts___featured_image___internal___owner'
+  | 'blog_posts___featured_image___internal___type'
+  | 'blog_posts___featured_image___childMdx___rawBody'
+  | 'blog_posts___featured_image___childMdx___fileAbsolutePath'
+  | 'blog_posts___featured_image___childMdx___slug'
+  | 'blog_posts___featured_image___childMdx___body'
+  | 'blog_posts___featured_image___childMdx___excerpt'
+  | 'blog_posts___featured_image___childMdx___headings'
+  | 'blog_posts___featured_image___childMdx___html'
+  | 'blog_posts___featured_image___childMdx___mdxAST'
+  | 'blog_posts___featured_image___childMdx___tableOfContents'
+  | 'blog_posts___featured_image___childMdx___timeToRead'
+  | 'blog_posts___featured_image___childMdx___id'
+  | 'blog_posts___featured_image___childMdx___children'
+  | 'blog_posts___updated_by'
+  | 'blog_posts___post_serie'
+  | 'blog_posts___serie_copy'
+  | 'blog_posts___id'
+  | 'strapiId';
+
+export type StrapiPostSerieFilterInput = {
+  id?: Maybe<StringQueryOperatorInput>;
+  parent?: Maybe<NodeFilterInput>;
+  children?: Maybe<NodeFilterListInput>;
+  internal?: Maybe<InternalFilterInput>;
+  slug?: Maybe<StringQueryOperatorInput>;
+  name?: Maybe<StringQueryOperatorInput>;
+  createdAt?: Maybe<DateQueryOperatorInput>;
+  updatedAt?: Maybe<DateQueryOperatorInput>;
+  created_by?: Maybe<StrapiPostSerieCreated_ByFilterInput>;
+  updated_by?: Maybe<StrapiPostSerieUpdated_ByFilterInput>;
+  post_tags?: Maybe<StringQueryOperatorInput>;
+  blog_posts?: Maybe<StrapiPostSerieBlog_PostsFilterListInput>;
+  strapiId?: Maybe<StringQueryOperatorInput>;
+};
+
+export type StrapiPostSerieGroupConnection = {
+  totalCount: Scalars['Int'];
+  edges: Array<StrapiPostSerieEdge>;
+  nodes: Array<StrapiPostSerie>;
+  pageInfo: PageInfo;
+  field: Scalars['String'];
+  fieldValue?: Maybe<Scalars['String']>;
+};
+
+export type StrapiPostSerieSortInput = {
+  fields?: Maybe<Array<Maybe<StrapiPostSerieFieldsEnum>>>;
+  order?: Maybe<Array<Maybe<SortOrderEnum>>>;
+};
+
+export type StrapiPostSerieUpdated_By = {
+  firstname?: Maybe<Scalars['String']>;
+  lastname?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['Date']>;
+  updatedAt?: Maybe<Scalars['Date']>;
+  id?: Maybe<Scalars['String']>;
+};
+
+
+export type StrapiPostSerieUpdated_ByCreatedAtArgs = {
+  formatString?: Maybe<Scalars['String']>;
+  fromNow?: Maybe<Scalars['Boolean']>;
+  difference?: Maybe<Scalars['String']>;
+  locale?: Maybe<Scalars['String']>;
+};
+
+
+export type StrapiPostSerieUpdated_ByUpdatedAtArgs = {
+  formatString?: Maybe<Scalars['String']>;
+  fromNow?: Maybe<Scalars['Boolean']>;
+  difference?: Maybe<Scalars['String']>;
+  locale?: Maybe<Scalars['String']>;
+};
+
+export type StrapiPostSerieUpdated_ByFilterInput = {
+  firstname?: Maybe<StringQueryOperatorInput>;
+  lastname?: Maybe<StringQueryOperatorInput>;
+  createdAt?: Maybe<DateQueryOperatorInput>;
+  updatedAt?: Maybe<DateQueryOperatorInput>;
+  id?: Maybe<StringQueryOperatorInput>;
+};
+
+export type StrapiPostsFieldsEnum = 
+  | 'id'
+  | 'parent___id'
+  | 'parent___parent___id'
+  | 'parent___parent___parent___id'
+  | 'parent___parent___parent___children'
+  | 'parent___parent___children'
+  | 'parent___parent___children___id'
+  | 'parent___parent___children___children'
+  | 'parent___parent___internal___content'
+  | 'parent___parent___internal___contentDigest'
+  | 'parent___parent___internal___description'
+  | 'parent___parent___internal___fieldOwners'
+  | 'parent___parent___internal___ignoreType'
+  | 'parent___parent___internal___mediaType'
+  | 'parent___parent___internal___owner'
+  | 'parent___parent___internal___type'
+  | 'parent___children'
+  | 'parent___children___id'
+  | 'parent___children___parent___id'
+  | 'parent___children___parent___children'
+  | 'parent___children___children'
+  | 'parent___children___children___id'
+  | 'parent___children___children___children'
+  | 'parent___children___internal___content'
+  | 'parent___children___internal___contentDigest'
+  | 'parent___children___internal___description'
+  | 'parent___children___internal___fieldOwners'
+  | 'parent___children___internal___ignoreType'
+  | 'parent___children___internal___mediaType'
+  | 'parent___children___internal___owner'
+  | 'parent___children___internal___type'
+  | 'parent___internal___content'
+  | 'parent___internal___contentDigest'
+  | 'parent___internal___description'
+  | 'parent___internal___fieldOwners'
+  | 'parent___internal___ignoreType'
+  | 'parent___internal___mediaType'
+  | 'parent___internal___owner'
+  | 'parent___internal___type'
+  | 'children'
+  | 'children___id'
+  | 'children___parent___id'
+  | 'children___parent___parent___id'
+  | 'children___parent___parent___children'
+  | 'children___parent___children'
+  | 'children___parent___children___id'
+  | 'children___parent___children___children'
+  | 'children___parent___internal___content'
+  | 'children___parent___internal___contentDigest'
+  | 'children___parent___internal___description'
+  | 'children___parent___internal___fieldOwners'
+  | 'children___parent___internal___ignoreType'
+  | 'children___parent___internal___mediaType'
+  | 'children___parent___internal___owner'
+  | 'children___parent___internal___type'
+  | 'children___children'
+  | 'children___children___id'
+  | 'children___children___parent___id'
+  | 'children___children___parent___children'
+  | 'children___children___children'
+  | 'children___children___children___id'
+  | 'children___children___children___children'
+  | 'children___children___internal___content'
+  | 'children___children___internal___contentDigest'
+  | 'children___children___internal___description'
+  | 'children___children___internal___fieldOwners'
+  | 'children___children___internal___ignoreType'
+  | 'children___children___internal___mediaType'
+  | 'children___children___internal___owner'
+  | 'children___children___internal___type'
+  | 'children___internal___content'
+  | 'children___internal___contentDigest'
+  | 'children___internal___description'
+  | 'children___internal___fieldOwners'
+  | 'children___internal___ignoreType'
+  | 'children___internal___mediaType'
+  | 'children___internal___owner'
+  | 'children___internal___type'
+  | 'internal___content'
+  | 'internal___contentDigest'
+  | 'internal___description'
+  | 'internal___fieldOwners'
+  | 'internal___ignoreType'
+  | 'internal___mediaType'
+  | 'internal___owner'
+  | 'internal___type'
+  | 'language'
+  | 'post_tags'
+  | 'post_tags___tag'
+  | 'post_tags___createdAt'
+  | 'post_tags___updatedAt'
+  | 'post_tags___created_by'
+  | 'post_tags___updated_by'
+  | 'post_tags___slug'
+  | 'post_tags___name'
+  | 'post_tags___id'
+  | 'slug'
+  | 'title'
+  | 'subtitle'
+  | 'content'
+  | 'description'
+  | 'date'
+  | 'createdAt'
+  | 'updatedAt'
+  | 'created_by___firstname'
+  | 'created_by___lastname'
+  | 'created_by___createdAt'
+  | 'created_by___updatedAt'
+  | 'created_by___id'
+  | 'featured_image___sourceInstanceName'
+  | 'featured_image___absolutePath'
+  | 'featured_image___relativePath'
+  | 'featured_image___extension'
+  | 'featured_image___size'
+  | 'featured_image___prettySize'
+  | 'featured_image___modifiedTime'
+  | 'featured_image___accessTime'
+  | 'featured_image___changeTime'
+  | 'featured_image___birthTime'
+  | 'featured_image___root'
+  | 'featured_image___dir'
+  | 'featured_image___base'
+  | 'featured_image___ext'
+  | 'featured_image___name'
+  | 'featured_image___relativeDirectory'
+  | 'featured_image___dev'
+  | 'featured_image___mode'
+  | 'featured_image___nlink'
+  | 'featured_image___uid'
+  | 'featured_image___gid'
+  | 'featured_image___rdev'
+  | 'featured_image___ino'
+  | 'featured_image___atimeMs'
+  | 'featured_image___mtimeMs'
+  | 'featured_image___ctimeMs'
+  | 'featured_image___atime'
+  | 'featured_image___mtime'
+  | 'featured_image___ctime'
+  | 'featured_image___birthtime'
+  | 'featured_image___birthtimeMs'
+  | 'featured_image___blksize'
+  | 'featured_image___blocks'
+  | 'featured_image___publicURL'
+  | 'featured_image___childImageSharp___fixed___base64'
+  | 'featured_image___childImageSharp___fixed___tracedSVG'
+  | 'featured_image___childImageSharp___fixed___aspectRatio'
+  | 'featured_image___childImageSharp___fixed___width'
+  | 'featured_image___childImageSharp___fixed___height'
+  | 'featured_image___childImageSharp___fixed___src'
+  | 'featured_image___childImageSharp___fixed___srcSet'
+  | 'featured_image___childImageSharp___fixed___srcWebp'
+  | 'featured_image___childImageSharp___fixed___srcSetWebp'
+  | 'featured_image___childImageSharp___fixed___originalName'
+  | 'featured_image___childImageSharp___resolutions___base64'
+  | 'featured_image___childImageSharp___resolutions___tracedSVG'
+  | 'featured_image___childImageSharp___resolutions___aspectRatio'
+  | 'featured_image___childImageSharp___resolutions___width'
+  | 'featured_image___childImageSharp___resolutions___height'
+  | 'featured_image___childImageSharp___resolutions___src'
+  | 'featured_image___childImageSharp___resolutions___srcSet'
+  | 'featured_image___childImageSharp___resolutions___srcWebp'
+  | 'featured_image___childImageSharp___resolutions___srcSetWebp'
+  | 'featured_image___childImageSharp___resolutions___originalName'
+  | 'featured_image___childImageSharp___fluid___base64'
+  | 'featured_image___childImageSharp___fluid___tracedSVG'
+  | 'featured_image___childImageSharp___fluid___aspectRatio'
+  | 'featured_image___childImageSharp___fluid___src'
+  | 'featured_image___childImageSharp___fluid___srcSet'
+  | 'featured_image___childImageSharp___fluid___srcWebp'
+  | 'featured_image___childImageSharp___fluid___srcSetWebp'
+  | 'featured_image___childImageSharp___fluid___sizes'
+  | 'featured_image___childImageSharp___fluid___originalImg'
+  | 'featured_image___childImageSharp___fluid___originalName'
+  | 'featured_image___childImageSharp___fluid___presentationWidth'
+  | 'featured_image___childImageSharp___fluid___presentationHeight'
+  | 'featured_image___childImageSharp___sizes___base64'
+  | 'featured_image___childImageSharp___sizes___tracedSVG'
+  | 'featured_image___childImageSharp___sizes___aspectRatio'
+  | 'featured_image___childImageSharp___sizes___src'
+  | 'featured_image___childImageSharp___sizes___srcSet'
+  | 'featured_image___childImageSharp___sizes___srcWebp'
+  | 'featured_image___childImageSharp___sizes___srcSetWebp'
+  | 'featured_image___childImageSharp___sizes___sizes'
+  | 'featured_image___childImageSharp___sizes___originalImg'
+  | 'featured_image___childImageSharp___sizes___originalName'
+  | 'featured_image___childImageSharp___sizes___presentationWidth'
+  | 'featured_image___childImageSharp___sizes___presentationHeight'
+  | 'featured_image___childImageSharp___original___width'
+  | 'featured_image___childImageSharp___original___height'
+  | 'featured_image___childImageSharp___original___src'
+  | 'featured_image___childImageSharp___resize___src'
+  | 'featured_image___childImageSharp___resize___tracedSVG'
+  | 'featured_image___childImageSharp___resize___width'
+  | 'featured_image___childImageSharp___resize___height'
+  | 'featured_image___childImageSharp___resize___aspectRatio'
+  | 'featured_image___childImageSharp___resize___originalName'
+  | 'featured_image___childImageSharp___id'
+  | 'featured_image___childImageSharp___parent___id'
+  | 'featured_image___childImageSharp___parent___children'
+  | 'featured_image___childImageSharp___children'
+  | 'featured_image___childImageSharp___children___id'
+  | 'featured_image___childImageSharp___children___children'
+  | 'featured_image___childImageSharp___internal___content'
+  | 'featured_image___childImageSharp___internal___contentDigest'
+  | 'featured_image___childImageSharp___internal___description'
+  | 'featured_image___childImageSharp___internal___fieldOwners'
+  | 'featured_image___childImageSharp___internal___ignoreType'
+  | 'featured_image___childImageSharp___internal___mediaType'
+  | 'featured_image___childImageSharp___internal___owner'
+  | 'featured_image___childImageSharp___internal___type'
+  | 'featured_image___id'
+  | 'featured_image___parent___id'
+  | 'featured_image___parent___parent___id'
+  | 'featured_image___parent___parent___children'
+  | 'featured_image___parent___children'
+  | 'featured_image___parent___children___id'
+  | 'featured_image___parent___children___children'
+  | 'featured_image___parent___internal___content'
+  | 'featured_image___parent___internal___contentDigest'
+  | 'featured_image___parent___internal___description'
+  | 'featured_image___parent___internal___fieldOwners'
+  | 'featured_image___parent___internal___ignoreType'
+  | 'featured_image___parent___internal___mediaType'
+  | 'featured_image___parent___internal___owner'
+  | 'featured_image___parent___internal___type'
+  | 'featured_image___children'
+  | 'featured_image___children___id'
+  | 'featured_image___children___parent___id'
+  | 'featured_image___children___parent___children'
+  | 'featured_image___children___children'
+  | 'featured_image___children___children___id'
+  | 'featured_image___children___children___children'
+  | 'featured_image___children___internal___content'
+  | 'featured_image___children___internal___contentDigest'
+  | 'featured_image___children___internal___description'
+  | 'featured_image___children___internal___fieldOwners'
+  | 'featured_image___children___internal___ignoreType'
+  | 'featured_image___children___internal___mediaType'
+  | 'featured_image___children___internal___owner'
+  | 'featured_image___children___internal___type'
+  | 'featured_image___internal___content'
+  | 'featured_image___internal___contentDigest'
+  | 'featured_image___internal___description'
+  | 'featured_image___internal___fieldOwners'
+  | 'featured_image___internal___ignoreType'
+  | 'featured_image___internal___mediaType'
+  | 'featured_image___internal___owner'
+  | 'featured_image___internal___type'
+  | 'featured_image___childMdx___rawBody'
+  | 'featured_image___childMdx___fileAbsolutePath'
+  | 'featured_image___childMdx___frontmatter___title'
+  | 'featured_image___childMdx___frontmatter___date'
+  | 'featured_image___childMdx___frontmatter___description'
+  | 'featured_image___childMdx___frontmatter___tags'
+  | 'featured_image___childMdx___frontmatter___subtitle'
+  | 'featured_image___childMdx___frontmatter___image_caption'
+  | 'featured_image___childMdx___slug'
+  | 'featured_image___childMdx___body'
+  | 'featured_image___childMdx___excerpt'
+  | 'featured_image___childMdx___headings'
+  | 'featured_image___childMdx___headings___value'
+  | 'featured_image___childMdx___headings___depth'
+  | 'featured_image___childMdx___html'
+  | 'featured_image___childMdx___mdxAST'
+  | 'featured_image___childMdx___tableOfContents'
+  | 'featured_image___childMdx___timeToRead'
+  | 'featured_image___childMdx___wordCount___paragraphs'
+  | 'featured_image___childMdx___wordCount___sentences'
+  | 'featured_image___childMdx___wordCount___words'
+  | 'featured_image___childMdx___id'
+  | 'featured_image___childMdx___parent___id'
+  | 'featured_image___childMdx___parent___children'
+  | 'featured_image___childMdx___children'
+  | 'featured_image___childMdx___children___id'
+  | 'featured_image___childMdx___children___children'
+  | 'featured_image___childMdx___internal___content'
+  | 'featured_image___childMdx___internal___contentDigest'
+  | 'featured_image___childMdx___internal___description'
+  | 'featured_image___childMdx___internal___fieldOwners'
+  | 'featured_image___childMdx___internal___ignoreType'
+  | 'featured_image___childMdx___internal___mediaType'
+  | 'featured_image___childMdx___internal___owner'
+  | 'featured_image___childMdx___internal___type'
+  | 'updated_by___firstname'
+  | 'updated_by___lastname'
+  | 'updated_by___createdAt'
+  | 'updated_by___updatedAt'
+  | 'updated_by___id'
+  | 'strapiId'
+  | 'post_serie___slug'
+  | 'post_serie___name'
+  | 'post_serie___createdAt'
+  | 'post_serie___updatedAt'
+  | 'post_serie___created_by'
+  | 'post_serie___updated_by'
+  | 'post_serie___post_tags'
+  | 'post_serie___id'
+  | 'serie_copy'
+  | 'translation___language'
+  | 'translation___post_tags'
+  | 'translation___slug'
+  | 'translation___content'
+  | 'translation___date'
+  | 'translation___title'
+  | 'translation___description'
+  | 'translation___createdAt'
+  | 'translation___updatedAt'
+  | 'translation___created_by'
+  | 'translation___featured_image___sourceInstanceName'
+  | 'translation___featured_image___absolutePath'
+  | 'translation___featured_image___relativePath'
+  | 'translation___featured_image___extension'
+  | 'translation___featured_image___size'
+  | 'translation___featured_image___prettySize'
+  | 'translation___featured_image___modifiedTime'
+  | 'translation___featured_image___accessTime'
+  | 'translation___featured_image___changeTime'
+  | 'translation___featured_image___birthTime'
+  | 'translation___featured_image___root'
+  | 'translation___featured_image___dir'
+  | 'translation___featured_image___base'
+  | 'translation___featured_image___ext'
+  | 'translation___featured_image___name'
+  | 'translation___featured_image___relativeDirectory'
+  | 'translation___featured_image___dev'
+  | 'translation___featured_image___mode'
+  | 'translation___featured_image___nlink'
+  | 'translation___featured_image___uid'
+  | 'translation___featured_image___gid'
+  | 'translation___featured_image___rdev'
+  | 'translation___featured_image___ino'
+  | 'translation___featured_image___atimeMs'
+  | 'translation___featured_image___mtimeMs'
+  | 'translation___featured_image___ctimeMs'
+  | 'translation___featured_image___atime'
+  | 'translation___featured_image___mtime'
+  | 'translation___featured_image___ctime'
+  | 'translation___featured_image___birthtime'
+  | 'translation___featured_image___birthtimeMs'
+  | 'translation___featured_image___blksize'
+  | 'translation___featured_image___blocks'
+  | 'translation___featured_image___publicURL'
+  | 'translation___featured_image___childImageSharp___id'
+  | 'translation___featured_image___childImageSharp___children'
+  | 'translation___featured_image___id'
+  | 'translation___featured_image___parent___id'
+  | 'translation___featured_image___parent___children'
+  | 'translation___featured_image___children'
+  | 'translation___featured_image___children___id'
+  | 'translation___featured_image___children___children'
+  | 'translation___featured_image___internal___content'
+  | 'translation___featured_image___internal___contentDigest'
+  | 'translation___featured_image___internal___description'
+  | 'translation___featured_image___internal___fieldOwners'
+  | 'translation___featured_image___internal___ignoreType'
+  | 'translation___featured_image___internal___mediaType'
+  | 'translation___featured_image___internal___owner'
+  | 'translation___featured_image___internal___type'
+  | 'translation___featured_image___childMdx___rawBody'
+  | 'translation___featured_image___childMdx___fileAbsolutePath'
+  | 'translation___featured_image___childMdx___slug'
+  | 'translation___featured_image___childMdx___body'
+  | 'translation___featured_image___childMdx___excerpt'
+  | 'translation___featured_image___childMdx___headings'
+  | 'translation___featured_image___childMdx___html'
+  | 'translation___featured_image___childMdx___mdxAST'
+  | 'translation___featured_image___childMdx___tableOfContents'
+  | 'translation___featured_image___childMdx___timeToRead'
+  | 'translation___featured_image___childMdx___id'
+  | 'translation___featured_image___childMdx___children'
+  | 'translation___translation'
+  | 'translation___updated_by'
+  | 'translation___id'
+  | 'childStrapiPostContent___id'
+  | 'childStrapiPostContent___parent___id'
+  | 'childStrapiPostContent___parent___parent___id'
+  | 'childStrapiPostContent___parent___parent___children'
+  | 'childStrapiPostContent___parent___children'
+  | 'childStrapiPostContent___parent___children___id'
+  | 'childStrapiPostContent___parent___children___children'
+  | 'childStrapiPostContent___parent___internal___content'
+  | 'childStrapiPostContent___parent___internal___contentDigest'
+  | 'childStrapiPostContent___parent___internal___description'
+  | 'childStrapiPostContent___parent___internal___fieldOwners'
+  | 'childStrapiPostContent___parent___internal___ignoreType'
+  | 'childStrapiPostContent___parent___internal___mediaType'
+  | 'childStrapiPostContent___parent___internal___owner'
+  | 'childStrapiPostContent___parent___internal___type'
+  | 'childStrapiPostContent___children'
+  | 'childStrapiPostContent___children___id'
+  | 'childStrapiPostContent___children___parent___id'
+  | 'childStrapiPostContent___children___parent___children'
+  | 'childStrapiPostContent___children___children'
+  | 'childStrapiPostContent___children___children___id'
+  | 'childStrapiPostContent___children___children___children'
+  | 'childStrapiPostContent___children___internal___content'
+  | 'childStrapiPostContent___children___internal___contentDigest'
+  | 'childStrapiPostContent___children___internal___description'
+  | 'childStrapiPostContent___children___internal___fieldOwners'
+  | 'childStrapiPostContent___children___internal___ignoreType'
+  | 'childStrapiPostContent___children___internal___mediaType'
+  | 'childStrapiPostContent___children___internal___owner'
+  | 'childStrapiPostContent___children___internal___type'
+  | 'childStrapiPostContent___internal___content'
+  | 'childStrapiPostContent___internal___contentDigest'
+  | 'childStrapiPostContent___internal___description'
+  | 'childStrapiPostContent___internal___fieldOwners'
+  | 'childStrapiPostContent___internal___ignoreType'
+  | 'childStrapiPostContent___internal___mediaType'
+  | 'childStrapiPostContent___internal___owner'
+  | 'childStrapiPostContent___internal___type'
+  | 'childStrapiPostContent___childMdx___rawBody'
+  | 'childStrapiPostContent___childMdx___fileAbsolutePath'
+  | 'childStrapiPostContent___childMdx___frontmatter___title'
+  | 'childStrapiPostContent___childMdx___frontmatter___date'
+  | 'childStrapiPostContent___childMdx___frontmatter___description'
+  | 'childStrapiPostContent___childMdx___frontmatter___tags'
+  | 'childStrapiPostContent___childMdx___frontmatter___subtitle'
+  | 'childStrapiPostContent___childMdx___frontmatter___image_caption'
+  | 'childStrapiPostContent___childMdx___slug'
+  | 'childStrapiPostContent___childMdx___body'
+  | 'childStrapiPostContent___childMdx___excerpt'
+  | 'childStrapiPostContent___childMdx___headings'
+  | 'childStrapiPostContent___childMdx___headings___value'
+  | 'childStrapiPostContent___childMdx___headings___depth'
+  | 'childStrapiPostContent___childMdx___html'
+  | 'childStrapiPostContent___childMdx___mdxAST'
+  | 'childStrapiPostContent___childMdx___tableOfContents'
+  | 'childStrapiPostContent___childMdx___timeToRead'
+  | 'childStrapiPostContent___childMdx___wordCount___paragraphs'
+  | 'childStrapiPostContent___childMdx___wordCount___sentences'
+  | 'childStrapiPostContent___childMdx___wordCount___words'
+  | 'childStrapiPostContent___childMdx___id'
+  | 'childStrapiPostContent___childMdx___parent___id'
+  | 'childStrapiPostContent___childMdx___parent___children'
+  | 'childStrapiPostContent___childMdx___children'
+  | 'childStrapiPostContent___childMdx___children___id'
+  | 'childStrapiPostContent___childMdx___children___children'
+  | 'childStrapiPostContent___childMdx___internal___content'
+  | 'childStrapiPostContent___childMdx___internal___contentDigest'
+  | 'childStrapiPostContent___childMdx___internal___description'
+  | 'childStrapiPostContent___childMdx___internal___fieldOwners'
+  | 'childStrapiPostContent___childMdx___internal___ignoreType'
+  | 'childStrapiPostContent___childMdx___internal___mediaType'
+  | 'childStrapiPostContent___childMdx___internal___owner'
+  | 'childStrapiPostContent___childMdx___internal___type';
+
+export type StrapiPostsFilterInput = {
+  id?: Maybe<StringQueryOperatorInput>;
+  parent?: Maybe<NodeFilterInput>;
+  children?: Maybe<NodeFilterListInput>;
+  internal?: Maybe<InternalFilterInput>;
+  language?: Maybe<StringQueryOperatorInput>;
+  post_tags?: Maybe<StrapiPostsPost_TagsFilterListInput>;
+  slug?: Maybe<StringQueryOperatorInput>;
+  title?: Maybe<StringQueryOperatorInput>;
+  subtitle?: Maybe<StringQueryOperatorInput>;
+  content?: Maybe<StringQueryOperatorInput>;
+  description?: Maybe<StringQueryOperatorInput>;
+  date?: Maybe<DateQueryOperatorInput>;
+  createdAt?: Maybe<DateQueryOperatorInput>;
+  updatedAt?: Maybe<DateQueryOperatorInput>;
+  created_by?: Maybe<StrapiPostsCreated_ByFilterInput>;
+  featured_image?: Maybe<FileFilterInput>;
+  updated_by?: Maybe<StrapiPostsUpdated_ByFilterInput>;
+  strapiId?: Maybe<StringQueryOperatorInput>;
+  post_serie?: Maybe<StrapiPostsPost_SerieFilterInput>;
+  serie_copy?: Maybe<StringQueryOperatorInput>;
+  translation?: Maybe<StrapiPostsTranslationFilterInput>;
+  childStrapiPostContent?: Maybe<StrapiPostContentFilterInput>;
+};
+
+export type StrapiPostsGroupConnection = {
+  totalCount: Scalars['Int'];
+  edges: Array<StrapiPostsEdge>;
+  nodes: Array<StrapiPosts>;
+  pageInfo: PageInfo;
+  field: Scalars['String'];
+  fieldValue?: Maybe<Scalars['String']>;
+};
+
+export type StrapiPostsPost_Serie = {
+  slug?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['Date']>;
+  updatedAt?: Maybe<Scalars['Date']>;
+  created_by?: Maybe<Scalars['String']>;
+  updated_by?: Maybe<Scalars['String']>;
+  post_tags?: Maybe<Array<Maybe<Scalars['String']>>>;
+  id?: Maybe<Scalars['String']>;
+};
+
+
+export type StrapiPostsPost_SerieCreatedAtArgs = {
+  formatString?: Maybe<Scalars['String']>;
+  fromNow?: Maybe<Scalars['Boolean']>;
+  difference?: Maybe<Scalars['String']>;
+  locale?: Maybe<Scalars['String']>;
+};
+
+
+export type StrapiPostsPost_SerieUpdatedAtArgs = {
+  formatString?: Maybe<Scalars['String']>;
+  fromNow?: Maybe<Scalars['Boolean']>;
+  difference?: Maybe<Scalars['String']>;
+  locale?: Maybe<Scalars['String']>;
+};
+
+export type StrapiPostsPost_SerieFilterInput = {
+  slug?: Maybe<StringQueryOperatorInput>;
+  name?: Maybe<StringQueryOperatorInput>;
+  createdAt?: Maybe<DateQueryOperatorInput>;
+  updatedAt?: Maybe<DateQueryOperatorInput>;
+  created_by?: Maybe<StringQueryOperatorInput>;
+  updated_by?: Maybe<StringQueryOperatorInput>;
+  post_tags?: Maybe<StringQueryOperatorInput>;
+  id?: Maybe<StringQueryOperatorInput>;
+};
+
+export type StrapiPostsPost_Tags = {
+  tag?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['Date']>;
+  updatedAt?: Maybe<Scalars['Date']>;
+  created_by?: Maybe<Scalars['String']>;
+  updated_by?: Maybe<Scalars['String']>;
+  slug?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['String']>;
+};
+
+
+export type StrapiPostsPost_TagsCreatedAtArgs = {
+  formatString?: Maybe<Scalars['String']>;
+  fromNow?: Maybe<Scalars['Boolean']>;
+  difference?: Maybe<Scalars['String']>;
+  locale?: Maybe<Scalars['String']>;
+};
+
+
+export type StrapiPostsPost_TagsUpdatedAtArgs = {
+  formatString?: Maybe<Scalars['String']>;
+  fromNow?: Maybe<Scalars['Boolean']>;
+  difference?: Maybe<Scalars['String']>;
+  locale?: Maybe<Scalars['String']>;
+};
+
+export type StrapiPostsPost_TagsFilterInput = {
+  tag?: Maybe<StringQueryOperatorInput>;
+  createdAt?: Maybe<DateQueryOperatorInput>;
+  updatedAt?: Maybe<DateQueryOperatorInput>;
+  created_by?: Maybe<StringQueryOperatorInput>;
+  updated_by?: Maybe<StringQueryOperatorInput>;
+  slug?: Maybe<StringQueryOperatorInput>;
+  name?: Maybe<StringQueryOperatorInput>;
+  id?: Maybe<StringQueryOperatorInput>;
+};
+
+export type StrapiPostsPost_TagsFilterListInput = {
+  elemMatch?: Maybe<StrapiPostsPost_TagsFilterInput>;
+};
+
+export type StrapiPostsSortInput = {
+  fields?: Maybe<Array<Maybe<StrapiPostsFieldsEnum>>>;
+  order?: Maybe<Array<Maybe<SortOrderEnum>>>;
+};
+
+export type StrapiPostsTranslation = {
+  language?: Maybe<Scalars['String']>;
+  post_tags?: Maybe<Array<Maybe<Scalars['String']>>>;
+  slug?: Maybe<Scalars['String']>;
+  content?: Maybe<Scalars['String']>;
+  date?: Maybe<Scalars['Date']>;
+  title?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['Date']>;
+  updatedAt?: Maybe<Scalars['Date']>;
+  created_by?: Maybe<Scalars['String']>;
+  featured_image?: Maybe<File>;
+  translation?: Maybe<Scalars['String']>;
+  updated_by?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['String']>;
+};
+
+
+export type StrapiPostsTranslationDateArgs = {
+  formatString?: Maybe<Scalars['String']>;
+  fromNow?: Maybe<Scalars['Boolean']>;
+  difference?: Maybe<Scalars['String']>;
+  locale?: Maybe<Scalars['String']>;
+};
+
+
+export type StrapiPostsTranslationCreatedAtArgs = {
+  formatString?: Maybe<Scalars['String']>;
+  fromNow?: Maybe<Scalars['Boolean']>;
+  difference?: Maybe<Scalars['String']>;
+  locale?: Maybe<Scalars['String']>;
+};
+
+
+export type StrapiPostsTranslationUpdatedAtArgs = {
+  formatString?: Maybe<Scalars['String']>;
+  fromNow?: Maybe<Scalars['Boolean']>;
+  difference?: Maybe<Scalars['String']>;
+  locale?: Maybe<Scalars['String']>;
+};
+
+export type StrapiPostsTranslationFilterInput = {
+  language?: Maybe<StringQueryOperatorInput>;
+  post_tags?: Maybe<StringQueryOperatorInput>;
+  slug?: Maybe<StringQueryOperatorInput>;
+  content?: Maybe<StringQueryOperatorInput>;
+  date?: Maybe<DateQueryOperatorInput>;
+  title?: Maybe<StringQueryOperatorInput>;
+  description?: Maybe<StringQueryOperatorInput>;
+  createdAt?: Maybe<DateQueryOperatorInput>;
+  updatedAt?: Maybe<DateQueryOperatorInput>;
+  created_by?: Maybe<StringQueryOperatorInput>;
+  featured_image?: Maybe<FileFilterInput>;
+  translation?: Maybe<StringQueryOperatorInput>;
+  updated_by?: Maybe<StringQueryOperatorInput>;
+  id?: Maybe<StringQueryOperatorInput>;
+};
+
+export type StrapiPostsUpdated_By = {
+  firstname?: Maybe<Scalars['String']>;
+  lastname?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['Date']>;
+  updatedAt?: Maybe<Scalars['Date']>;
+  id?: Maybe<Scalars['String']>;
+};
+
+
+export type StrapiPostsUpdated_ByCreatedAtArgs = {
+  formatString?: Maybe<Scalars['String']>;
+  fromNow?: Maybe<Scalars['Boolean']>;
+  difference?: Maybe<Scalars['String']>;
+  locale?: Maybe<Scalars['String']>;
+};
+
+
+export type StrapiPostsUpdated_ByUpdatedAtArgs = {
+  formatString?: Maybe<Scalars['String']>;
+  fromNow?: Maybe<Scalars['Boolean']>;
+  difference?: Maybe<Scalars['String']>;
+  locale?: Maybe<Scalars['String']>;
+};
+
+export type StrapiPostsUpdated_ByFilterInput = {
+  firstname?: Maybe<StringQueryOperatorInput>;
+  lastname?: Maybe<StringQueryOperatorInput>;
+  createdAt?: Maybe<DateQueryOperatorInput>;
+  updatedAt?: Maybe<DateQueryOperatorInput>;
+  id?: Maybe<StringQueryOperatorInput>;
+};
+
+export type StrapiPostTags = Node & {
+  id: Scalars['ID'];
+  parent?: Maybe<Node>;
+  children: Array<Node>;
+  internal: Internal;
+  tag?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['Date']>;
+  updatedAt?: Maybe<Scalars['Date']>;
+  created_by?: Maybe<StrapiPostTagsCreated_By>;
+  updated_by?: Maybe<StrapiPostTagsUpdated_By>;
+  slug?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  blog_posts?: Maybe<Array<Maybe<StrapiPostTagsBlog_Posts>>>;
+  strapiId?: Maybe<Scalars['String']>;
+};
+
+
+export type StrapiPostTagsCreatedAtArgs = {
+  formatString?: Maybe<Scalars['String']>;
+  fromNow?: Maybe<Scalars['Boolean']>;
+  difference?: Maybe<Scalars['String']>;
+  locale?: Maybe<Scalars['String']>;
+};
+
+
+export type StrapiPostTagsUpdatedAtArgs = {
+  formatString?: Maybe<Scalars['String']>;
+  fromNow?: Maybe<Scalars['Boolean']>;
+  difference?: Maybe<Scalars['String']>;
+  locale?: Maybe<Scalars['String']>;
+};
+
+export type StrapiPostTagsBlog_Posts = {
+  language?: Maybe<Scalars['String']>;
+  post_tags?: Maybe<Array<Maybe<Scalars['String']>>>;
+  slug?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  subtitle?: Maybe<Scalars['String']>;
+  content?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  date?: Maybe<Scalars['Date']>;
+  createdAt?: Maybe<Scalars['Date']>;
+  updatedAt?: Maybe<Scalars['Date']>;
+  created_by?: Maybe<Scalars['String']>;
+  featured_image?: Maybe<File>;
+  updated_by?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['String']>;
+  translation?: Maybe<Scalars['String']>;
+  post_serie?: Maybe<Scalars['String']>;
+  serie_copy?: Maybe<Scalars['String']>;
+};
+
+
+export type StrapiPostTagsBlog_PostsDateArgs = {
+  formatString?: Maybe<Scalars['String']>;
+  fromNow?: Maybe<Scalars['Boolean']>;
+  difference?: Maybe<Scalars['String']>;
+  locale?: Maybe<Scalars['String']>;
+};
+
+
+export type StrapiPostTagsBlog_PostsCreatedAtArgs = {
+  formatString?: Maybe<Scalars['String']>;
+  fromNow?: Maybe<Scalars['Boolean']>;
+  difference?: Maybe<Scalars['String']>;
+  locale?: Maybe<Scalars['String']>;
+};
+
+
+export type StrapiPostTagsBlog_PostsUpdatedAtArgs = {
+  formatString?: Maybe<Scalars['String']>;
+  fromNow?: Maybe<Scalars['Boolean']>;
+  difference?: Maybe<Scalars['String']>;
+  locale?: Maybe<Scalars['String']>;
+};
+
+export type StrapiPostTagsBlog_PostsFilterInput = {
+  language?: Maybe<StringQueryOperatorInput>;
+  post_tags?: Maybe<StringQueryOperatorInput>;
+  slug?: Maybe<StringQueryOperatorInput>;
+  title?: Maybe<StringQueryOperatorInput>;
+  subtitle?: Maybe<StringQueryOperatorInput>;
+  content?: Maybe<StringQueryOperatorInput>;
+  description?: Maybe<StringQueryOperatorInput>;
+  date?: Maybe<DateQueryOperatorInput>;
+  createdAt?: Maybe<DateQueryOperatorInput>;
+  updatedAt?: Maybe<DateQueryOperatorInput>;
+  created_by?: Maybe<StringQueryOperatorInput>;
+  featured_image?: Maybe<FileFilterInput>;
+  updated_by?: Maybe<StringQueryOperatorInput>;
+  id?: Maybe<StringQueryOperatorInput>;
+  translation?: Maybe<StringQueryOperatorInput>;
+  post_serie?: Maybe<StringQueryOperatorInput>;
+  serie_copy?: Maybe<StringQueryOperatorInput>;
+};
+
+export type StrapiPostTagsBlog_PostsFilterListInput = {
+  elemMatch?: Maybe<StrapiPostTagsBlog_PostsFilterInput>;
+};
+
+export type StrapiPostTagsConnection = {
+  totalCount: Scalars['Int'];
+  edges: Array<StrapiPostTagsEdge>;
+  nodes: Array<StrapiPostTags>;
+  pageInfo: PageInfo;
+  distinct: Array<Scalars['String']>;
+  group: Array<StrapiPostTagsGroupConnection>;
+};
+
+
+export type StrapiPostTagsConnectionDistinctArgs = {
+  field: StrapiPostTagsFieldsEnum;
+};
+
+
+export type StrapiPostTagsConnectionGroupArgs = {
+  skip?: Maybe<Scalars['Int']>;
+  limit?: Maybe<Scalars['Int']>;
+  field: StrapiPostTagsFieldsEnum;
+};
+
+export type StrapiPostTagsCreated_By = {
+  firstname?: Maybe<Scalars['String']>;
+  lastname?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['Date']>;
+  updatedAt?: Maybe<Scalars['Date']>;
+  id?: Maybe<Scalars['String']>;
+};
+
+
+export type StrapiPostTagsCreated_ByCreatedAtArgs = {
+  formatString?: Maybe<Scalars['String']>;
+  fromNow?: Maybe<Scalars['Boolean']>;
+  difference?: Maybe<Scalars['String']>;
+  locale?: Maybe<Scalars['String']>;
+};
+
+
+export type StrapiPostTagsCreated_ByUpdatedAtArgs = {
+  formatString?: Maybe<Scalars['String']>;
+  fromNow?: Maybe<Scalars['Boolean']>;
+  difference?: Maybe<Scalars['String']>;
+  locale?: Maybe<Scalars['String']>;
+};
+
+export type StrapiPostTagsCreated_ByFilterInput = {
+  firstname?: Maybe<StringQueryOperatorInput>;
+  lastname?: Maybe<StringQueryOperatorInput>;
+  createdAt?: Maybe<DateQueryOperatorInput>;
+  updatedAt?: Maybe<DateQueryOperatorInput>;
+  id?: Maybe<StringQueryOperatorInput>;
+};
+
+export type StrapiPostTagsEdge = {
+  next?: Maybe<StrapiPostTags>;
+  node: StrapiPostTags;
+  previous?: Maybe<StrapiPostTags>;
+};
+
+export type StrapiPostTagsFieldsEnum = 
+  | 'id'
+  | 'parent___id'
+  | 'parent___parent___id'
+  | 'parent___parent___parent___id'
+  | 'parent___parent___parent___children'
+  | 'parent___parent___children'
+  | 'parent___parent___children___id'
+  | 'parent___parent___children___children'
+  | 'parent___parent___internal___content'
+  | 'parent___parent___internal___contentDigest'
+  | 'parent___parent___internal___description'
+  | 'parent___parent___internal___fieldOwners'
+  | 'parent___parent___internal___ignoreType'
+  | 'parent___parent___internal___mediaType'
+  | 'parent___parent___internal___owner'
+  | 'parent___parent___internal___type'
+  | 'parent___children'
+  | 'parent___children___id'
+  | 'parent___children___parent___id'
+  | 'parent___children___parent___children'
+  | 'parent___children___children'
+  | 'parent___children___children___id'
+  | 'parent___children___children___children'
+  | 'parent___children___internal___content'
+  | 'parent___children___internal___contentDigest'
+  | 'parent___children___internal___description'
+  | 'parent___children___internal___fieldOwners'
+  | 'parent___children___internal___ignoreType'
+  | 'parent___children___internal___mediaType'
+  | 'parent___children___internal___owner'
+  | 'parent___children___internal___type'
+  | 'parent___internal___content'
+  | 'parent___internal___contentDigest'
+  | 'parent___internal___description'
+  | 'parent___internal___fieldOwners'
+  | 'parent___internal___ignoreType'
+  | 'parent___internal___mediaType'
+  | 'parent___internal___owner'
+  | 'parent___internal___type'
+  | 'children'
+  | 'children___id'
+  | 'children___parent___id'
+  | 'children___parent___parent___id'
+  | 'children___parent___parent___children'
+  | 'children___parent___children'
+  | 'children___parent___children___id'
+  | 'children___parent___children___children'
+  | 'children___parent___internal___content'
+  | 'children___parent___internal___contentDigest'
+  | 'children___parent___internal___description'
+  | 'children___parent___internal___fieldOwners'
+  | 'children___parent___internal___ignoreType'
+  | 'children___parent___internal___mediaType'
+  | 'children___parent___internal___owner'
+  | 'children___parent___internal___type'
+  | 'children___children'
+  | 'children___children___id'
+  | 'children___children___parent___id'
+  | 'children___children___parent___children'
+  | 'children___children___children'
+  | 'children___children___children___id'
+  | 'children___children___children___children'
+  | 'children___children___internal___content'
+  | 'children___children___internal___contentDigest'
+  | 'children___children___internal___description'
+  | 'children___children___internal___fieldOwners'
+  | 'children___children___internal___ignoreType'
+  | 'children___children___internal___mediaType'
+  | 'children___children___internal___owner'
+  | 'children___children___internal___type'
+  | 'children___internal___content'
+  | 'children___internal___contentDigest'
+  | 'children___internal___description'
+  | 'children___internal___fieldOwners'
+  | 'children___internal___ignoreType'
+  | 'children___internal___mediaType'
+  | 'children___internal___owner'
+  | 'children___internal___type'
+  | 'internal___content'
+  | 'internal___contentDigest'
+  | 'internal___description'
+  | 'internal___fieldOwners'
+  | 'internal___ignoreType'
+  | 'internal___mediaType'
+  | 'internal___owner'
+  | 'internal___type'
+  | 'tag'
+  | 'createdAt'
+  | 'updatedAt'
+  | 'created_by___firstname'
+  | 'created_by___lastname'
+  | 'created_by___createdAt'
+  | 'created_by___updatedAt'
+  | 'created_by___id'
+  | 'updated_by___firstname'
+  | 'updated_by___lastname'
+  | 'updated_by___createdAt'
+  | 'updated_by___updatedAt'
+  | 'updated_by___id'
+  | 'slug'
+  | 'name'
+  | 'blog_posts'
+  | 'blog_posts___language'
+  | 'blog_posts___post_tags'
+  | 'blog_posts___slug'
+  | 'blog_posts___title'
+  | 'blog_posts___subtitle'
+  | 'blog_posts___content'
+  | 'blog_posts___description'
+  | 'blog_posts___date'
+  | 'blog_posts___createdAt'
+  | 'blog_posts___updatedAt'
+  | 'blog_posts___created_by'
+  | 'blog_posts___featured_image___sourceInstanceName'
+  | 'blog_posts___featured_image___absolutePath'
+  | 'blog_posts___featured_image___relativePath'
+  | 'blog_posts___featured_image___extension'
+  | 'blog_posts___featured_image___size'
+  | 'blog_posts___featured_image___prettySize'
+  | 'blog_posts___featured_image___modifiedTime'
+  | 'blog_posts___featured_image___accessTime'
+  | 'blog_posts___featured_image___changeTime'
+  | 'blog_posts___featured_image___birthTime'
+  | 'blog_posts___featured_image___root'
+  | 'blog_posts___featured_image___dir'
+  | 'blog_posts___featured_image___base'
+  | 'blog_posts___featured_image___ext'
+  | 'blog_posts___featured_image___name'
+  | 'blog_posts___featured_image___relativeDirectory'
+  | 'blog_posts___featured_image___dev'
+  | 'blog_posts___featured_image___mode'
+  | 'blog_posts___featured_image___nlink'
+  | 'blog_posts___featured_image___uid'
+  | 'blog_posts___featured_image___gid'
+  | 'blog_posts___featured_image___rdev'
+  | 'blog_posts___featured_image___ino'
+  | 'blog_posts___featured_image___atimeMs'
+  | 'blog_posts___featured_image___mtimeMs'
+  | 'blog_posts___featured_image___ctimeMs'
+  | 'blog_posts___featured_image___atime'
+  | 'blog_posts___featured_image___mtime'
+  | 'blog_posts___featured_image___ctime'
+  | 'blog_posts___featured_image___birthtime'
+  | 'blog_posts___featured_image___birthtimeMs'
+  | 'blog_posts___featured_image___blksize'
+  | 'blog_posts___featured_image___blocks'
+  | 'blog_posts___featured_image___publicURL'
+  | 'blog_posts___featured_image___childImageSharp___id'
+  | 'blog_posts___featured_image___childImageSharp___children'
+  | 'blog_posts___featured_image___id'
+  | 'blog_posts___featured_image___parent___id'
+  | 'blog_posts___featured_image___parent___children'
+  | 'blog_posts___featured_image___children'
+  | 'blog_posts___featured_image___children___id'
+  | 'blog_posts___featured_image___children___children'
+  | 'blog_posts___featured_image___internal___content'
+  | 'blog_posts___featured_image___internal___contentDigest'
+  | 'blog_posts___featured_image___internal___description'
+  | 'blog_posts___featured_image___internal___fieldOwners'
+  | 'blog_posts___featured_image___internal___ignoreType'
+  | 'blog_posts___featured_image___internal___mediaType'
+  | 'blog_posts___featured_image___internal___owner'
+  | 'blog_posts___featured_image___internal___type'
+  | 'blog_posts___featured_image___childMdx___rawBody'
+  | 'blog_posts___featured_image___childMdx___fileAbsolutePath'
+  | 'blog_posts___featured_image___childMdx___slug'
+  | 'blog_posts___featured_image___childMdx___body'
+  | 'blog_posts___featured_image___childMdx___excerpt'
+  | 'blog_posts___featured_image___childMdx___headings'
+  | 'blog_posts___featured_image___childMdx___html'
+  | 'blog_posts___featured_image___childMdx___mdxAST'
+  | 'blog_posts___featured_image___childMdx___tableOfContents'
+  | 'blog_posts___featured_image___childMdx___timeToRead'
+  | 'blog_posts___featured_image___childMdx___id'
+  | 'blog_posts___featured_image___childMdx___children'
+  | 'blog_posts___updated_by'
+  | 'blog_posts___id'
+  | 'blog_posts___translation'
+  | 'blog_posts___post_serie'
+  | 'blog_posts___serie_copy'
+  | 'strapiId';
+
+export type StrapiPostTagsFilterInput = {
+  id?: Maybe<StringQueryOperatorInput>;
+  parent?: Maybe<NodeFilterInput>;
+  children?: Maybe<NodeFilterListInput>;
+  internal?: Maybe<InternalFilterInput>;
+  tag?: Maybe<StringQueryOperatorInput>;
+  createdAt?: Maybe<DateQueryOperatorInput>;
+  updatedAt?: Maybe<DateQueryOperatorInput>;
+  created_by?: Maybe<StrapiPostTagsCreated_ByFilterInput>;
+  updated_by?: Maybe<StrapiPostTagsUpdated_ByFilterInput>;
+  slug?: Maybe<StringQueryOperatorInput>;
+  name?: Maybe<StringQueryOperatorInput>;
+  blog_posts?: Maybe<StrapiPostTagsBlog_PostsFilterListInput>;
+  strapiId?: Maybe<StringQueryOperatorInput>;
+};
+
+export type StrapiPostTagsGroupConnection = {
+  totalCount: Scalars['Int'];
+  edges: Array<StrapiPostTagsEdge>;
+  nodes: Array<StrapiPostTags>;
+  pageInfo: PageInfo;
+  field: Scalars['String'];
+  fieldValue?: Maybe<Scalars['String']>;
+};
+
+export type StrapiPostTagsSortInput = {
+  fields?: Maybe<Array<Maybe<StrapiPostTagsFieldsEnum>>>;
+  order?: Maybe<Array<Maybe<SortOrderEnum>>>;
+};
+
+export type StrapiPostTagsUpdated_By = {
+  firstname?: Maybe<Scalars['String']>;
+  lastname?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['Date']>;
+  updatedAt?: Maybe<Scalars['Date']>;
+  id?: Maybe<Scalars['String']>;
+};
+
+
+export type StrapiPostTagsUpdated_ByCreatedAtArgs = {
+  formatString?: Maybe<Scalars['String']>;
+  fromNow?: Maybe<Scalars['Boolean']>;
+  difference?: Maybe<Scalars['String']>;
+  locale?: Maybe<Scalars['String']>;
+};
+
+
+export type StrapiPostTagsUpdated_ByUpdatedAtArgs = {
+  formatString?: Maybe<Scalars['String']>;
+  fromNow?: Maybe<Scalars['Boolean']>;
+  difference?: Maybe<Scalars['String']>;
+  locale?: Maybe<Scalars['String']>;
+};
+
+export type StrapiPostTagsUpdated_ByFilterInput = {
+  firstname?: Maybe<StringQueryOperatorInput>;
+  lastname?: Maybe<StringQueryOperatorInput>;
+  createdAt?: Maybe<DateQueryOperatorInput>;
+  updatedAt?: Maybe<DateQueryOperatorInput>;
+  id?: Maybe<StringQueryOperatorInput>;
+};
+
 export type StrapiSite = Node & {
   id: Scalars['ID'];
   parent?: Maybe<Node>;
@@ -4883,6 +6696,7 @@ export type StrapiSite = Node & {
   updatedAt?: Maybe<Scalars['Date']>;
   created_by?: Maybe<StrapiSiteCreated_By>;
   updated_by?: Maybe<StrapiSiteUpdated_By>;
+  seo_image?: Maybe<File>;
   strapiId?: Maybe<Scalars['String']>;
 };
 
@@ -5061,6 +6875,180 @@ export type StrapiSiteFieldsEnum =
   | 'updated_by___createdAt'
   | 'updated_by___updatedAt'
   | 'updated_by___id'
+  | 'seo_image___sourceInstanceName'
+  | 'seo_image___absolutePath'
+  | 'seo_image___relativePath'
+  | 'seo_image___extension'
+  | 'seo_image___size'
+  | 'seo_image___prettySize'
+  | 'seo_image___modifiedTime'
+  | 'seo_image___accessTime'
+  | 'seo_image___changeTime'
+  | 'seo_image___birthTime'
+  | 'seo_image___root'
+  | 'seo_image___dir'
+  | 'seo_image___base'
+  | 'seo_image___ext'
+  | 'seo_image___name'
+  | 'seo_image___relativeDirectory'
+  | 'seo_image___dev'
+  | 'seo_image___mode'
+  | 'seo_image___nlink'
+  | 'seo_image___uid'
+  | 'seo_image___gid'
+  | 'seo_image___rdev'
+  | 'seo_image___ino'
+  | 'seo_image___atimeMs'
+  | 'seo_image___mtimeMs'
+  | 'seo_image___ctimeMs'
+  | 'seo_image___atime'
+  | 'seo_image___mtime'
+  | 'seo_image___ctime'
+  | 'seo_image___birthtime'
+  | 'seo_image___birthtimeMs'
+  | 'seo_image___blksize'
+  | 'seo_image___blocks'
+  | 'seo_image___publicURL'
+  | 'seo_image___childImageSharp___fixed___base64'
+  | 'seo_image___childImageSharp___fixed___tracedSVG'
+  | 'seo_image___childImageSharp___fixed___aspectRatio'
+  | 'seo_image___childImageSharp___fixed___width'
+  | 'seo_image___childImageSharp___fixed___height'
+  | 'seo_image___childImageSharp___fixed___src'
+  | 'seo_image___childImageSharp___fixed___srcSet'
+  | 'seo_image___childImageSharp___fixed___srcWebp'
+  | 'seo_image___childImageSharp___fixed___srcSetWebp'
+  | 'seo_image___childImageSharp___fixed___originalName'
+  | 'seo_image___childImageSharp___resolutions___base64'
+  | 'seo_image___childImageSharp___resolutions___tracedSVG'
+  | 'seo_image___childImageSharp___resolutions___aspectRatio'
+  | 'seo_image___childImageSharp___resolutions___width'
+  | 'seo_image___childImageSharp___resolutions___height'
+  | 'seo_image___childImageSharp___resolutions___src'
+  | 'seo_image___childImageSharp___resolutions___srcSet'
+  | 'seo_image___childImageSharp___resolutions___srcWebp'
+  | 'seo_image___childImageSharp___resolutions___srcSetWebp'
+  | 'seo_image___childImageSharp___resolutions___originalName'
+  | 'seo_image___childImageSharp___fluid___base64'
+  | 'seo_image___childImageSharp___fluid___tracedSVG'
+  | 'seo_image___childImageSharp___fluid___aspectRatio'
+  | 'seo_image___childImageSharp___fluid___src'
+  | 'seo_image___childImageSharp___fluid___srcSet'
+  | 'seo_image___childImageSharp___fluid___srcWebp'
+  | 'seo_image___childImageSharp___fluid___srcSetWebp'
+  | 'seo_image___childImageSharp___fluid___sizes'
+  | 'seo_image___childImageSharp___fluid___originalImg'
+  | 'seo_image___childImageSharp___fluid___originalName'
+  | 'seo_image___childImageSharp___fluid___presentationWidth'
+  | 'seo_image___childImageSharp___fluid___presentationHeight'
+  | 'seo_image___childImageSharp___sizes___base64'
+  | 'seo_image___childImageSharp___sizes___tracedSVG'
+  | 'seo_image___childImageSharp___sizes___aspectRatio'
+  | 'seo_image___childImageSharp___sizes___src'
+  | 'seo_image___childImageSharp___sizes___srcSet'
+  | 'seo_image___childImageSharp___sizes___srcWebp'
+  | 'seo_image___childImageSharp___sizes___srcSetWebp'
+  | 'seo_image___childImageSharp___sizes___sizes'
+  | 'seo_image___childImageSharp___sizes___originalImg'
+  | 'seo_image___childImageSharp___sizes___originalName'
+  | 'seo_image___childImageSharp___sizes___presentationWidth'
+  | 'seo_image___childImageSharp___sizes___presentationHeight'
+  | 'seo_image___childImageSharp___original___width'
+  | 'seo_image___childImageSharp___original___height'
+  | 'seo_image___childImageSharp___original___src'
+  | 'seo_image___childImageSharp___resize___src'
+  | 'seo_image___childImageSharp___resize___tracedSVG'
+  | 'seo_image___childImageSharp___resize___width'
+  | 'seo_image___childImageSharp___resize___height'
+  | 'seo_image___childImageSharp___resize___aspectRatio'
+  | 'seo_image___childImageSharp___resize___originalName'
+  | 'seo_image___childImageSharp___id'
+  | 'seo_image___childImageSharp___parent___id'
+  | 'seo_image___childImageSharp___parent___children'
+  | 'seo_image___childImageSharp___children'
+  | 'seo_image___childImageSharp___children___id'
+  | 'seo_image___childImageSharp___children___children'
+  | 'seo_image___childImageSharp___internal___content'
+  | 'seo_image___childImageSharp___internal___contentDigest'
+  | 'seo_image___childImageSharp___internal___description'
+  | 'seo_image___childImageSharp___internal___fieldOwners'
+  | 'seo_image___childImageSharp___internal___ignoreType'
+  | 'seo_image___childImageSharp___internal___mediaType'
+  | 'seo_image___childImageSharp___internal___owner'
+  | 'seo_image___childImageSharp___internal___type'
+  | 'seo_image___id'
+  | 'seo_image___parent___id'
+  | 'seo_image___parent___parent___id'
+  | 'seo_image___parent___parent___children'
+  | 'seo_image___parent___children'
+  | 'seo_image___parent___children___id'
+  | 'seo_image___parent___children___children'
+  | 'seo_image___parent___internal___content'
+  | 'seo_image___parent___internal___contentDigest'
+  | 'seo_image___parent___internal___description'
+  | 'seo_image___parent___internal___fieldOwners'
+  | 'seo_image___parent___internal___ignoreType'
+  | 'seo_image___parent___internal___mediaType'
+  | 'seo_image___parent___internal___owner'
+  | 'seo_image___parent___internal___type'
+  | 'seo_image___children'
+  | 'seo_image___children___id'
+  | 'seo_image___children___parent___id'
+  | 'seo_image___children___parent___children'
+  | 'seo_image___children___children'
+  | 'seo_image___children___children___id'
+  | 'seo_image___children___children___children'
+  | 'seo_image___children___internal___content'
+  | 'seo_image___children___internal___contentDigest'
+  | 'seo_image___children___internal___description'
+  | 'seo_image___children___internal___fieldOwners'
+  | 'seo_image___children___internal___ignoreType'
+  | 'seo_image___children___internal___mediaType'
+  | 'seo_image___children___internal___owner'
+  | 'seo_image___children___internal___type'
+  | 'seo_image___internal___content'
+  | 'seo_image___internal___contentDigest'
+  | 'seo_image___internal___description'
+  | 'seo_image___internal___fieldOwners'
+  | 'seo_image___internal___ignoreType'
+  | 'seo_image___internal___mediaType'
+  | 'seo_image___internal___owner'
+  | 'seo_image___internal___type'
+  | 'seo_image___childMdx___rawBody'
+  | 'seo_image___childMdx___fileAbsolutePath'
+  | 'seo_image___childMdx___frontmatter___title'
+  | 'seo_image___childMdx___frontmatter___date'
+  | 'seo_image___childMdx___frontmatter___description'
+  | 'seo_image___childMdx___frontmatter___tags'
+  | 'seo_image___childMdx___frontmatter___subtitle'
+  | 'seo_image___childMdx___frontmatter___image_caption'
+  | 'seo_image___childMdx___slug'
+  | 'seo_image___childMdx___body'
+  | 'seo_image___childMdx___excerpt'
+  | 'seo_image___childMdx___headings'
+  | 'seo_image___childMdx___headings___value'
+  | 'seo_image___childMdx___headings___depth'
+  | 'seo_image___childMdx___html'
+  | 'seo_image___childMdx___mdxAST'
+  | 'seo_image___childMdx___tableOfContents'
+  | 'seo_image___childMdx___timeToRead'
+  | 'seo_image___childMdx___wordCount___paragraphs'
+  | 'seo_image___childMdx___wordCount___sentences'
+  | 'seo_image___childMdx___wordCount___words'
+  | 'seo_image___childMdx___id'
+  | 'seo_image___childMdx___parent___id'
+  | 'seo_image___childMdx___parent___children'
+  | 'seo_image___childMdx___children'
+  | 'seo_image___childMdx___children___id'
+  | 'seo_image___childMdx___children___children'
+  | 'seo_image___childMdx___internal___content'
+  | 'seo_image___childMdx___internal___contentDigest'
+  | 'seo_image___childMdx___internal___description'
+  | 'seo_image___childMdx___internal___fieldOwners'
+  | 'seo_image___childMdx___internal___ignoreType'
+  | 'seo_image___childMdx___internal___mediaType'
+  | 'seo_image___childMdx___internal___owner'
+  | 'seo_image___childMdx___internal___type'
   | 'strapiId';
 
 export type StrapiSiteFilterInput = {
@@ -5073,6 +7061,7 @@ export type StrapiSiteFilterInput = {
   updatedAt?: Maybe<DateQueryOperatorInput>;
   created_by?: Maybe<StrapiSiteCreated_ByFilterInput>;
   updated_by?: Maybe<StrapiSiteUpdated_ByFilterInput>;
+  seo_image?: Maybe<FileFilterInput>;
   strapiId?: Maybe<StringQueryOperatorInput>;
 };
 
@@ -5701,7 +7690,6 @@ export type StrapiUsesContentFieldsEnum =
   | 'childMdx___rawBody'
   | 'childMdx___fileAbsolutePath'
   | 'childMdx___frontmatter___title'
-  | 'childMdx___frontmatter___subtitle'
   | 'childMdx___frontmatter___date'
   | 'childMdx___frontmatter___image___sourceInstanceName'
   | 'childMdx___frontmatter___image___absolutePath'
@@ -5739,8 +7727,9 @@ export type StrapiUsesContentFieldsEnum =
   | 'childMdx___frontmatter___image___publicURL'
   | 'childMdx___frontmatter___image___id'
   | 'childMdx___frontmatter___image___children'
-  | 'childMdx___frontmatter___tags'
   | 'childMdx___frontmatter___description'
+  | 'childMdx___frontmatter___tags'
+  | 'childMdx___frontmatter___subtitle'
   | 'childMdx___frontmatter___series___id'
   | 'childMdx___frontmatter___series___index'
   | 'childMdx___frontmatter___series___copy'
@@ -5758,9 +7747,6 @@ export type StrapiUsesContentFieldsEnum =
   | 'childMdx___wordCount___paragraphs'
   | 'childMdx___wordCount___sentences'
   | 'childMdx___wordCount___words'
-  | 'childMdx___fields___slug'
-  | 'childMdx___fields___lang'
-  | 'childMdx___fields___postFolderName'
   | 'childMdx___id'
   | 'childMdx___parent___id'
   | 'childMdx___parent___parent___id'
@@ -6003,10 +7989,10 @@ export type StrapiUsesFieldsEnum =
   | 'childStrapiUsesContent___childMdx___rawBody'
   | 'childStrapiUsesContent___childMdx___fileAbsolutePath'
   | 'childStrapiUsesContent___childMdx___frontmatter___title'
-  | 'childStrapiUsesContent___childMdx___frontmatter___subtitle'
   | 'childStrapiUsesContent___childMdx___frontmatter___date'
-  | 'childStrapiUsesContent___childMdx___frontmatter___tags'
   | 'childStrapiUsesContent___childMdx___frontmatter___description'
+  | 'childStrapiUsesContent___childMdx___frontmatter___tags'
+  | 'childStrapiUsesContent___childMdx___frontmatter___subtitle'
   | 'childStrapiUsesContent___childMdx___frontmatter___image_caption'
   | 'childStrapiUsesContent___childMdx___slug'
   | 'childStrapiUsesContent___childMdx___body'
@@ -6021,9 +8007,6 @@ export type StrapiUsesFieldsEnum =
   | 'childStrapiUsesContent___childMdx___wordCount___paragraphs'
   | 'childStrapiUsesContent___childMdx___wordCount___sentences'
   | 'childStrapiUsesContent___childMdx___wordCount___words'
-  | 'childStrapiUsesContent___childMdx___fields___slug'
-  | 'childStrapiUsesContent___childMdx___fields___lang'
-  | 'childStrapiUsesContent___childMdx___fields___postFolderName'
   | 'childStrapiUsesContent___childMdx___id'
   | 'childStrapiUsesContent___childMdx___parent___id'
   | 'childStrapiUsesContent___childMdx___parent___children'
