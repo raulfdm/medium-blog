@@ -1,7 +1,7 @@
 require('dotenv').config();
 const R = require('ramda');
 
-const { algoliaSetupOptions, PROJECT_DIR_NAME } = require('./helpers');
+const { algoliaSetupOptions } = require('./helpers');
 
 const isProduction = R.propEq('NODE_ENV', 'production')(process.env);
 console.log('isProduction -->', isProduction);
@@ -35,13 +35,6 @@ const plugins = [
   `gatsby-plugin-typescript`,
   `gatsby-transformer-json`,
   `gatsby-transformer-sharp`,
-  {
-    resolve: `gatsby-source-filesystem`,
-    options: {
-      path: `${PROJECT_DIR_NAME}/blog`,
-      name: `blog`,
-    },
-  },
   {
     resolve: `gatsby-alias-imports`,
     options: {
