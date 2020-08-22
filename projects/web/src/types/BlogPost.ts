@@ -18,10 +18,7 @@ export type BlogPost_Post = Pick<
 > & {
   id: StrapiPosts['strapiId'];
   serieCopy: StrapiPosts['serie_copy'];
-  translation: Pick<
-    StrapiPostsTranslation,
-    'language' | 'slug' | 'translation'
-  >;
+  translation: Pick<StrapiPostsTranslation, 'language' | 'slug'>;
   serie: Pick<StrapiPostSerie, 'slug' | 'id'>;
   featuredImage: StrapiPosts['featured_image'];
   tags: Pick<StrapiPostsPost_Tags, 'id' | 'name' | 'slug'>;
