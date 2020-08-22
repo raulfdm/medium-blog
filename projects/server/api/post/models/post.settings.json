@@ -22,8 +22,8 @@
       "required": true
     },
     "post_tags": {
-      "via": "blog_posts",
       "collection": "post-tag",
+      "via": "blog_posts",
       "dominant": true
     },
     "description": {
@@ -61,8 +61,17 @@
       "model": "post"
     },
     "post_serie": {
-      "via": "blog_posts",
-      "model": "post-serie"
+      "model": "post-serie",
+      "via": "blog_posts"
+    },
+    "featured_image_caption": {
+      "type": "richtext",
+      "maxLength": 300
+    },
+    "is_shown": {
+      "type": "boolean",
+      "default": true,
+      "required": true
     }
   }
 }

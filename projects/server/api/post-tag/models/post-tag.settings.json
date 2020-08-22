@@ -17,11 +17,12 @@
     },
     "slug": {
       "type": "uid",
-      "required": true
+      "required": true,
+      "targetField": "name"
     },
     "blog_posts": {
-      "collection": "post",
-      "via": "post_tags"
+      "via": "post_tags",
+      "collection": "post"
     }
   }
 }

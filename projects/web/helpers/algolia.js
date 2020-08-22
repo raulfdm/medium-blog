@@ -2,7 +2,7 @@ const { blogPostUri } = require('../globalShared/utils');
 
 const myQuery = `
   query BlogPosts {
-    posts: allStrapiPosts(sort: {fields: date, order: DESC}, limit: 1000) {
+    posts: allStrapiPosts(sort: {fields: date, order: DESC}, limit: 1000, filter: {is_shown: {eq: true}}) {
       nodes {
         objectID: id
         language

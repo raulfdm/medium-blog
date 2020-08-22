@@ -7,7 +7,7 @@ import {
 } from '@app-types/graphql';
 import { blogPostUri } from '@globalShared/utils';
 
-const Fluid = types.model({
+const ChildImageSharp_Fluid = types.model({
   aspectRatio: types.number,
   base64: types.string,
   originalImg: types.string,
@@ -21,17 +21,18 @@ const Fluid = types.model({
   tracedSVG: types.string,
 });
 
-const ChildImageSharp = types.model({ fluid: Fluid });
+const ChildImageSharp_Original = types.model({
+  src: types.string,
+});
 
-const Image = types.model({
-  publicURL: types.string,
-  childImageSharp: ChildImageSharp,
+const ChildImageSharp = types.model({
+  fluid: ChildImageSharp_Fluid,
+  original: ChildImageSharp_Original,
 });
 
 const Translation = types.model({
   slug: types.string,
   language: types.string,
-  translation: types.string,
 });
 
 const Tag = types.model({
@@ -67,7 +68,11 @@ const Post = types
         tags: types.maybe(types.array(types.string)),
       }),
     ),
-    featuredImage: types.maybeNull(Image),
+    featuredImage: types.maybeNull(
+      types.model({
+        childImageSharp: ChildImageSharp,
+      }),
+    ),
     childStrapiPostContent: ChildStrapiPostContent,
     tags: types.maybeNull(types.array(Tag)),
   })

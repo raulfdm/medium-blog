@@ -9,7 +9,11 @@ const tagTemplate = path.resolve('./src/screens/Tag/PageTemplate.tsx');
 async function createBlogPost({ graphql, createPage }) {
   const result = await graphql(`
     query BlogPosts {
-      posts: allStrapiPosts(sort: { fields: date, order: DESC }, limit: 1000) {
+      posts: allStrapiPosts(
+        sort: { fields: date, order: DESC }
+        limit: 1000
+        filter: { is_shown: { eq: true } }
+      ) {
         nodes {
           ...BlogPost
         }
@@ -50,8 +54,10 @@ async function createBlogPost({ graphql, createPage }) {
         id
       }
       featuredImage: featured_image {
-        publicURL
         childImageSharp {
+          original {
+            src
+          }
           fluid(quality: 100, maxWidth: 1500, fit: CONTAIN) {
             base64
             tracedSVG
@@ -148,7 +154,11 @@ async function createTagPage({ graphql, createPage }) {
           }
         }
       }
-      posts: allStrapiPosts(sort: { fields: date, order: DESC }, limit: 1000) {
+      posts: allStrapiPosts(
+        sort: { fields: date, order: DESC }
+        limit: 1000
+        filter: { is_shown: { eq: true } }
+      ) {
         nodes {
           ...BlogPost
         }
@@ -166,7 +176,6 @@ async function createTagPage({ graphql, createPage }) {
       translation {
         language
         slug
-        translation
       }
       serie: post_serie {
         slug
@@ -174,8 +183,10 @@ async function createTagPage({ graphql, createPage }) {
       }
       language
       featuredImage: featured_image {
-        publicURL
         childImageSharp {
+          original {
+            src
+          }
           fluid(quality: 100, maxWidth: 1500, fit: CONTAIN) {
             base64
             tracedSVG

@@ -44,7 +44,11 @@ const Home: React.FC<HomeProps> = ({ data }) => {
 
 export const query = graphql`
   query BlogPosts {
-    posts: allStrapiPosts(sort: { fields: date, order: DESC }, limit: 1000) {
+    posts: allStrapiPosts(
+      sort: { fields: date, order: DESC }
+      limit: 1000
+      filter: { is_shown: { eq: true } }
+    ) {
       nodes {
         ...BlogPost
       }
@@ -81,7 +85,6 @@ export const query = graphql`
     translation {
       language
       slug
-      translation
     }
     serie: post_serie {
       slug
@@ -89,8 +92,10 @@ export const query = graphql`
     }
     language
     featuredImage: featured_image {
-      publicURL
       childImageSharp {
+        original {
+          src
+        }
         fluid(quality: 100, maxWidth: 1500, fit: CONTAIN) {
           base64
           tracedSVG
