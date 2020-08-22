@@ -50,8 +50,10 @@ async function createBlogPost({ graphql, createPage }) {
         id
       }
       featuredImage: featured_image {
-        publicURL
         childImageSharp {
+          original {
+            src
+          }
           fluid(quality: 100, maxWidth: 1500, fit: CONTAIN) {
             base64
             tracedSVG
@@ -166,7 +168,6 @@ async function createTagPage({ graphql, createPage }) {
       translation {
         language
         slug
-        translation
       }
       serie: post_serie {
         slug
@@ -174,8 +175,10 @@ async function createTagPage({ graphql, createPage }) {
       }
       language
       featuredImage: featured_image {
-        publicURL
         childImageSharp {
+          original {
+            src
+          }
           fluid(quality: 100, maxWidth: 1500, fit: CONTAIN) {
             base64
             tracedSVG

@@ -20,6 +20,7 @@ import { useTwitterScript } from '@hooks/useTwitterScript';
 import LayoutBlog from '@screens/Blog/Layout';
 import SEO from '@components/SEO';
 import { BlogPostPageContext } from './types';
+import { SitePageContextPostFeaturedImageChildImageSharpOriginal } from '@app-types/graphql';
 
 const Article = styled(motion.article)`
   && {
@@ -61,7 +62,7 @@ const BlogPostPageTemplate: React.FC<{
         )}
         lang={language!}
         url={postUri!}
-        image={featuredImage?.publicURL}
+        image={featuredImage?.childImageSharp!.original!.src}
         isBlogPost
       />
       <ThemeProvider>

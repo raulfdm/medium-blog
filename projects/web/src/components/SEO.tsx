@@ -16,7 +16,12 @@ type SEOProps = {
 
 const SEO: React.FC<SEOProps> = (props) => {
   const {
-    site: { url: siteUrl, seoImage },
+    site: {
+      url: siteUrl,
+      seoImage: {
+        childImageSharp: { original },
+      },
+    },
     social: {
       twitter: { url: twitterUrl },
     },
@@ -25,7 +30,11 @@ const SEO: React.FC<SEOProps> = (props) => {
       site: strapiSite {
         url
         seoImage: seo_image {
-          publicURL
+          childImageSharp {
+            original {
+              src
+            }
+          }
         }
       }
       social: strapiSocial {
@@ -47,7 +56,7 @@ const SEO: React.FC<SEOProps> = (props) => {
     children,
   } = props;
 
-  const metaImg = `${siteUrl}${image || seoImage.publicURL}`;
+  const metaImg = `${siteUrl}${image || original.src}`;
   const metaUrl = getCanonicalLink({ siteUrl, uri: url });
 
   return (

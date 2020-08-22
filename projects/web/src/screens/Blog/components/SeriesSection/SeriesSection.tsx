@@ -70,17 +70,14 @@ function SeriesMenu({ serie, currentPostId }: SeriesMenuProps) {
               data-testid="series-post-list"
             >
               {blogPosts!.map((post) => {
-                const { id, copy, uri, subtitle } = post!;
+                const { id, copy, uri } = post!;
                 return (
                   <S.Item
                     key={id}
                     className={id === currentPostId ? 'active' : ''}
                     data-testid={`post_${id}`}
                   >
-                    <Link to={uri!}>
-                      {copy}
-                      {subtitle && ` - ${subtitle}`}
-                    </Link>
+                    <Link to={uri!}>{copy}</Link>
                   </S.Item>
                 );
               })}

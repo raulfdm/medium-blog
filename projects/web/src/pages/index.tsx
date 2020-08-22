@@ -81,7 +81,6 @@ export const query = graphql`
     translation {
       language
       slug
-      translation
     }
     serie: post_serie {
       slug
@@ -89,8 +88,10 @@ export const query = graphql`
     }
     language
     featuredImage: featured_image {
-      publicURL
       childImageSharp {
+        original {
+          src
+        }
         fluid(quality: 100, maxWidth: 1500, fit: CONTAIN) {
           base64
           tracedSVG
