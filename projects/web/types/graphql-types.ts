@@ -2456,21 +2456,21 @@ export type SitePageConnectionGroupArgs = {
 };
 
 export type SitePageContext = {
-  posts?: Maybe<Array<Maybe<SitePageContextPosts>>>;
-  tag?: Maybe<SitePageContextTag>;
   postUri?: Maybe<Scalars['String']>;
   post?: Maybe<SitePageContextPost>;
   serie?: Maybe<SitePageContextSerie>;
   translation?: Maybe<SitePageContextTranslation>;
+  posts?: Maybe<Array<Maybe<SitePageContextPosts>>>;
+  tag?: Maybe<SitePageContextTag>;
 };
 
 export type SitePageContextFilterInput = {
-  posts?: Maybe<SitePageContextPostsFilterListInput>;
-  tag?: Maybe<SitePageContextTagFilterInput>;
   postUri?: Maybe<StringQueryOperatorInput>;
   post?: Maybe<SitePageContextPostFilterInput>;
   serie?: Maybe<SitePageContextSerieFilterInput>;
   translation?: Maybe<SitePageContextTranslationFilterInput>;
+  posts?: Maybe<SitePageContextPostsFilterListInput>;
+  tag?: Maybe<SitePageContextTagFilterInput>;
 };
 
 export type SitePageContextPost = {
@@ -2916,26 +2916,6 @@ export type SitePageFieldsEnum =
   | 'internal___owner'
   | 'internal___type'
   | 'isCreatedByStatefulCreatePages'
-  | 'context___posts'
-  | 'context___posts___id'
-  | 'context___posts___title'
-  | 'context___posts___subtitle'
-  | 'context___posts___description'
-  | 'context___posts___date'
-  | 'context___posts___serieCopy'
-  | 'context___posts___slug'
-  | 'context___posts___translation___language'
-  | 'context___posts___translation___slug'
-  | 'context___posts___serie___slug'
-  | 'context___posts___serie___id'
-  | 'context___posts___serie___name'
-  | 'context___posts___language'
-  | 'context___posts___tags'
-  | 'context___posts___tags___id'
-  | 'context___posts___tags___name'
-  | 'context___posts___tags___slug'
-  | 'context___tag___slug'
-  | 'context___tag___name'
   | 'context___postUri'
   | 'context___post___id'
   | 'context___post___title'
@@ -2966,6 +2946,26 @@ export type SitePageFieldsEnum =
   | 'context___serie___blogPosts___uri'
   | 'context___translation___language'
   | 'context___translation___postUri'
+  | 'context___posts'
+  | 'context___posts___id'
+  | 'context___posts___title'
+  | 'context___posts___subtitle'
+  | 'context___posts___description'
+  | 'context___posts___date'
+  | 'context___posts___serieCopy'
+  | 'context___posts___slug'
+  | 'context___posts___translation___language'
+  | 'context___posts___translation___slug'
+  | 'context___posts___serie___slug'
+  | 'context___posts___serie___id'
+  | 'context___posts___serie___name'
+  | 'context___posts___language'
+  | 'context___posts___tags'
+  | 'context___posts___tags___id'
+  | 'context___posts___tags___name'
+  | 'context___posts___tags___slug'
+  | 'context___tag___slug'
+  | 'context___tag___name'
   | 'pluginCreator___id'
   | 'pluginCreator___parent___id'
   | 'pluginCreator___parent___parent___id'
