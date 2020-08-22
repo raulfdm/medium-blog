@@ -44,7 +44,11 @@ const Home: React.FC<HomeProps> = ({ data }) => {
 
 export const query = graphql`
   query BlogPosts {
-    posts: allStrapiPosts(sort: { fields: date, order: DESC }, limit: 1000) {
+    posts: allStrapiPosts(
+      sort: { fields: date, order: DESC }
+      limit: 1000
+      filter: { is_shown: { eq: true } }
+    ) {
       nodes {
         ...BlogPost
       }
