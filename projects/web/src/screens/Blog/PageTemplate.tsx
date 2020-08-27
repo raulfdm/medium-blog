@@ -77,7 +77,7 @@ const BlogPostPageTemplate: React.FC<{
               translation,
             }}
           >
-            <Header />
+            <Header title={post.title!} subtitle={post.subtitle} />
             <AvailableTranslations />
             <SeriesSection noDivider />
             <FeaturedImage />
