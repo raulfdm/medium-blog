@@ -5,6 +5,7 @@ import { addDecorator } from '@storybook/react';
 import { ThemeProvider } from '@contexts/theme';
 import { GlobalStyles } from '@styles/index';
 import { BlogGlobalStyle } from '@styles/blogPost';
+import { IntlContextProvider } from '@contexts/react-intl';
 
 export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' },
@@ -30,12 +31,12 @@ addDecorator((story, ctx) => {
   const isBlog = ctx.kind.includes('Blog/');
 
   return (
-    <>
+    <IntlContextProvider>
       <ThemeProvider>
         <GlobalStyles />
         {isBlog && <BlogGlobalStyle />}
         {story()}
       </ThemeProvider>
-    </>
+    </IntlContextProvider>
   );
 });
