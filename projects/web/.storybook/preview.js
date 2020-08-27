@@ -1,4 +1,10 @@
+import React from 'react';
 import { action } from '@storybook/addon-actions';
+import { addDecorator } from '@storybook/react';
+
+import { ThemeProvider } from '@contexts/theme';
+import { GlobalStyles } from '@styles/index';
+import { BlogGlobalStyle } from '@styles/blogPost';
 
 export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' },
@@ -17,3 +23,19 @@ global.___loader = {
 window.___navigate = (pathname) => {
   action('NavigateTo:')(pathname);
 };
+
+addDecorator((story, ctx) => {
+  /* I only wants to import blog globalStyles if the component is
+  part of Blog/ */
+  const isBlog = ctx.kind.includes('Blog/');
+
+  return (
+    <>
+      <ThemeProvider>
+        <GlobalStyles />
+        {isBlog && <BlogGlobalStyle />}
+        {story()}
+      </ThemeProvider>
+    </>
+  );
+});
