@@ -8,5 +8,7 @@ export default {
 } as Meta;
 
 export const defaultCase = () => (
-  <Blockquote>Some block quote in here</Blockquote>
+  <div style={{ padding: 16 }}>
+    <Blockquote>Some block quote in here</Blockquote>
+  </div>
 );
