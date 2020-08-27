@@ -4,10 +4,8 @@ import { MDXRenderer } from 'gatsby-plugin-mdx';
 
 import { AvailableTranslations } from '@screens/Blog/components/AvailableTranslations';
 import { BlogContextProvider } from '@screens/Blog/context';
-import { BlogGlobalStyle } from '@styles/blogPost';
 import { Container, LineDivider } from '@components/Ui';
 import { FeaturedImage } from '@screens/Blog/components/FeaturedImage';
-import { GlobalStyles } from '@styles/index';
 import { Header } from '@screens/Blog/components/Header';
 import { joinSubtitleAndDescription } from '@utils/seo';
 import { MenuBar } from '@components/MenuBar';
@@ -15,12 +13,11 @@ import { pageTransitionVariants, Tags, Tag } from '@components/Ui';
 import { SeriesSection } from '@screens/Blog/components/SeriesSection';
 import { SideMenu } from '@components/SideMenu';
 import { styled, media, SiteTheme } from '@styles/styled';
-import { ThemeProvider } from '@contexts/theme';
 import { useTwitterScript } from '@hooks/useTwitterScript';
 import LayoutBlog from '@screens/Blog/Layout';
-import SEO from '@components/SEO';
+import { BlogThemeProvider } from '@screens/Blog/styles/themeProvider';
+import { SEO } from '@components/SEO';
 import { BlogPostPageContext } from './types';
-import { SitePageContextPostFeaturedImageChildImageSharpOriginal } from '@app-types/graphql';
 
 const Article = styled(motion.article)`
   && {
@@ -65,10 +62,8 @@ const BlogPostPageTemplate: React.FC<{
         image={featuredImage?.childImageSharp!.original!.src}
         isBlogPost
       />
-      <ThemeProvider>
+      <BlogThemeProvider>
         <MenuBar />
-        <GlobalStyles />
-        <BlogGlobalStyle />
         <Article
           initial="exit"
           animate="enter"
@@ -102,7 +97,7 @@ const BlogPostPageTemplate: React.FC<{
           </BlogContextProvider>
         </Article>
         <SideMenu />
-      </ThemeProvider>
+      </BlogThemeProvider>
     </LayoutBlog>
   );
 };
