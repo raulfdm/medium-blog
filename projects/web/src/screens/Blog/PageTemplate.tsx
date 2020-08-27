@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
 import React from 'react';
 import { motion } from 'framer-motion';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
@@ -18,6 +19,7 @@ import LayoutBlog from '@screens/Blog/Layout';
 import { BlogThemeProvider } from '@screens/Blog/styles/themeProvider';
 import { SEO } from '@components/SEO';
 import { BlogPostPageContext } from './types';
+import { SitePageContextPostFeaturedImageChildImageSharpFluid } from '@app-types/graphql';
 
 const Article = styled(motion.article)`
   && {
@@ -80,7 +82,13 @@ const BlogPostPageTemplate: React.FC<{
             <Header title={post.title!} subtitle={post.subtitle} />
             <AvailableTranslations />
             <SeriesSection noDivider />
-            <FeaturedImage />
+            <FeaturedImage
+              fluid={
+                post.featuredImage?.childImageSharp!.fluid as NonNullable<
+                  SitePageContextPostFeaturedImageChildImageSharpFluid
+                >
+              }
+            />
             <Container as="main" className="post">
               <MDXRenderer>{body!}</MDXRenderer>
               <SeriesSection />
