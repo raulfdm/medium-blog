@@ -18,9 +18,13 @@ const Iframe = styled.iframe`
   height: 100%;
 `;
 
-export const YouTubeVideo: React.FC<React.HTMLProps<HTMLIFrameElement>> = ({
-  src,
-}) => {
+type YouTubeVideoProps = {
+  src: React.HTMLProps<HTMLIFrameElement>['src'];
+  videoId?: string;
+};
+export const YouTubeVideo: React.FC<YouTubeVideoProps> = ({ src, videoId }) => {
+  const videoSrc = videoId ? `https://www.youtube.com/embed/${videoId}` : src;
+
   /**
    * The reasons for defining here the code from iframe-responsive
    * is because with a custom component, remark does not know what kind
@@ -34,7 +38,7 @@ export const YouTubeVideo: React.FC<React.HTMLProps<HTMLIFrameElement>> = ({
       <Iframe
         width="560"
         height="315"
-        src={src}
+        src={videoSrc}
         frameBorder="0"
         allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
         allowFullScreen
@@ -42,3 +46,12 @@ export const YouTubeVideo: React.FC<React.HTMLProps<HTMLIFrameElement>> = ({
     </ResponsiveIframe>
   );
 };
+
+<iframe
+  width="560"
+  height="315"
+  src="https://www.youtube.com/embed/e_h1fHGN7Sc"
+  frameborder="0"
+  allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+  allowfullscreen
+></iframe>;
