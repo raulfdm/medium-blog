@@ -81,6 +81,7 @@
     "babel-loader": "8.1.0",
     "babel-plugin-ramda": "2.0.0",
     "babel-preset-gatsby": "0.5.7",
+    "babel-preset-react-app": "9.1.2",
     "cypress": "5.0.0",
     "cypress-image-snapshot": "3.1.1",
     "dotenv": "8.2.0",
