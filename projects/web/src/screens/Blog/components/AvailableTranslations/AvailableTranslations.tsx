@@ -18,7 +18,7 @@ const messages = defineMessages({
 });
 
 type AvailableTranslationsProps = {
-  translation?: DeepNonNullable<SitePageContextTranslation>;
+  translation?: DeepNonNullable<SitePageContextTranslation> | null;
 };
 
 export const AvailableTranslations: React.FC<AvailableTranslationsProps> = ({
