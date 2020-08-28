@@ -6,6 +6,7 @@ import { themeBackgroundColor } from '@styles/globals';
 
 type ThemeProps = {
   children: React.ReactNode;
+  initialTheme?: 'dark' | 'light';
 };
 
 type ContextType = {
@@ -18,8 +19,13 @@ type ContextType = {
 type ThemeKeys = keyof typeof ThemesAvailable;
 export const ThemeContext = createContext<Partial<ContextType>>({});
 
-export const ThemeProvider: React.FC<ThemeProps> = ({ children }) => {
-  const [currentTheme, setCurrentTheme] = useState<ThemeKeys>('light');
+export const ThemeProvider: React.FC<ThemeProps> = ({
+  children,
+  initialTheme,
+}) => {
+  const [currentTheme, setCurrentTheme] = useState<ThemeKeys>(
+    initialTheme || 'light',
+  );
 
   const isDarkTheme = currentTheme === 'dark';
 
@@ -29,18 +35,22 @@ export const ThemeProvider: React.FC<ThemeProps> = ({ children }) => {
     window.__onThemeChange = () => setCurrentTheme(window.__theme);
   }, []);
 
+  React.useEffect(() => {
+    toggleTheme(initialTheme);
+  }, [initialTheme]);
+
   function setMetaTheme(theme: ThemeKeys): void {
     document
       .querySelector('meta[name="theme-color"]')
       ?.setAttribute('content', themeBackgroundColor[theme]);
   }
 
-  const toggleTheme = (): void => {
-    const nextTheme = currentTheme === 'dark' ? 'light' : 'dark';
+  function toggleTheme(nTheme?: 'dark' | 'light'): void {
+    const nextTheme = nTheme || currentTheme === 'dark' ? 'light' : 'dark';
 
     setMetaTheme(nextTheme);
     window.__setPreferredTheme(nextTheme);
-  };
+  }
 
   const enhancedTheme = { ...(theme as SiteTheme), isDarkTheme };
 

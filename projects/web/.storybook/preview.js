@@ -11,6 +11,41 @@ export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' },
 };
 
+export const globalTypes = {
+  locale: {
+    name: 'Locale',
+    description: 'Internationalization locale',
+    defaultValue: 'en',
+    toolbar: {
+      icon: 'globe',
+      items: [
+        { value: 'en', right: '🇺🇸', title: 'English' },
+        { value: 'pt', right: '🇧🇷', title: 'Portuguese' },
+      ],
+    },
+  },
+  theme: {
+    name: 'Theme',
+    description: 'Global theme for components',
+    defaultValue: 'light',
+    toolbar: {
+      icon: 'lightning',
+      items: [
+        {
+          value: 'light',
+          title: 'Light',
+          right: '☀️',
+        },
+        {
+          value: 'dark',
+          title: 'Dark',
+          right: '🌑',
+        },
+      ],
+    },
+  },
+};
+
 // Gatsby's Link overrides:
 // Gatsby Link calls the `enqueue` & `hovering` methods on the global variable ___loader.
 // This global object isn't set in storybook context, requiring you to override it to empty functions (no-op),
@@ -29,10 +64,19 @@ addDecorator((story, ctx) => {
   /* I only wants to import blog globalStyles if the component is
   part of Blog/ */
   const isBlog = ctx.kind.includes('Blog/');
+  const { locale, theme } = ctx.globals;
+
+  /* This code only exists to make the Theme works in Storybook env.
+  It's also present in `preview-body` but here since I cannot commit updates
+  there when the user select a new theme, I do it here.
+  */
+  React.useEffect(() => {
+    document.querySelector('body').classList.add(theme);
+  }, [theme]);
 
   return (
-    <IntlContextProvider>
-      <ThemeProvider>
+    <IntlContextProvider lang={locale}>
+      <ThemeProvider initialTheme={theme}>
         <GlobalStyles />
         {isBlog && <BlogGlobalStyle />}
         {story()}
