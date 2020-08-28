@@ -81,7 +81,7 @@ const BlogPostPageTemplate: React.FC<{
           >
             <Header title={post.title!} subtitle={post.subtitle} />
             <AvailableTranslations />
-            <SeriesSection noDivider />
+            <SeriesSection currentPostId={post.id} serie={serie!} />
             <FeaturedImage
               fluid={
                 post.featuredImage?.childImageSharp!.fluid as NonNullable<
@@ -91,7 +91,7 @@ const BlogPostPageTemplate: React.FC<{
             />
             <Container as="main" className="post">
               <MDXRenderer>{body!}</MDXRenderer>
-              <SeriesSection />
+              <SeriesSection divider currentPostId={post.id} serie={serie!} />
               <LineDivider />
               {tags && (
                 <Tags>
