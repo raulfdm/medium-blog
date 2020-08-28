@@ -6,12 +6,14 @@ import { mockedImage } from './__mocks__/mockData';
 import { FeaturedImage } from '.';
 
 function renderWithContext(props?: any) {
-  return render(<FeaturedImage fluid={mockedImage} {...props} />);
+  return render(
+    <FeaturedImage fluid={mockedImage.childImageSharp.fluid} {...props} />,
+  );
 }
 
 describe('<FeaturedImage />', () => {
   it('does not render anything if not receives image', () => {
-    const { queryByTestId } = renderWithContext({ featuredImage: undefined });
+    const { queryByTestId } = renderWithContext({ fluid: undefined });
     expect(queryByTestId('featured-image-wrapper')).not.toBeInTheDocument();
   });
 
