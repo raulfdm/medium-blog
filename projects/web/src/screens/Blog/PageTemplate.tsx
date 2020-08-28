@@ -80,7 +80,7 @@ const BlogPostPageTemplate: React.FC<{
             }}
           >
             <Header title={post.title!} subtitle={post.subtitle} />
-            <AvailableTranslations />
+            <AvailableTranslations translation={translation} />
             <SeriesSection currentPostId={post.id} serie={serie!} />
             <FeaturedImage
               fluid={
