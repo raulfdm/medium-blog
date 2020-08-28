@@ -18,12 +18,29 @@ const Iframe = styled.iframe`
   height: 100%;
 `;
 
-type YouTubeVideoProps = {
+type YouTubeVideoSrcProps = {
   src: React.HTMLProps<HTMLIFrameElement>['src'];
-  videoId?: string;
 };
-export const YouTubeVideo: React.FC<YouTubeVideoProps> = ({ src, videoId }) => {
-  const videoSrc = videoId ? `https://www.youtube.com/embed/${videoId}` : src;
+
+type YouTubeVideoVideoIdProps = {
+  videoId: string;
+};
+
+type Overload = {
+  (props: YouTubeVideoSrcProps): JSX.Element;
+  (props: YouTubeVideoVideoIdProps): JSX.Element;
+};
+
+const hasSrc = (
+  props: YouTubeVideoSrcProps | YouTubeVideoVideoIdProps,
+): props is YouTubeVideoSrcProps => 'src' in props;
+
+export const YouTubeVideo: Overload = (
+  props: YouTubeVideoSrcProps | YouTubeVideoVideoIdProps,
+) => {
+  const videoSrc = hasSrc(props)
+    ? props.src
+    : `https://www.youtube.com/embed/${props.videoId}`;
 
   /**
    * The reasons for defining here the code from iframe-responsive
@@ -51,7 +68,7 @@ export const YouTubeVideo: React.FC<YouTubeVideoProps> = ({ src, videoId }) => {
   width="560"
   height="315"
   src="https://www.youtube.com/embed/e_h1fHGN7Sc"
-  frameborder="0"
+  frameBorder="0"
   allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-  allowfullscreen
+  allowFullScreen
 ></iframe>;

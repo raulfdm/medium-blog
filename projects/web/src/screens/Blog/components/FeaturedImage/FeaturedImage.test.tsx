@@ -2,25 +2,11 @@
 import React from 'react';
 import { render } from '@utils/test';
 
-import { BlogContextProvider } from '@screens/Blog/context';
 import { mockedImage } from './__mocks__/mockData';
 import { FeaturedImage } from '.';
 
-function renderWithContext(contextValues?: any) {
-  return render(
-    <BlogContextProvider
-      value={
-        {
-          post: {
-            featuredImage: mockedImage,
-            ...contextValues,
-          },
-        } as any
-      }
-    >
-      <FeaturedImage />
-    </BlogContextProvider>,
-  );
+function renderWithContext(props?: any) {
+  return render(<FeaturedImage fluid={mockedImage} {...props} />);
 }
 
 describe('<FeaturedImage />', () => {

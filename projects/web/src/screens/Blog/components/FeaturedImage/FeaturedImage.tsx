@@ -43,6 +43,7 @@ export const FeaturedImage: React.FC<FeaturedImageProps> = ({ fluid }) => {
       data-testid="featured-image-wrapper"
     >
       <StyledImg
+        /* @ts-ignore */
         fluid={fluid}
         alt={imageCaption || formatMessage(messages.featuredImageLabel)}
         data-testid="featured-image"
