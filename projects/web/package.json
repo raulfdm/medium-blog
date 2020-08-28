@@ -15,8 +15,8 @@
     "test": "jest",
     "e2e:open": "CYPRESS_BASE_URL=http://localhost:8000 cypress open",
     "e2e:run": "cypress run",
-    "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "storybook": "start-storybook -p 6006 -s static --ci",
+    "build-storybook": "build-storybook -o storybook-public --quiet"
   },
   "dependencies": {
     "@formatjs/intl-pluralrules": "3.4.4",
