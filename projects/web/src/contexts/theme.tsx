@@ -10,7 +10,7 @@ type ThemeProps = {
 };
 
 type ContextType = {
-  toggleTheme: (opt: { theme?: ThemeValues }) => void;
+  toggleTheme: (opt?: { theme: ThemeValues }) => void;
   theme: SiteTheme;
   currentTheme: string;
   isDarkTheme: boolean;
@@ -37,8 +37,9 @@ function useThemeHandler({ initialTheme }: { initialTheme: ThemeValues }) {
     toggleTheme({ theme: initialTheme });
   }, [initialTheme]);
 
-  function toggleTheme({ theme }: { theme?: ThemeValues }): void {
-    const nextTheme = theme || (currentTheme === 'dark' ? 'light' : 'dark');
+  function toggleTheme(opts?: { theme: ThemeValues }): void {
+    const nextTheme =
+      opts?.theme || (currentTheme === 'dark' ? 'light' : 'dark');
 
     setMetaTheme(nextTheme);
     window.__setPreferredTheme(nextTheme);
