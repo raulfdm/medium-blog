@@ -83,7 +83,7 @@ export const SideMenu = () => {
               to={config.to}
               onClick={toggle}
               data-testid={`side-menu-${linkId}-link`}
-              isCurrentPage={urlPathname === config.to}
+              $isCurrentPage={urlPathname === config.to}
             >
               {formatMessage(config.localeId)}
             </StyledLink>
