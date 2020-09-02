@@ -6,6 +6,7 @@ import useLocalStorage from 'react-use/lib/useLocalStorage';
 import { LOCALES, LocaleValues } from '@app-types';
 import enMessages from '@locales/en.json';
 import ptMessages from '@locales/pt-br.json';
+import { isBrowserApiAvailable } from '@utils/utilities';
 
 type CustomIntlShape = {
   switchToPortuguese(): void;
@@ -18,7 +19,9 @@ const IntlContext = React.createContext<CustomIntlShape | undefined>(undefined);
 const supportedLanguages: string[] = [LOCALES.PT, LOCALES.EN];
 
 const getBrowserUrl = () => {
-  const navigatorLang = navigator.language.replace(/-.*/, '') as LocaleValues;
+  const navigatorLang = isBrowserApiAvailable.navigator
+    ? (navigator.language.replace(/-.*/, '') as LocaleValues)
+    : 'en';
 
   const isSupported = supportedLanguages.includes(navigatorLang);
 
