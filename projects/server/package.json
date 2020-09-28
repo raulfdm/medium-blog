@@ -21,7 +21,7 @@
     "strapi-plugin-email": "3.1.5",
     "strapi-plugin-graphql": "3.1.5",
     "strapi-plugin-upload": "3.1.5",
-    "strapi-plugin-users-permissions": "3.1.5",
+    "strapi-plugin-users-permissions": "3.1.6",
     "strapi-provider-upload-cloudinary": "^3.1.5",
     "strapi-utils": "3.1.5"
   },
