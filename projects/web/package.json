@@ -23,7 +23,7 @@
     "@mdx-js/mdx": "1.6.18",
     "algoliasearch": "4.5.1",
     "babel-plugin-styled-components": "1.11.1",
-    "dayjs": "1.8.36",
+    "dayjs": "1.9.0",
     "debounce-promise": "3.1.2",
     "flat": "5.0.2",
     "framer-motion": "2.6.15",
