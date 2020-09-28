@@ -18,7 +18,7 @@
     "strapi-connector-mongoose": "3.1.5",
     "strapi-plugin-content-manager": "3.1.5",
     "strapi-plugin-content-type-builder": "3.1.5",
-    "strapi-plugin-email": "3.1.5",
+    "strapi-plugin-email": "3.1.6",
     "strapi-plugin-graphql": "3.1.5",
     "strapi-plugin-upload": "3.1.5",
     "strapi-plugin-users-permissions": "3.1.5",
