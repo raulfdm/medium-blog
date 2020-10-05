@@ -17019,7 +17019,7 @@ markdown-it-sup@^1.0.0:
   resolved "https://registry.yarnpkg.com/markdown-it-sup/-/markdown-it-sup-1.0.0.tgz#cb9c9ff91a5255ac08f3fd3d63286e15df0a1fc3"
   integrity sha1-y5yf+RpSVawI8/09YyhuFd8KH8M=
 
-markdown-it@^11.0.0:
+markdown-it@^11.0.1:
   version "11.0.1"
   resolved "https://registry.yarnpkg.com/markdown-it/-/markdown-it-11.0.1.tgz#b54f15ec2a2193efa66dda1eb4173baea08993d6"
   integrity sha512-aU1TzmBKcWNNYvH9pjq6u92BML+Hz3h5S/QpfTFwiQF852pLT+9qHsrhM9JYipkOXZxGn+sGH8oyJE9FD9WezQ==
@@ -20523,7 +20523,7 @@ react-helmet-async@^1.0.2:
     react-fast-compare "^3.2.0"
     shallowequal "^1.1.0"
 
-react-helmet@6.1.0, react-helmet@^6.0.0:
+react-helmet@6.1.0, react-helmet@^6.0.0, react-helmet@^6.1.0:
   version "6.1.0"
   resolved "https://registry.yarnpkg.com/react-helmet/-/react-helmet-6.1.0.tgz#a750d5165cb13cf213e44747502652e794468726"
   integrity sha512-4uMzEY9nlDlgxr61NL3XbKRy1hEkXmKNXhjbAIOVw5vcFrsdYbH2FEwcNyWvWinl103nXgzYNlns9ca+8kFiWw==
@@ -23332,10 +23332,36 @@ strapi-helper-plugin@3.1.5:
     styled-components "^5.0.0"
     whatwg-fetch "^3.3.1"
 
-strapi-plugin-content-manager@3.1.5:
-  version "3.1.5"
-  resolved "https://registry.yarnpkg.com/strapi-plugin-content-manager/-/strapi-plugin-content-manager-3.1.5.tgz#945ed24d31624e83426ccd4df0ded970f50db89a"
-  integrity sha512-5PcrgemcWrnS2YOZWnjSDar6mEL7AdvZTFYLZL1xplwFPQb3huT/EwbFDR1oKtYGZ57noi7blO3TLmeiedoGiQ==
+strapi-helper-plugin@3.1.7:
+  version "3.1.7"
+  resolved "https://registry.yarnpkg.com/strapi-helper-plugin/-/strapi-helper-plugin-3.1.7.tgz#cb144a7103e4f503b05791c04fd2193eb9873bd7"
+  integrity sha512-zpCQ496E5fQoMSECV4kcHQGOrpdwd42qhd8lWdRnP1rJnmG6AAmfziKJ/OQtcnbz/skrk/TaOi6WvC7au3SQ8w==
+  dependencies:
+    "@buffetjs/core" "3.2.3"
+    "@buffetjs/hooks" "3.2.3"
+    "@buffetjs/icons" "3.2.3"
+    "@buffetjs/styles" "3.2.3"
+    "@buffetjs/utils" "3.2.3"
+    bootstrap "^4.5.2"
+    classnames "^2.2.5"
+    immutable "^3.8.2"
+    invariant "^2.2.1"
+    lodash "4.17.19"
+    moment "^2.16.0"
+    react "^16.13.1"
+    react-dom "^16.9.0"
+    react-helmet "^6.1.0"
+    react-intl "4.5.0"
+    react-router "^5.0.0"
+    react-router-dom "^5.0.0"
+    reactstrap "8.4.1"
+    styled-components "^5.0.0"
+    whatwg-fetch "^3.3.1"
+
+strapi-plugin-content-manager@3.1.7:
+  version "3.1.7"
+  resolved "https://registry.yarnpkg.com/strapi-plugin-content-manager/-/strapi-plugin-content-manager-3.1.7.tgz#d3267004c8f27b6d4a7373fa63e59aede5cb2553"
+  integrity sha512-iuF5i3p9RKJznefQoenKs9oVQ/ipblfibve/Ll2C65NHVoJzcbBQi9JQDjygipxwQJWsogNzLE/LtoPafLogbA==
   dependencies:
     "@sindresorhus/slugify" "1.1.0"
     classnames "^2.2.6"
@@ -23344,7 +23370,7 @@ strapi-plugin-content-manager@3.1.5:
     highlight.js "^10.1.1"
     immutable "^3.8.2"
     lodash "4.17.19"
-    markdown-it "^11.0.0"
+    markdown-it "^11.0.1"
     markdown-it-abbr "^1.0.4"
     markdown-it-container "^3.0.0"
     markdown-it-deflist "^2.0.3"
@@ -23366,8 +23392,8 @@ strapi-plugin-content-manager@3.1.5:
     redux "^4.0.1"
     redux-immutable "^4.0.0"
     reselect "^4.0.0"
-    strapi-helper-plugin "3.1.5"
-    strapi-utils "3.1.5"
+    strapi-helper-plugin "3.1.7"
+    strapi-utils "3.1.7"
     yup "^0.27.0"
 
 strapi-plugin-content-type-builder@3.1.5:
@@ -23506,6 +23532,18 @@ strapi-utils@3.1.5:
   version "3.1.5"
   resolved "https://registry.yarnpkg.com/strapi-utils/-/strapi-utils-3.1.5.tgz#e2aacec15c9dae49c0beda849744d2bb630dfacd"
   integrity sha512-Tdyffk24G+hT6e248Jmj36YzNnZB0tOTSqex3Tc0wPZYK8R//7BlaHekdBtekUMAqaKJv4ki/0qVop0VeA8gJQ==
+  dependencies:
+    "@sindresorhus/slugify" "1.1.0"
+    date-fns "^2.8.1"
+    lodash "4.17.19"
+    pino "^4.7.1"
+    pluralize "^8.0.0"
+    yup "0.28.1"
+
+strapi-utils@3.1.7:
+  version "3.1.7"
+  resolved "https://registry.yarnpkg.com/strapi-utils/-/strapi-utils-3.1.7.tgz#bf1aa46c9c9d20e0f96829e0bd85c8abd6367199"
+  integrity sha512-7+sAxGRjSfQnq2gFK2NTPBVnQeTHlM7rZjMpgtUjvzn0cv6DB0qqh/ePUVmCP5ONtfLrIidjWC8KkT5I+QrkoA==
   dependencies:
     "@sindresorhus/slugify" "1.1.0"
     date-fns "^2.8.1"
