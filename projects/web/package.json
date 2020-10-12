@@ -72,7 +72,7 @@
     "babel-eslint": "10.1.0",
     "babel-loader": "8.1.0",
     "babel-plugin-ramda": "2.0.0",
-    "babel-preset-gatsby": "0.5.10",
+    "babel-preset-gatsby": "0.5.13",
     "babel-preset-react-app": "9.1.2",
     "cypress": "5.2.0",
     "cypress-image-snapshot": "3.1.1",
