@@ -90,7 +90,7 @@
     "gatsby-plugin-google-analytics": "2.3.14",
     "gatsby-plugin-graphql-codegen": "2.7.1",
     "gatsby-plugin-i18n": "1.0.1",
-    "gatsby-plugin-manifest": "2.4.30",
+    "gatsby-plugin-manifest": "2.4.35",
     "gatsby-plugin-mdx": "1.2.40",
     "gatsby-plugin-netlify": "2.3.15",
     "gatsby-plugin-offline": "3.2.28",
