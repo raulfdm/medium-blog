@@ -6599,15 +6599,10 @@ acorn-walk@^7.0.0, acorn-walk@^7.1.1:
   resolved "https://registry.yarnpkg.com/acorn-walk/-/acorn-walk-7.2.0.tgz#0de889a601203909b0fbe07b8938dc21d2e967bc"
   integrity sha512-OPdCF6GsMIP+Az+aWfAAOEt2/+iVDKE7oy6lJ098aoe59oAmK76qV6Gw60SbZ8jHuG2wH058GF4pLFbYamYrVA==
 
-acorn@^6.1.1, acorn@^6.4.1:
+acorn@^6.1.1, acorn@^6.4.1, acorn@^7.1.0, acorn@^7.1.1, acorn@^7.2.0, acorn@^7.4.0:
   version "6.4.1"
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-6.4.1.tgz#531e58ba3f51b9dacb9a6646ca4debf5b14ca474"
   integrity sha512-ZVA9k326Nwrj3Cj9jlh3wGFutC2ZornPNARZwsNYqQYgN0EsV2d53w5RN/co65Ohn4sUAUtb1rSUAOD6XN9idA==
-
-acorn@^7.1.0, acorn@^7.1.1, acorn@^7.2.0, acorn@^7.4.0:
-  version "7.4.1"
-  resolved "https://registry.yarnpkg.com/acorn/-/acorn-7.4.1.tgz#feaed255973d2e77555b83dbc08851a6c63520fa"
-  integrity sha512-nQyp0o1/mNdbTO1PO6kHkwSrmgZ0MT/jCCpNiwbUjGoRN4dlBhqJtoQuCnEOKzgTVwg0ZWiCoQy6SxMebQVh8A==
 
 add-dom-event-listener@^1.1.0:
   version "1.1.0"
@@ -11474,7 +11469,7 @@ dot-case@^3.0.3:
     no-case "^3.0.3"
     tslib "^1.10.0"
 
-dot-prop@^5.2.0:
+dot-prop@^5.1.1, dot-prop@^5.2.0:
   version "5.3.0"
   resolved "https://registry.yarnpkg.com/dot-prop/-/dot-prop-5.3.0.tgz#90ccce708cd9cd82cc4dc8c3ddd9abdd55b20e88"
   integrity sha512-QM8q3zDe58hqUqjraQOmzZ1LIH9SWQJTlEKCH4kJ2oQvLZk7RbQXvtDM2XEq3fwkV9CCvvH4LA0AV+ogFsBM2Q==
@@ -19576,12 +19571,7 @@ minimatch@3.0.4, minimatch@^3.0.2, minimatch@^3.0.3, minimatch@^3.0.4:
   dependencies:
     brace-expansion "^1.1.7"
 
-minimist@^0.2.0:
-  version "0.2.1"
-  resolved "https://registry.yarnpkg.com/minimist/-/minimist-0.2.1.tgz#827ba4e7593464e7c221e8c5bed930904ee2c455"
-  integrity sha512-GY8fANSrTMfBVfInqJAY41QkOM+upUTytK1jZ0c8+3HdHrJxBJ3rF5i9moClXTE8uUSnUo8cAsCoxDXvSY4DHg==
-
-minimist@^1.1.0, minimist@^1.1.1, minimist@^1.1.3, minimist@^1.2.0, minimist@^1.2.3, minimist@^1.2.5:
+minimist@^0.2.0, minimist@^1.1.0, minimist@^1.1.1, minimist@^1.1.3, minimist@^1.2.0, minimist@^1.2.3, minimist@^1.2.5:
   version "1.2.5"
   resolved "https://registry.yarnpkg.com/minimist/-/minimist-1.2.5.tgz#67d66014b66a6a8aaa0c083c5fd58df4e4e97602"
   integrity sha512-FM9nNUYrRBAELZQT3xeZQ7fmMOBg6nWNmJKTcgsJeaLstP/UODVpGsr5OhXhhXg6f+qtJ8uiZ+PUxkDWcgIXLw==
@@ -19730,27 +19720,10 @@ mongoose-long@^0.3.2:
   resolved "https://registry.yarnpkg.com/mongoose-long/-/mongoose-long-0.3.2.tgz#9e38773fc93c9c5ecfea200635878593ea577fb0"
   integrity sha512-5gTjPH6HUmtNhamv8MPwExWo01Z4d9CT5njZlupqqbmxzMXTbDOgCuP/jnK+9SV0Fs7nuyYlXv7pJ/nA2pAAuA==
 
-mongoose@5.10.7:
-  version "5.10.7"
-  resolved "https://registry.yarnpkg.com/mongoose/-/mongoose-5.10.7.tgz#5590037f4d9078f4d4edac5c77f27b53829b1c94"
-  integrity sha512-oiofFrD4I5p3PhJXn49QyrU1nX5CY01qhPkfMMrXYPhkfGLEJVwFVO+0PsCxD91A2kQP+d/iFyk5U8e86KI8eQ==
-  dependencies:
-    bson "^1.1.4"
-    kareem "2.3.1"
-    mongodb "3.6.2"
-    mongoose-legacy-pluralize "1.0.2"
-    mpath "0.7.0"
-    mquery "3.2.2"
-    ms "2.1.2"
-    regexp-clone "1.0.0"
-    safe-buffer "5.2.1"
-    sift "7.0.1"
-    sliced "1.0.1"
-
-mongoose@^5.5.13:
-  version "5.10.6"
-  resolved "https://registry.yarnpkg.com/mongoose/-/mongoose-5.10.6.tgz#36faeb363627e7aac5c209a6d43368a8c6f3354f"
-  integrity sha512-p32oja2ydzFMS0K4P7G408Kagju6Qz/LmiAFAcP6BqnIi1McLTd6VZ3+ZQtQmaHM7w8iNupLLambCrsPKNJpYw==
+mongoose@5.10.8, mongoose@^5.5.13:
+  version "5.10.8"
+  resolved "https://registry.yarnpkg.com/mongoose/-/mongoose-5.10.8.tgz#e305dd5972c4d6b78418bd388342592ca5d8d633"
+  integrity sha512-hbpFhOU6rWkWPkekUeSJxqWwzsjVQZ9xPg4WmWA1HJ8YDvjyNye1xbp82fw67BpnyvcjHxyU3/YhujsOCx55yw==
   dependencies:
     bson "^1.1.4"
     kareem "2.3.1"
@@ -25641,18 +25614,18 @@ strapi-admin@3.2.3:
     webpackbar "^4.0.0"
     yup "^0.27.0"
 
-strapi-connector-mongoose@3.2.3:
-  version "3.2.3"
-  resolved "https://registry.yarnpkg.com/strapi-connector-mongoose/-/strapi-connector-mongoose-3.2.3.tgz#fb3698a1dc59604ceffa7d1c1103a8cc91582c88"
-  integrity sha512-JamiLyTaCILw78ETHDD+EZKvPI7RH5+f0t83fBKor5rKYnPqY4rLytiGNzpJB78w5jC709tiiay6n/AuoTJBTQ==
+strapi-connector-mongoose@3.2.4:
+  version "3.2.4"
+  resolved "https://registry.yarnpkg.com/strapi-connector-mongoose/-/strapi-connector-mongoose-3.2.4.tgz#c6619489f14e8a41989ce04d1f767fb6b3fd2d92"
+  integrity sha512-6P5Zf9NkkD050y8x2Y6DdytwEnPR12PH8GZoav/tuEQHmXHnW39ukULYN97efGFsgcC6awHYNdQbU9xMSnE7uQ==
   dependencies:
     lodash "4.17.19"
-    mongoose "5.10.7"
+    mongoose "5.10.8"
     mongoose-float "^1.0.4"
     mongoose-long "^0.3.2"
     pluralize "^8.0.0"
     semver "^7.3.2"
-    strapi-utils "3.2.3"
+    strapi-utils "3.2.4"
 
 strapi-database@3.2.3:
   version "3.2.3"
@@ -26001,6 +25974,18 @@ strapi-utils@3.2.3:
   version "3.2.3"
   resolved "https://registry.yarnpkg.com/strapi-utils/-/strapi-utils-3.2.3.tgz#327a0f94ec15857c01d9766a1b50aaf2898b78cd"
   integrity sha512-esCNsCJaJeEyA66AkKWsDo372y5c639JL/2AhKxl1WefS3TIW3qlT/Kuc3CmB2KAaG6PPTFEYqd2q4EImvRlSQ==
+  dependencies:
+    "@sindresorhus/slugify" "1.1.0"
+    date-fns "^2.8.1"
+    lodash "4.17.19"
+    pino "^4.7.1"
+    pluralize "^8.0.0"
+    yup "0.29.3"
+
+strapi-utils@3.2.4:
+  version "3.2.4"
+  resolved "https://registry.yarnpkg.com/strapi-utils/-/strapi-utils-3.2.4.tgz#15050faeb3b4aad9b12dc928b87aaa269950777a"
+  integrity sha512-923w3ZRILvmGPbplZCjc9QzOwXZbbT8Y8NxUBAi0XoZACAPbVuUeRZhF18lBjuArpn+ziD25g0J4BNEPHKzU0g==
   dependencies:
     "@sindresorhus/slugify" "1.1.0"
     date-fns "^2.8.1"
